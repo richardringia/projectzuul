@@ -34,30 +34,51 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
+        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, theachersRoom, principlesOffice, toilets, vaultRoom;
+
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        square = new Room("Outside the main entrace of the abandoned school");
+        hallway = new Room("hallway");
+        hallway2 = new Room("hallway2");
+        hallway3 = new Room("hallway3");
+        library = new Room("library");
+        classRoom666 = new Room("classRoom666");
+        canteen = new Room("canteen");
+        theachersRoom = new Room("theachersRoom");
+        principlesOffice = new Room("principlesOffice");
+        toilets = new Room("toilets");
+        vaultRoom = new Room("vaultRoom");
+
         
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        square.setExit("north", hallway);
 
-        theater.setExit("west", outside);
+        hallway.setExit("north", hallway2);
+        hallway.setExit("east", library);
+        hallway.setExit("south", square);
+        hallway.setExit("west", toilets);
 
-        pub.setExit("east", outside);
+        hallway2.setExit("north", hallway3);
+        hallway2.setExit("east", classRoom666);
+        hallway2.setExit("south", hallway);
+        hallway2.setExit("west", canteen);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        hallway3.setExit("north", principlesOffice);
+        hallway3.setExit("east", vaultRoom);
+        hallway3.setExit("south", hallway2);
+        hallway3.setExit("west", theachersRoom);
 
-        office.setExit("west", lab);
+        library.setExit("west", hallway);
+        toilets.setExit("east", hallway);
 
-        currentRoom = outside;  // start game outside
+        classRoom666.setExit("west", hallway2);
+        canteen.setExit("east", hallway2);
+
+        vaultRoom.setExit("west", hallway3);
+        theachersRoom.setExit("east", hallway3);
+        principlesOffice.setExit("south", hallway3);
+        
+        currentRoom = square;  // start game outside
     }
 
     /**
