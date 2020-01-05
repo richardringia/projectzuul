@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,13 +21,18 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private List<Room> roomsList;
+    private List<Item> itemsList;
+
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        roomsList = new ArrayList<>();
+        itemsList = new ArrayList<>();
         createRooms();
+        createItems();
         parser = new Parser();
     }
 
@@ -38,6 +45,7 @@ public class Game
 
         // create the rooms
         square = new Room("Outside the main entrace of the abandoned school");
+
         hallway = new Room("hallway");
         hallway2 = new Room("hallway2");
         hallway3 = new Room("hallway3");
@@ -77,8 +85,45 @@ public class Game
         vaultRoom.setExit("west", hallway3);
         theachersRoom.setExit("east", hallway3);
         principlesOffice.setExit("south", hallway3);
-        
+
+        this.roomsList.add(square);
+        this.roomsList.add(hallway);
+        this.roomsList.add(hallway2);
+        this.roomsList.add(hallway3);
+        this.roomsList.add(library);
+        this.roomsList.add(classRoom666);
+        this.roomsList.add(canteen);
+        this.roomsList.add(theachersRoom);
+        this.roomsList.add(principlesOffice);
+        this.roomsList.add(toilets);
+        this.roomsList.add(vaultRoom);
+
         currentRoom = square;  // start game outside
+    }
+
+    /**
+     * Create all the items and add them to the rooms
+     */
+    private void createItems() {
+        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document;
+
+        map = new Item("Map", true);
+        vaultKeys = new Item("Vault keys", true);
+        flashlight = new Item("Flashlight", true);
+        spiritVacuumCleaner = new Item("Spirit vacuum cleaner", true);
+        document = new Item("Document", true);
+
+        map.setItemToRoom(this.roomsList.get(4));
+        vaultKeys.setItemToRoom(this.roomsList.get(8));
+        flashlight.setItemToRandomRoom(this.roomsList);
+        spiritVacuumCleaner.setItemToRandomRoom(this.roomsList);
+        document.setItemToRoom(this.roomsList.get(10));
+
+        this.itemsList.add(map);
+        this.itemsList.add(vaultKeys);
+        this.itemsList.add(flashlight);
+        this.itemsList.add(spiritVacuumCleaner);
+        this.itemsList.add(document);
     }
 
     /**
