@@ -25,6 +25,8 @@ public class Game
     private List<Item> itemsList;
     private Player player;
 
+    private ArrayList<Room> previousRooms = new ArrayList<>();
+        
     /**
      * Create the game and initialise its internal map.
      */
@@ -178,6 +180,9 @@ public class Game
                 System.out.println("I don't know what you mean...");
                 break;
 
+            case BACK:
+                goBack();
+                break;
             case HELP:
                 printHelp();
                 break;
@@ -209,6 +214,19 @@ public class Game
         parser.showCommands();
     }
 
+    private void goBack()
+    {
+        if (previousRooms.size() == 0)
+        {            
+            System.out.println("There is no room to go back to!");
+            return;
+        }
+        System.out.println(previousRooms.get(previousRooms.size() - 1).description);
+        currentRoom = previousRooms.get(previousRooms.size() - 1);
+
+        previousRooms.remove(previousRooms.size() - 1);
+        System.out.println(currentRoom.getLongDescription());
+    }
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -230,8 +248,14 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRooms.add(currentRoom);
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+            System.out.println(previousRooms.size() + "\n\n\n");
+            for (int i = 0; i < previousRooms.size(); i++)
+            {
+                System.out.println(previousRooms.get(i).description);
+            }
         }
     }
 
