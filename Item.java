@@ -24,4 +24,12 @@ public class Item {
     public int getWeight() {
         return this.weight;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean isCanPickup() {
+        return this.canPickup;
+    }
 }

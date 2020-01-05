@@ -190,7 +190,12 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
-
+            case INVESTIGATE:
+                goInvestigate();
+                break;
+            case PICKUP:
+                goPickup(command);
+                break;
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -251,6 +256,44 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
             System.out.println(previousRooms.size() + "\n\n\n");
+        }
+    }
+
+    private void goInvestigate() {
+        if (currentRoom.getItems().size() > 0) {
+            System.out.println("Items in this room:");
+            for(Item item: currentRoom.getItems()) {
+                System.out.println(item.getName());
+            }
+        } else {
+            System.out.println("There are no items in this room!");
+        }
+
+    }
+
+    private void goPickup(Command command) {
+        if(!command.hasSecondWord()) {
+            System.out.println("What do you want to pick up?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+
+        Item item = currentRoom.getItem(itemString);
+
+        if (item != null) {
+            if (item.isCanPickup()) {
+                if (player.addItem(item)) {
+                    System.out.println("Item add to the bag!");
+                    currentRoom.removeItem(item);
+                } else {
+                    System.out.println("Item not added to bag, bag is full!");
+                }
+            } else {
+                System.out.println("Cannot pickup this item!");
+            }
+        } else {
+            System.out.println("Item not find. To find out which items are in the room. Run command: investigate");
         }
     }
 

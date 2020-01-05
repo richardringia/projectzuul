@@ -8,4 +8,6 @@ comment3.params=room
 comment3.target=void\ setItemToRoom(Room)
 comment4.params=
 comment4.target=int\ getWeight()
-numComments=5
+comment5.params=
+comment5.target=java.lang.String\ getName()
+numComments=6

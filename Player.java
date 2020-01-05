@@ -5,7 +5,9 @@ public class Player {
     private int maxWeight = 10;
     private List<Item> itemList;
 
-    public Player() { }
+    public Player() {
+        this.itemList = new ArrayList<>();
+    }
 
     public boolean addItem(Item item) {
         if (this.getTotalWeight() <= this.maxWeight) {

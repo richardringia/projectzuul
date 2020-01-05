@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Room 
 {
-    public String description;
+    private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private List<Item> itemList; // stores all the items in the room
 
@@ -95,6 +95,22 @@ public class Room
 
     public void addItem(Item item) {
         this.itemList.add(item);
+    }
+
+    public List<Item> getItems() {
+        return this.itemList;
+    }
+
+
+    public Item getItem(String name) {
+        return this.itemList.stream()
+                .filter(item -> name.equals(item.getName()))
+                .findAny()
+                .orElse(null);
+    }
+
+    public void removeItem(Item item) {
+        this.itemList.remove(item);
     }
 }
 
