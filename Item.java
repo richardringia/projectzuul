@@ -4,11 +4,13 @@ import java.util.Random;
 public class Item {
     private String name;
     private boolean canPickup;
+    private int weight;
 
 
-    public Item(String name, boolean canPickup) {
+    public Item(String name, boolean canPickup, int weight) {
         this.name = name;
         this.canPickup = canPickup;
+        this.weight = weight;
     }
 
     public void setItemToRandomRoom(List<Room> availebleRooms) {
@@ -17,5 +19,9 @@ public class Item {
 
     public void setItemToRoom(Room room) {
         room.addItem(this);
+    }
+    
+    public int getWeight() {
+        return this.weight;
     }
 }

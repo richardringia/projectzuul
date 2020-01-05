@@ -23,6 +23,7 @@ public class Game
     private Room currentRoom;
     private List<Room> roomsList;
     private List<Item> itemsList;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
@@ -31,6 +32,7 @@ public class Game
     {
         roomsList = new ArrayList<>();
         itemsList = new ArrayList<>();
+        player = new Player();
         createRooms();
         createItems();
         parser = new Parser();
@@ -105,25 +107,28 @@ public class Game
      * Create all the items and add them to the rooms
      */
     private void createItems() {
-        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document;
+        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document, bookcase;
 
-        map = new Item("Map", true);
-        vaultKeys = new Item("Vault keys", true);
-        flashlight = new Item("Flashlight", true);
-        spiritVacuumCleaner = new Item("Spirit vacuum cleaner", true);
-        document = new Item("Document", true);
+        map = new Item("Map", true, 2);
+        vaultKeys = new Item("Vault keys", true, 1);
+        flashlight = new Item("Flashlight", true, 3);
+        spiritVacuumCleaner = new Item("Spirit vacuum cleaner", true, 8);
+        document = new Item("Document", true, 0);
+        bookcase = new Item("Bookcase", false, 0);
 
         map.setItemToRoom(this.roomsList.get(4));
         vaultKeys.setItemToRoom(this.roomsList.get(8));
         flashlight.setItemToRandomRoom(this.roomsList);
         spiritVacuumCleaner.setItemToRandomRoom(this.roomsList);
         document.setItemToRoom(this.roomsList.get(10));
+        bookcase.setItemToRoom(this.roomsList.get(4));
 
         this.itemsList.add(map);
         this.itemsList.add(vaultKeys);
         this.itemsList.add(flashlight);
         this.itemsList.add(spiritVacuumCleaner);
         this.itemsList.add(document);
+        this.itemsList.add(bookcase);
     }
 
     /**
