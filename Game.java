@@ -221,7 +221,6 @@ public class Game
             System.out.println("There is no room to go back to!");
             return;
         }
-        System.out.println(previousRooms.get(previousRooms.size() - 1).description);
         currentRoom = previousRooms.get(previousRooms.size() - 1);
 
         previousRooms.remove(previousRooms.size() - 1);
@@ -252,10 +251,6 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
             System.out.println(previousRooms.size() + "\n\n\n");
-            for (int i = 0; i < previousRooms.size(); i++)
-            {
-                System.out.println(previousRooms.get(i).description);
-            }
         }
     }
 
