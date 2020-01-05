@@ -18,6 +18,13 @@ public class Player {
         }
     }
 
+    public Item getItem(String name) {
+        return this.itemList.stream()
+                .filter(item -> name.equals(item.getName()))
+                .findAny()
+                .orElse(null);
+    }
+
     private int getTotalWeight() {
         int weight = 0;
         for (Item item: this.itemList) {

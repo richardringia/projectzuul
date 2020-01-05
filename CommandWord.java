@@ -18,6 +18,7 @@ public enum CommandWord
     PICKUP("pickup"),
     ABOUT("about"),
     PLAY("play");
+    OPEN("open");
 
     
     // The command string.

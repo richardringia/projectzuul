@@ -110,28 +110,27 @@ public class Game
      * Create all the items and add them to the rooms
      */
     private void createItems() {
-        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document, bookcase;
+        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document, bookcase, vault;
 
         map = new Item("Map", true, 2);
         vaultKeys = new Item("Vault keys", true, 1);
         flashlight = new Item("Flashlight", true, 3);
         spiritVacuumCleaner = new Item("Spirit vacuum cleaner", true, 8);
-        document = new Item("Document", true, 0);
         bookcase = new Item("Bookcase", false, 0);
+        vault = new Vault(vaultKeys, this.roomsList.get(10));
 
         map.setItemToRoom(this.roomsList.get(4));
         vaultKeys.setItemToRoom(this.roomsList.get(8));
         flashlight.setItemToRandomRoom(this.roomsList);
         spiritVacuumCleaner.setItemToRandomRoom(this.roomsList);
-        document.setItemToRoom(this.roomsList.get(10));
         bookcase.setItemToRoom(this.roomsList.get(4));
 
         this.itemsList.add(map);
         this.itemsList.add(vaultKeys);
         this.itemsList.add(flashlight);
         this.itemsList.add(spiritVacuumCleaner);
-        this.itemsList.add(document);
         this.itemsList.add(bookcase);
+        this.itemsList.add(vault);
     }
     
     /**
@@ -228,14 +227,15 @@ public class Game
                     goInvestigate();
                     break;
 
-                case PICKUP:
-                    goPickup(command);
-                    break;
-
-                case QUIT:
-                    wantToQuit = quit(command);
-                    break;
-            }
+            case PICKUP:
+                goPickup(command);
+                break;
+            case OPEN:
+                goOpen(command);
+                break;
+            case QUIT:
+                wantToQuit = quit(command);
+                break;
         }
         return wantToQuit;
     }
@@ -330,6 +330,43 @@ public class Game
             }
         } else {
             System.out.println("Item not find. To find out which items are in the room. Run command: investigate");
+        }
+    }
+
+    private void goOpen(Command command) {
+        if(!command.hasSecondWord()) {
+            System.out.println("What do you want to open?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+
+        Item item = currentRoom.getItem(itemString);
+
+        switch (itemString) {
+            case "Vault":
+                openVault();
+                break;
+            default:
+                System.out.println("Nothing to open here!");
+                break;
+        }
+    }
+
+    private void openVault() {
+        Item key = player.getItem("Vault keys");
+        if (key != null) {
+            Item item = currentRoom.getItem("Vault");
+            if (item != null) {
+                Vault vault = (Vault)item;
+                if (vault.openVault(key)) {
+                    System.out.println("You won the game!");
+                }
+            } else {
+                System.out.println("No vault in this room!");
+            }
+        } else {
+            System.out.println("You haven't find the vault keys yet. Please search!");
         }
     }
 
