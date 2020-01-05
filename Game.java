@@ -24,7 +24,7 @@ public class Game
     private List<Room> roomsList;
     private List<Item> itemsList;
     private Player player;
-
+    private boolean isMenu = true;
     private ArrayList<Room> previousRooms = new ArrayList<>();
         
     /**
@@ -45,21 +45,22 @@ public class Game
      */
     private void createRooms()
     {
-        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, theachersRoom, principlesOffice, toilets, vaultRoom;
+        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
 
         // create the rooms
-        square = new Room("Outside the main entrace of the abandoned school");
+        square = new Room("You are outside of an abandoned school building, inside are some important documents which are very important. Retrieve the documents and get a big reward. " +
+                "Don't get killed on the way, good luck!");
 
-        hallway = new Room("hallway");
-        hallway2 = new Room("hallway2");
-        hallway3 = new Room("hallway3");
-        library = new Room("library");
-        classRoom666 = new Room("classRoom666");
-        canteen = new Room("canteen");
-        theachersRoom = new Room("theachersRoom");
-        principlesOffice = new Room("principlesOffice");
-        toilets = new Room("toilets");
-        vaultRoom = new Room("vaultRoom");
+        hallway = new Room("You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.");
+        hallway2 = new Room("You find yourself in another hallway.");
+        hallway3 = new Room("You find yourself in the third hallway, seems like there are some important rooms nearby.");
+        library = new Room("You are in the library, of course this means there are books around, maybe there is something important in there?");
+        classRoom666 = new Room("You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?");
+        canteen = new Room("You are in a canteen, ghosts don't need food so they probably aren'there, or are they?");
+        teachersRoom = new Room("Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.");
+        principlesOffice = new Room("The principles office always holds something important, try looking around to see what you can find.");
+        toilets = new Room("You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned... ");
+        vaultRoom = new Room("The vault room, could this be where you need to be, maybe investigate to see if can find something.");
 
         
         // initialise room exits
@@ -78,7 +79,7 @@ public class Game
         hallway3.setExit("north", principlesOffice);
         hallway3.setExit("east", vaultRoom);
         hallway3.setExit("south", hallway2);
-        hallway3.setExit("west", theachersRoom);
+        hallway3.setExit("west", teachersRoom);
 
         library.setExit("west", hallway);
         toilets.setExit("east", hallway);
@@ -87,7 +88,7 @@ public class Game
         canteen.setExit("east", hallway2);
 
         vaultRoom.setExit("west", hallway3);
-        theachersRoom.setExit("east", hallway3);
+        teachersRoom.setExit("east", hallway3);
         principlesOffice.setExit("south", hallway3);
 
         this.roomsList.add(square);
@@ -97,7 +98,7 @@ public class Game
         this.roomsList.add(library);
         this.roomsList.add(classRoom666);
         this.roomsList.add(canteen);
-        this.roomsList.add(theachersRoom);
+        this.roomsList.add(teachersRoom);
         this.roomsList.add(principlesOffice);
         this.roomsList.add(toilets);
         this.roomsList.add(vaultRoom);
@@ -132,28 +133,25 @@ public class Game
         this.itemsList.add(document);
         this.itemsList.add(bookcase);
     }
-
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
     {            
-        printWelcome();
+        printMenu();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-    /**
-     * Print out the opening message for the player.
-     */
     private void printWelcome()
     {
         System.out.println();
@@ -162,6 +160,17 @@ public class Game
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     * Print out the opening message for the player.
+     */
+    private void printMenu()
+    {
+        System.out.println();
+        System.out.println("Welcome to the World of Zuul!");
+        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("You are currently in the main menu, your options are play, about and quit. Select what you want to do by typing the word.");
     }
 
     /**
@@ -174,31 +183,59 @@ public class Game
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
+        if (isMenu)
+        {
+            switch (commandWord)
+            {
+                 case UNKNOWN:
+                    System.out.println("I don't know what you mean...");
+                    break;
+    
+                case ABOUT:
+                    System.out.println("Wij zijn 2 student van de Hanzehogeschool Groningen.");
+                    break;
+                    
+                case PLAY:
+                    printWelcome();
+                    isMenu = false;
+                    break;
+                    
+                case QUIT:
+                    wantToQuit = quit(command);
+                    break;   
+            }
+        }
+        else
+        {
+            switch (commandWord) {
+                case UNKNOWN:
+                    System.out.println("I don't know what you mean...");
+                    break;
+    
+                case BACK:
+                    goBack();
+                    break;
+                    
+                case HELP:
+                    printHelp();
+                    break;
+    
+                case GO:
+                    goRoom(command);
+                    break;
 
-        switch (commandWord) {
-            case UNKNOWN:
-                System.out.println("I don't know what you mean...");
-                break;
+                case INVESTIGATE:
+                    goInvestigate();
+                    break;
 
-            case BACK:
-                goBack();
-                break;
-            case HELP:
-                printHelp();
-                break;
+                case PICKUP:
+                    goPickup(command);
+                    break;
 
-            case GO:
-                goRoom(command);
-                break;
-            case INVESTIGATE:
-                goInvestigate();
-                break;
-            case PICKUP:
-                goPickup(command);
-                break;
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
+                case QUIT:
+                    wantToQuit = quit(command);
+                    break;
+            }
         }
         return wantToQuit;
     }
@@ -255,7 +292,6 @@ public class Game
             previousRooms.add(currentRoom);
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-            System.out.println(previousRooms.size() + "\n\n\n");
         }
     }
 

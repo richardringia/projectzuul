@@ -15,8 +15,11 @@ public enum CommandWord
     UNKNOWN("?"),
     BACK("back"),
     INVESTIGATE("investigate"),
-    PICKUP("pickup");
+    PICKUP("pickup"),
+    ABOUT("about"),
+    PLAY("play");
 
+    
     // The command string.
     private String commandString;
 
