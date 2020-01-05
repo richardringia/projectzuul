@@ -17,7 +17,7 @@ public enum CommandWord
     INVESTIGATE("investigate"),
     PICKUP("pickup"),
     ABOUT("about"),
-    PLAY("play");
+    PLAY("play"),
     OPEN("open");
 
     

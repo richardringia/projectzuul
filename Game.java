@@ -210,32 +210,29 @@ public class Game
                 case UNKNOWN:
                     System.out.println("I don't know what you mean...");
                     break;
-    
                 case BACK:
                     goBack();
-                    break;
-                    
+                    break;  
                 case HELP:
                     printHelp();
                     break;
-    
+   
                 case GO:
                     goRoom(command);
                     break;
-
                 case INVESTIGATE:
                     goInvestigate();
                     break;
-
-            case PICKUP:
-                goPickup(command);
-                break;
-            case OPEN:
-                goOpen(command);
-                break;
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
+                case PICKUP:
+                    goPickup(command);
+                    break;
+                case OPEN:
+                    wantToQuit = goOpen(command);
+                    break;
+                case QUIT:
+                    wantToQuit = quit(command);
+                    break;
+            }
         }
         return wantToQuit;
     }
@@ -333,10 +330,10 @@ public class Game
         }
     }
 
-    private void goOpen(Command command) {
+    private boolean goOpen(Command command) {
         if(!command.hasSecondWord()) {
             System.out.println("What do you want to open?");
-            return;
+            return false;
         }
 
         String itemString = command.getSecondWord();
@@ -345,15 +342,15 @@ public class Game
 
         switch (itemString) {
             case "Vault":
-                openVault();
-                break;
+                return openVault();
             default:
                 System.out.println("Nothing to open here!");
                 break;
         }
+        return false;
     }
 
-    private void openVault() {
+    private boolean openVault() {
         Item key = player.getItem("Vault keys");
         if (key != null) {
             Item item = currentRoom.getItem("Vault");
@@ -361,6 +358,7 @@ public class Game
                 Vault vault = (Vault)item;
                 if (vault.openVault(key)) {
                     System.out.println("You won the game!");
+                    return true;
                 }
             } else {
                 System.out.println("No vault in this room!");
@@ -368,6 +366,7 @@ public class Game
         } else {
             System.out.println("You haven't find the vault keys yet. Please search!");
         }
+        return false;
     }
 
     /** 
