@@ -27,6 +27,11 @@ public class Game
     private boolean isMenu = true;
     private ArrayList<Room> previousRooms = new ArrayList<>();
         
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.play();
+    }
+    
     /**
      * Create the game and initialise its internal map.
      */
