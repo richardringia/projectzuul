@@ -3,6 +3,10 @@ package Models;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * In this class the player will be created.
+ * With the player class items can be stored.
+ */
 public class Player {
     private int maxWeight = 10;
     private List<Item> itemList;
