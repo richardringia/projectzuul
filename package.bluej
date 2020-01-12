@@ -48,17 +48,30 @@ editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
 editor.fx.0.y=0
+<<<<<<< Updated upstream
 objectbench.height=101
 objectbench.width=1133
 package.divider.horizontal=0.6
 package.divider.vertical=0.8973384030418251
 package.editor.height=937
 package.editor.width=1771
+=======
+objectbench.height=146
+objectbench.width=1880
+package.divider.horizontal=0.6
+package.divider.vertical=0.8485148514851485
+package.editor.height=850
+package.editor.width=1790
+>>>>>>> Stashed changes
 package.editor.x=0
 package.editor.y=23
 package.frame.height=1110
 package.frame.width=1920
+<<<<<<< Updated upstream
 package.numDependencies=15
+=======
+package.numDependencies=13
+>>>>>>> Stashed changes
 package.numTargets=9
 package.showExtends=true
 package.showUses=true
@@ -73,8 +86,8 @@ target1.name=Item
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=80
-target1.x=140
-target1.y=30
+target1.x=90
+target1.y=10
 target2.height=50
 target2.name=Player
 target2.showInterface=false
@@ -111,8 +124,13 @@ target6.name=Vault
 target6.showInterface=false
 target6.type=ClassTarget
 target6.width=80
+<<<<<<< Updated upstream
 target6.x=1360
 target6.y=540
+=======
+target6.x=180
+target6.y=10
+>>>>>>> Stashed changes
 target7.height=60
 target7.name=CommandWords
 target7.naviview.expanded=true
