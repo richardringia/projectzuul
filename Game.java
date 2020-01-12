@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*;
 import Models.*;
+import Handlers.*;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -27,6 +29,7 @@ public class Game
     private Player player;
     private boolean isMenu = true;
     private ArrayList<Room> previousRooms = new ArrayList<>();
+    private GameHandler main;
         
     public static void main(String[] args) {
         Game game = new Game();
@@ -38,78 +41,15 @@ public class Game
      */
     public Game() 
     {
-        roomsList = new ArrayList<>();
+        main = new GameHandler();
+        //roomsList = main.getRoomList();
+
+        System.out.println(main);
+
         itemsList = new ArrayList<>();
         player = new Player();
-        createRooms();
         createItems();
         parser = new Parser();
-    }
-
-    /**
-     * Create all the rooms and link their exits together.
-     */
-    private void createRooms()
-    {
-        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
-
-        // create the rooms
-        square = new Room("You are outside of an abandoned school building, inside are some important documents which are very important. Retrieve the documents and get a big reward. " +
-                "Don't get killed on the way, good luck!");
-
-        hallway = new Room("You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.");
-        hallway2 = new Room("You find yourself in another hallway.");
-        hallway3 = new Room("You find yourself in the third hallway, seems like there are some important rooms nearby.");
-        library = new Room("You are in the library, of course this means there are books around, maybe there is something important in there?");
-        classRoom666 = new Room("You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?");
-        canteen = new Room("You are in a canteen, ghosts don't need food so they probably aren'there, or are they?");
-        teachersRoom = new Room("Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.");
-        principlesOffice = new Room("The principles office always holds something important, try looking around to see what you can find.");
-        toilets = new Room("You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned... ");
-        vaultRoom = new Room("The vault room, could this be where you need to be, maybe investigate to see if can find something.");
-
-        
-        // initialise room exits
-        square.setExit("north", hallway);
-
-        hallway.setExit("north", hallway2);
-        hallway.setExit("east", library);
-        hallway.setExit("south", square);
-        hallway.setExit("west", toilets);
-
-        hallway2.setExit("north", hallway3);
-        hallway2.setExit("east", classRoom666);
-        hallway2.setExit("south", hallway);
-        hallway2.setExit("west", canteen);
-
-        hallway3.setExit("north", principlesOffice);
-        hallway3.setExit("east", vaultRoom);
-        hallway3.setExit("south", hallway2);
-        hallway3.setExit("west", teachersRoom);
-
-        library.setExit("west", hallway);
-        toilets.setExit("east", hallway);
-
-        classRoom666.setExit("west", hallway2);
-        canteen.setExit("east", hallway2);
-
-        vaultRoom.setExit("west", hallway3);
-        teachersRoom.setExit("east", hallway3);
-        principlesOffice.setExit("south", hallway3);
-
-        this.roomsList.add(square);
-        this.roomsList.add(hallway);
-        this.roomsList.add(hallway2);
-        this.roomsList.add(hallway3);
-        this.roomsList.add(library);
-        this.roomsList.add(classRoom666);
-        this.roomsList.add(canteen);
-        this.roomsList.add(teachersRoom);
-        this.roomsList.add(principlesOffice);
-        this.roomsList.add(toilets);
-        this.roomsList.add(vaultRoom);
-
-        currentRoom = square;  // start game outside
     }
 
     /**
@@ -162,7 +102,6 @@ public class Game
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
