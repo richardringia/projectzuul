@@ -78,9 +78,9 @@ public class RoomHandler {
         hallway2.setExit("west", randomList.get(3));
 
         hallway3.setExit("south", hallway2);
-        hallway3.setExit("north", randomList.get(4));
-        hallway3.setExit("east", randomList.get(5));
-        hallway3.setExit("west", randomList.get(6));
+        hallway3.setExit("north", randomList.get(6));
+        hallway3.setExit("east", randomList.get(4));
+        hallway3.setExit("west", randomList.get(5));
 
         randomList.get(0).setExit("west", hallway);
         randomList.get(1).setExit("east", hallway);
