@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import Models.*;
-import Handlers.*;
 
 /**
  * Deze class voorzorgt het maken van het spel.
@@ -19,20 +18,19 @@ public class GameHandler {
     private List<Item> itemList;
 
     public GameHandler() {
-        roomList = new ArrayList<>();
-        createRooms();
+        RoomHandler roomHandler = new RoomHandler();
+        roomList = roomHandler.getRoomList();
+
+        itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
     }
 
     public List<Room> getRoomList()
     {
-        return roomList;
+        return this.roomList;
     }
 
-    private void createRooms() {
-        roomList = RoomHandler.createRooms();
-    }
-
-    private void createItems() {
-
+    public List<Item> getItemList()
+    {
+        return this.itemList;
     }
 }

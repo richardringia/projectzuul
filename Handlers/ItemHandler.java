@@ -2,10 +2,11 @@ package Handlers;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*; // TODO: CHANGE
+
 import Models.*;
 
-public static class ItemHandler
-{
+public class ItemHandler {
 
     public static List<Item> createItems(List<Room> rooms, Room vaultRoom, Room mapRoom, Room keysRoom) {
         Item map, vaultKeys, flashlight, spiritVacuumCleaner, bookcase, vault;
@@ -21,8 +22,7 @@ public static class ItemHandler
         vaultKeys.setItemToRoom(keysRoom);
         flashlight.setItemToRandomRoom(rooms);
         spiritVacuumCleaner.setItemToRandomRoom(rooms);
-        bookcase.setItemToRoom(rooms);
-
+        bookcase.setItemToRoom(mapRoom);
 
         return new ArrayList<>(Arrays.asList(map, vaultKeys, flashlight, spiritVacuumCleaner, bookcase, vault));
     }

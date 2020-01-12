@@ -6,9 +6,9 @@ public class Vault extends Item {
 
 
     public Vault(Item key, Room room){
-        super("Vault", false, 0);
+        super("Vault");
         this.key = key;
-        document = new Item("Document", true, 0);
+        document = new Item("Document", 0);
         this.setItemToRoom(room);
     }
 

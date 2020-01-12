@@ -2,17 +2,40 @@ package Handlers;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.*; // TODO: CHANGE
 
 import Models.*;
 
 /**
  *
  */
-public class RoomHandler
-{
-    public static List<Room> createRooms()
-    {
+public class RoomHandler {
+    private Room vaultRoom;
+    private Room mapRoom;
+    private Room keysRoom;
+    private List<Room> roomList;
+
+    public RoomHandler() {
+        this.roomList = this.createRooms();
+    }
+
+    public Room getVaultRoom() {
+        return this.vaultRoom;
+    }
+
+    public Room getMapRoom() {
+        return this.mapRoom;
+    }
+
+    public Room getKeysRoom() {
+        return this.keysRoom;
+    }
+
+    public List<Room> getRoomList() {
+        return this.roomList;
+    }
+
+    private List<Room> createRooms() {
         Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
 
         // create the rooms
@@ -69,6 +92,12 @@ public class RoomHandler
         randomList.get(5).setExit("east", hallway3);
         randomList.get(6).setExit("south", hallway3);
 
+        this.vaultRoom = vaultRoom;
+        this.mapRoom = library;
+        this.keysRoom = principlesOffice;
+
         return new ArrayList<>(Arrays.asList(square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom));
     }
+
+
 }

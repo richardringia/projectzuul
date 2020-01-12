@@ -42,41 +42,13 @@ public class Game
     public Game()
     {
         main = new GameHandler();
-        //roomsList = main.getRoomList();
+        roomsList = main.getRoomList();
 
-        System.out.println(main);
 
         itemsList = new ArrayList<>();
         player = new Player();
-        createItems();
+        itemsList = main.getItemList();
         parser = new Parser();
-    }
-
-    /**
-     * Create all the items and add them to the rooms
-     */
-    private void createItems() {
-        Item map, vaultKeys, flashlight, spiritVacuumCleaner, document, bookcase, vault;
-
-        map = new Item("Map", true, 2);
-        vaultKeys = new Item("Vault keys", true, 1);
-        flashlight = new Item("Flashlight", true, 3);
-        spiritVacuumCleaner = new Item("Spirit vacuum cleaner", true, 8);
-        bookcase = new Item("Bookcase", false, 0);
-        vault = new Vault(vaultKeys, this.roomsList.get(10));
-
-        map.setItemToRoom(this.roomsList.get(4));
-        vaultKeys.setItemToRoom(this.roomsList.get(8));
-        flashlight.setItemToRandomRoom(this.roomsList);
-        spiritVacuumCleaner.setItemToRandomRoom(this.roomsList);
-        bookcase.setItemToRoom(this.roomsList.get(4));
-
-        this.itemsList.add(map);
-        this.itemsList.add(vaultKeys);
-        this.itemsList.add(flashlight);
-        this.itemsList.add(spiritVacuumCleaner);
-        this.itemsList.add(bookcase);
-        this.itemsList.add(vault);
     }
 
     /**
