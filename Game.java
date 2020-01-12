@@ -43,7 +43,7 @@ public class Game
     {
         main = new GameHandler();
         roomsList = main.getRoomList();
-        currentRoom = roomsList.get(0);
+        currentRoom = roomsList.get(0); 
 
         itemsList = new ArrayList<>();
         player = new Player();
