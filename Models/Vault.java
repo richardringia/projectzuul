@@ -1,3 +1,5 @@
+package Models;
+
 public class Vault extends Item {
     private Item key;
     private Item document;

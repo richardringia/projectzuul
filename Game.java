@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import Models.*;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
