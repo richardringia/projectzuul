@@ -98,6 +98,4 @@ public class RoomHandler {
 
         return new ArrayList<>(Arrays.asList(square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom));
     }
-
-
 }
