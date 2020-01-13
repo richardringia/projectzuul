@@ -1,3 +1,5 @@
+package Zuul;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.*;
@@ -28,6 +30,7 @@ public class Game
     private List<Item> itemsList;
     private Player player;
     private boolean isMenu = true;
+    private boolean becomePossessed = false;
     private ArrayList<Room> previousRooms = new ArrayList<>();
     private GameHandler main;
         
@@ -42,6 +45,7 @@ public class Game
     public Game()
     {
         main = new GameHandler();
+        main.setGameInstance(this);
         roomsList = main.getRoomList();
         currentRoom = roomsList.get(0); 
 
@@ -71,11 +75,10 @@ public class Game
 
     private void printWelcome()
     {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println();
+        main.startTimer();
+        System.out.println("\n----------------------------------");
         System.out.println(currentRoom.getLongDescription());
+        System.out.println("\n----------------------------------\n");
     }
 
     /**
@@ -83,12 +86,18 @@ public class Game
      */
     private void printMenu()
     {
-        System.out.println();
+        System.out.println("\n----------------------------------\n");
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("You are currently in the main menu, your options are play, about and quit. Select what you want to do by typing the word.");
+        System.out.println("You are currently in the main menu, your options are\n\nplay\nabout\nquit\n");
+        System.out.println("----------------------------------\n");
     }
 
+    public void setBecomePossessed(boolean becomePossessed)
+    {
+        this.becomePossessed = becomePossessed;
+    }
+    
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
@@ -178,9 +187,12 @@ public class Game
             return;
         }
         currentRoom = previousRooms.get(previousRooms.size() - 1);
-
+        becamePossessed();
+        
         previousRooms.remove(previousRooms.size() - 1);
+        System.out.println("----------------------------------\n");
         System.out.println(currentRoom.getLongDescription());
+        System.out.println("\n----------------------------------\n");
     }
     /**
      * Try to go in one direction. If there is an exit, enter the new
@@ -205,10 +217,25 @@ public class Game
         else {
             previousRooms.add(currentRoom);
             currentRoom = nextRoom;
+            becamePossessed();
+        
+            System.out.println("\n----------------------------------");
             System.out.println(currentRoom.getLongDescription());
+            System.out.println("\n----------------------------------\n");
         }
     }
 
+    private void becamePossessed()
+    {           
+        if (becomePossessed)
+        {   
+            System.out.println("\n**********************************\n");  
+            System.out.println("The ghosts are onto you, a ghost just went inside your body and you feel weird. You will have to hurry up or you will lose control and die!"); 
+            System.out.println("\n**********************************\n");
+            becomePossessed = false;
+        }
+    }
+    
     private void goInvestigate() {
         if (currentRoom.getItems().size() > 0) {
             System.out.println("Items in this room:");
