@@ -8,7 +8,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
-import Components.RoomPanel;
+import GUI.Components.RoomPanel;
 import Models.*;
 
 public class MapHandler {
