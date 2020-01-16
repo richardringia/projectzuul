@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+
 public class GUI
 {
     Game game;
@@ -80,7 +81,13 @@ public class GUI
             icons.add(ImageIO.read(url16));
             icons.add(ImageIO.read(url32));
 
-            window.setIconImages(icons);
+
+            if (System.getProperty("os.name").startsWith("Mac OS X")) {
+                Taskbar.getTaskbar().setIconImage(ImageIO.read(url32));
+            } else {
+                window.setIconImages(icons);
+            }
+//            Application.getApplication().setDockIconImage(image);
         }
         catch(IOException IO)
         {
