@@ -33,11 +33,6 @@ public class Game
     private boolean becomePossessed = false;
     private ArrayList<Room> previousRooms = new ArrayList<>();
     private GameHandler main;
-        
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.play();
-    }
 
     /**
      * Create the game and initialise its internal map.

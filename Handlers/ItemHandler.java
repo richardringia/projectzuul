@@ -18,7 +18,8 @@ public class ItemHandler {
         bookcase = new Item("Bookcase");
         vault = new Vault(vaultKeys, vaultRoom);
 
-        map.setItemToRoom(mapRoom);
+//        map.setItemToRoom(mapRoom);
+        map.setItemToRoom(rooms.get(0));
         vaultKeys.setItemToRoom(keysRoom);
         flashlight.setItemToRandomRoom(rooms);
         spiritVacuumCleaner.setItemToRandomRoom(rooms);

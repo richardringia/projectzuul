@@ -18,11 +18,15 @@ public class GameHandler {
     // In deze list worden alle items gestored
     private List<Item> itemList;
 
+    private MapHandler mapHandler;
+
     public GameHandler() {
         RoomHandler roomHandler = new RoomHandler();
         roomList = roomHandler.getRoomList();
         RoomHandler room = new RoomHandler();
         itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
+
+        mapHandler = new MapHandler(this.roomList);
     }
     
     public void startTimer()
@@ -50,5 +54,10 @@ public class GameHandler {
     public void setGameInstance(Game gameInstance)
     {
         this.gameInstance = gameInstance;
+    }
+
+
+    public void updateRoom() {
+
     }
 }
