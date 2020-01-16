@@ -1,3 +1,7 @@
+import Components.MyButton;
+import Components.MyLabel;
+import Components.MyPanel;
+import Components.MyTextArea;
 import Zuul.Game;
 
 import javax.imageio.ImageIO;
@@ -11,23 +15,40 @@ import java.util.ArrayList;
 
 public class GUI
 {
+    Game game;
+
     JFrame window;
 
-    JPanel titleNamePanel;
+    Container currentSelectedCommand;
+    Container currentSelectedButton;
 
-    JLabel titleNameLabel;
+    MyPanel titleNamePanel;
 
-    JTextArea aboutPageText;
+    MyPanel commandButtonHolder;
+    MyPanel directionButtonHolder, investigateItemsHolder, helpHolder, quitMenuHolder;
 
-    JButton startButton;
-    JButton quitButton;
-    JButton aboutButton;
+    MyLabel titleNameLabel;
 
-    JButton back;
+    MyTextArea aboutPageText;
+    MyTextArea helpPageText;
+    MyTextArea gameCurrentRoom;
 
-    Font titleFont = new Font("Arial", Font.PLAIN, 50);
+    // Buttons in Main Menu.
+    MyButton startButton, quitButton, aboutButton;
 
-    boolean aboutPageCreated = false;
+    // Directions
+    MyButton north, south, east, west, back;
+    MyButton quitToMenu, quitToDesktop;
+    MyButton move, investigate, help, quit;
+    MyButton pickup, open, drop;
+
+    // Back button on the About Page.
+    MyButton aboutPageBack;
+
+    Font titleFont = new Font("Arial", Font.PLAIN, 30);
+    Font gameFont = new Font("Arial", Font.PLAIN, 15);
+
+    boolean aboutPageCreated = false, gameScreenCreated = false;
 
     public static void main(String[] args) {
         new GUI();
@@ -39,10 +60,10 @@ public class GUI
         createMainMenu();
     }
 
-    public void createWindow()
+    private void createWindow()
     {
         window = new JFrame();
-        window.setSize(610, 610);
+        window.setSize(600, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
@@ -67,36 +88,36 @@ public class GUI
         }
     }
 
-    public void createMainMenu()
+    private void createMainMenu()
     {
-        titleNamePanel = createJPanel(Color.BLACK, 0, 0, 600, 100, window);
+        //titleNamePanel = createJPanel(Color.BLACK, 0, 0, 600, 100, window);
+        titleNamePanel = new MyPanel(Color.BLACK, 0, 0, 600, 100, window);
 
-        titleNameLabel = createJLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
+        //titleNameLabel = createJLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
+        titleNameLabel = new MyLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
 
-        startButton = createJButton("START", Color.BLACK, Color.WHITE,  250, 150, 100, 35, window);
-        aboutButton = createJButton("ABOUT", Color.BLACK, Color.WHITE, 250, 200, 100, 35, window);
-        quitButton = createJButton("QUIT", Color.BLACK, Color.WHITE, 250, 300, 100, 35, window);
+        startButton = new MyButton("START", Color.BLACK, Color.WHITE,  250, 150, 100, 35, window);
+        aboutButton = new MyButton("ABOUT", Color.BLACK, Color.WHITE, 250, 200, 100, 35, window);
+        quitButton = new MyButton("QUIT", Color.BLACK, Color.WHITE, 250, 300, 100, 35, window);
 
         setMainMenuListeners();
 
         window.setVisible(true);
     }
 
-    public void setMainMenuListeners()
+    private void setMainMenuListeners()
     {
         startButton.addActionListener(e ->
         {
-            Game game = new Game();
-            game.play();
-
+            createGame();
         });
 
         aboutButton.addActionListener(e -> createAboutPage());
 
-        quitButton.addActionListener(e -> window.dispose());
+        quitButton.addActionListener(e -> quitGame());
     }
 
-    public void setMainMenuActive(boolean active)
+    private void setMainMenuActive(boolean active)
     {
         titleNamePanel.setVisible(active);
         titleNameLabel.setVisible(active);
@@ -105,15 +126,145 @@ public class GUI
         quitButton.setVisible(active);
     }
 
-    public void createAboutPage()
+    private void createGame()
+    {
+        setMainMenuActive(false);
+        if (gameScreenCreated)
+        {
+            setDefaultGameValues();
+            return;
+        }
+
+        game = new Game();
+        gameCurrentRoom = new MyTextArea(game.getCurrentRoom().getLongDescription(),  Color.BLACK, Color.WHITE,  100, 100, 400, 200, window);
+        gameCurrentRoom.setFont(gameFont);
+
+        createCommandButtons();
+        createDirectionButtons();
+        createHelpPage();
+        createQuitButtons();
+        setCommandButtonListeners();
+
+        setDefaultGameValues();
+    }
+
+    private void setDefaultGameValues()
+    {
+        gameScreenCreated = true;
+        commandButtonHolder.setVisible(true);
+        setCurrentSelectedCommand(directionButtonHolder);
+        setCurrentSelectedButton(move);
+
+        window.repaint();
+    }
+
+    private void createCommandButtons()
+    {
+        commandButtonHolder = new MyPanel(Color.BLACK, 20, 20, 500, 40, window);
+        commandButtonHolder.setLayout(new GridLayout(1, 10));
+        ((GridLayout)commandButtonHolder.getLayout()).setHgap(10);
+
+        move = new MyButton("Move", Color.GRAY, Color.WHITE, 0, 0, 0, 0, commandButtonHolder);
+        investigate = new MyButton("Investigate", Color.BLACK, Color.WHITE, 0, 0, 0, 0, commandButtonHolder);
+        help = new MyButton("Help", Color.BLACK, Color.WHITE, 0, 0, 0, 0, commandButtonHolder);
+        quit = new MyButton("Quit", Color.BLACK, Color.WHITE, 0, 0, 0, 0, commandButtonHolder);
+    }
+
+    private void createDirectionButtons()
+    {
+        directionButtonHolder = new MyPanel(Color.BLACK, 225, 300, 150, 200, window);
+        directionButtonHolder.setLayout(new GridLayout(5, 1));
+        ((GridLayout)directionButtonHolder.getLayout()).setVgap(10);
+
+        north = new MyButton("North", Color.BLACK, Color.WHITE, 0, 0, 0, 0, directionButtonHolder);
+        east = new MyButton("East", Color.BLACK, Color.WHITE, 0, 0, 0, 0, directionButtonHolder);
+        south = new MyButton("South", Color.BLACK, Color.WHITE, 0, 0, 0, 0, directionButtonHolder);
+        west = new MyButton("West", Color.BLACK, Color.WHITE, 0, 0, 0, 0, directionButtonHolder);
+        back = new MyButton("Back", Color.BLACK, Color.WHITE, 0, 0, 0, 0, directionButtonHolder);
+    }
+
+    private void createHelpPage()
+    {
+        helpHolder = new MyPanel(Color.BLACK, 100, 100, 400, 250, window);
+        helpHolder.setLayout(new GridLayout(1, 1));
+        helpHolder.setVisible(false);
+
+        helpPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  0, 0, 0, 0, helpHolder);
+
+        helpPageText.setText("DIT IS EEN HELP PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+    }
+
+    private void createQuitButtons()
+    {
+        quitMenuHolder = new MyPanel(Color.BLACK, 225, 200, 150, 80, window);
+        quitMenuHolder.setLayout(new GridLayout(2, 1));
+        ((GridLayout)quitMenuHolder.getLayout()).setVgap(10);
+        quitMenuHolder.setVisible(false);
+
+        quitToMenu = new MyButton("Quit to Main Menu", Color.BLACK, Color.WHITE, 0, 0, 0, 0, quitMenuHolder);
+        quitToDesktop = new MyButton("Quit to Desktop", Color.BLACK, Color.WHITE, 0, 0, 0, 0, quitMenuHolder);
+
+        setQuitButtonListeners();
+    }
+
+    private void setCommandButtonListeners()
+    {
+        move.addActionListener(e ->
+        {
+            commands(directionButtonHolder, move, true);
+        });
+
+        help.addActionListener(e ->
+        {
+            commands(helpHolder, help, false);
+        });
+
+        quit.addActionListener(e ->
+        {
+            commands(quitMenuHolder, quit, false);
+        });
+    }
+
+    private void commands(Container holder, Container button, boolean selectedMove)
+    {
+        setCurrentSelectedCommand(holder);
+        setCurrentSelectedButton(button);
+
+        gameCurrentRoom.setVisible(selectedMove);
+    }
+
+    private void setQuitButtonListeners()
+    {
+        quitToMenu.addActionListener(e ->
+        {
+            commandButtonHolder.setVisible(false);
+            quitMenuHolder.setVisible(false);
+            setMainMenuActive(true);
+        });
+
+        quitToDesktop.addActionListener(e -> quitGame());
+    }
+
+    private void createAboutPage()
     {
         setMainMenuActive(false);
         if (!aboutPageCreated) {
-            back = createJButton("< BACK", Color.BLACK, Color.WHITE, 15, 15, 100, 35, window);
-            aboutPageText = new JTextArea();
-            aboutPageText.setBounds(100, 100, 400, 250);
-            aboutPageText.setBackground(Color.BLACK);
-            aboutPageText.setForeground(Color.WHITE);
+            aboutPageBack = new MyButton("< BACK", Color.BLACK, Color.WHITE, 15, 15, 100, 35, window);
+            aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  100, 100, 400, 250, window);
+
             aboutPageText.setText("DIT IS EEN ABOUT PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
@@ -128,9 +279,7 @@ public class GUI
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-            aboutPageText.setLineWrap(true);
 
-            window.add(aboutPageText);
             setAboutPageListeners();
         }
         else
@@ -139,49 +288,39 @@ public class GUI
         }
     }
 
-    public void setAboutPageListeners()
+    private void setAboutPageListeners()
     {
-        back.addActionListener(e ->
+        aboutPageBack.addActionListener(e ->
         {
             setMainMenuActive(true);
             setAboutPageActive(false);
         });
     }
 
-    public void setAboutPageActive(boolean active)
+    private void setCurrentSelectedCommand(Container container)
     {
-        back.setVisible(active);
+        if (currentSelectedCommand != null)
+            currentSelectedCommand.setVisible(false);
+        currentSelectedCommand = container;
+        currentSelectedCommand.setVisible(true);
+    }
+
+    private void setCurrentSelectedButton(Container container)
+    {
+        if (currentSelectedButton != null)
+            currentSelectedButton.setBackground(Color.BLACK);
+        currentSelectedButton = container;
+        currentSelectedButton.setBackground(Color.GRAY);
+    }
+
+    private void setAboutPageActive(boolean active)
+    {
+        aboutPageBack.setVisible(active);
         aboutPageText.setVisible(active);
     }
 
-    public JPanel createJPanel(Color background, int x, int y, int width, int height, Container parent)
+    private void quitGame()
     {
-        JPanel panel = new JPanel();
-        panel.setBackground(background);
-        panel.setBounds(x, y, width, height);
-        parent.add(panel);
-
-        return panel;
-    }
-
-    public JLabel createJLabel(String text, Color foreground, Font font, Container parent)
-    {
-        JLabel label = new JLabel(text);
-        label.setForeground(foreground);
-        label.setFont(font);
-        parent.add(label);
-
-        return label;
-    }
-
-    public JButton createJButton(String text, Color background, Color foreground, int x, int y, int width, int height, Container parent)
-    {
-        JButton button = new JButton(text);
-        button.setBackground(background);
-        button.setForeground(foreground);
-        button.setBounds(x, y, width, height);
-        parent.add(button);
-
-        return button;
+        window.dispose();
     }
 }

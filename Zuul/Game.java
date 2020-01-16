@@ -308,6 +308,11 @@ public class Game
         return false;
     }
 
+    public Room getCurrentRoom()
+    {
+        return currentRoom;
+    }
+
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

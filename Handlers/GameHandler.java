@@ -26,11 +26,12 @@ public class GameHandler {
         RoomHandler room = new RoomHandler();
         itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
 
-        mapHandler = new MapHandler(this.roomList);
+        //mapHandler = new MapHandler(this.roomList);
     }
     
     public void startTimer()
     {
+        System.out.println("TIMER RUNNING");
         new java.util.Timer().schedule( 
         new java.util.TimerTask() {
             @Override
