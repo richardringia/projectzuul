@@ -11,7 +11,7 @@ public class MyFrame extends JFrame
 {
     public MyFrame()
     {
-        this.setSize(600, 600);
+        this.setSize(1200, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(Color.black);
         this.setLayout(null);
@@ -28,7 +28,11 @@ public class MyFrame extends JFrame
             icons.add(ImageIO.read(url16));
             icons.add(ImageIO.read(url32));
 
-            this.setIconImages(icons);
+            if (System.getProperty("os.name").startsWith("Mac OS X")) {
+                Taskbar.getTaskbar().setIconImage(ImageIO.read(url32));
+            } else {
+                this.setIconImages(icons);
+            }
         }
         catch(IOException IO)
         {
