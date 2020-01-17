@@ -333,4 +333,8 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+
+    public List<Room> getRoomsList() {
+        return this.roomsList;
+    }
 }

@@ -14,10 +14,12 @@ public class RoomPanel extends JPanel {
         this.room = room;
         this.setPreferredSize(new Dimension(100, 100));
         if (this.room != null) {
-            this.add(new JLabel(room.getName()));
-            this.setBorder(BorderFactory.createLineBorder(Color.black));
-            this.setBackground(Color.green);
+            JLabel label = new JLabel(room.getName());
+            label.setForeground(Color.WHITE);
+            this.add(label);
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         }
+        this.setBackground(Color.BLACK);
     }
 
     public void togglePlayerIsInRoom() {

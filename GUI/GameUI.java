@@ -3,6 +3,7 @@ package GUI;
 import GUI.Components.MyButton;
 import GUI.Components.MyPanel;
 import GUI.Components.MyTextArea;
+import Handlers.MapHandler;
 import Models.Item;
 import Zuul.Game;
 
@@ -21,6 +22,7 @@ public class GameUI
 
     MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
     MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
+    JPanel map;
 
     MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
     MyButton north, south, east, west, back;
@@ -60,6 +62,7 @@ public class GameUI
         createHelpPage();
         createQuitButtons();
         setDefaultGameValues();
+        createMap();
     }
 
     private void setDefaultGameValues()
@@ -277,4 +280,9 @@ public class GameUI
         CurrentSelectedCommand.setBackground(Color.GRAY);
     }
 
+    private void createMap() {
+        MapHandler mapHandler = new MapHandler(game.getRoomsList());
+        map = mapHandler.getMap();
+        window.add(map);
+    }
 }

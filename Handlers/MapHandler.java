@@ -16,7 +16,7 @@ public class MapHandler {
     private static final int FPS = 60;
 
     private List<Room> roomList;
-    private JFrame frame;
+    private JPanel frame;
     private int gridLength = 3;
     private int gridHeight = 5;
     private Room currentRoom;
@@ -42,6 +42,10 @@ public class MapHandler {
         }
     }
 
+    public JPanel getMap() {
+        return this.frame;
+    }
+
 
     private void start() {
         this.draw();
@@ -56,14 +60,15 @@ public class MapHandler {
     }
 
     private void draw() {
-        this.frame = new JFrame();
-        frame.setTitle("Map");
-        frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.frame = new JPanel();
+//        frame.setSize(600, 600);
+        frame.setBackground(Color.BLACK);
+        frame.setBounds(600, 0, 600, 600);
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(gridHeight, gridLength));
+        mainPanel.setBackground(Color.BLACK);
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridLength; x++) {
                 RoomPanel panel = new RoomPanel(findRoom(x, y));
