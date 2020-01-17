@@ -8,7 +8,7 @@ import GUI.Components.MyTextArea;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu
+public class MainMenu implements MainMenuListener
 {
     GUI gui;
     JFrame window;
@@ -60,7 +60,8 @@ public class MainMenu
         quitButton.addActionListener(e -> gui.quitGame());
     }
 
-    void setMainMenuVisibility(boolean visibility)
+    @Override
+    public void setMainMenuVisibility(boolean visibility)
     {
         titleNamePanel.setVisible(visibility);
         titleNameLabel.setVisible(visibility);
