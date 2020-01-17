@@ -313,6 +313,11 @@ public class Game
         return currentRoom;
     }
 
+    public void setCurrentRoom(Room currentRoom)
+    {
+        this.currentRoom = currentRoom;
+    }
+
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

@@ -76,7 +76,6 @@ public class MainMenu implements MainMenuListener
         if (!aboutPageCreated) {
             aboutPageBack = new MyButton("< BACK", Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
             aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  100, 100, 400, 250, window);
-
             aboutPageText.setText("DIT IS EEN ABOUT PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +

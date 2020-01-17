@@ -3,6 +3,7 @@ package GUI;
 import GUI.Components.MyButton;
 import GUI.Components.MyPanel;
 import GUI.Components.MyTextArea;
+import Models.Item;
 import Zuul.Game;
 
 import javax.swing.*;
@@ -18,7 +19,8 @@ public class GameUI
 
     Container currentSelectedCommandHolder, CurrentSelectedCommand;
 
-    MyPanel commandButtonsHolder, moveButtonHolder, investigateItemsHolder, helpTextHolder, quitMenuHolder;
+    MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
+    MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
 
     MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
     MyButton north, south, east, west, back;
@@ -26,10 +28,9 @@ public class GameUI
 
     MyTextArea helpPageText;
     MyTextArea currentRoomText;
+    MyTextArea noItemsText;
 
     boolean gameScreenCreated = false;
-
-    Font gameFont = new Font("Arial", Font.PLAIN, 15);
 
     public GameUI(GUI gui)
     {
@@ -51,10 +52,11 @@ public class GameUI
 
         game = new Game();
         currentRoomText = new MyTextArea(game.getCurrentRoom().getLongDescription(),  Color.BLACK, Color.WHITE,  100, 100, 400, 200, window);
-        currentRoomText.setFont(gameFont);
 
         createCommandButtons();
         createDirectionButtons();
+        createInvestigationView();
+        setInvestigationItems();
         createHelpPage();
         createQuitButtons();
         setDefaultGameValues();
@@ -91,10 +93,92 @@ public class GameUI
         ((GridLayout)moveButtonHolder.getLayout()).setVgap(10);
 
         north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
+        west = new MyButton("West", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
         east = new MyButton("East", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
         south = new MyButton("South", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-        west = new MyButton("West", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
         back = new MyButton("Back", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
+
+        setDirectionButtonEnabled();
+        setDirectionButtonListeners();
+    }
+
+    /*private void setDirectionButtonsVisibility(MyButton direction, String directionString)
+    {
+        System.out.println(directionString);
+        if (game.getCurrentRoom().getExit(directionString) == null)
+        {
+            moveButtonHolder.remove(direction);
+        }
+        else if (direction.getParent() == null)
+        {
+            moveButtonHolder.add(direction);
+        }
+        window.repaint();
+    }*/
+
+    private void setDirectionButtonEnabled()
+    {
+        north.setEnabled(game.getCurrentRoom().getExit("north") != null);
+        east.setEnabled(game.getCurrentRoom().getExit("east") != null);
+        south.setEnabled(game.getCurrentRoom().getExit("south") != null);
+        west.setEnabled(game.getCurrentRoom().getExit("west") != null);
+    }
+
+    private void setDirectionButtonListeners()
+    {
+        north.addActionListener(e ->
+        {
+            goRoom("north");
+        });
+        east.addActionListener(e ->
+        {
+            goRoom("east");
+        });
+        south.addActionListener(e ->
+        {
+            goRoom("south");
+        });
+        west.addActionListener(e ->
+        {
+            goRoom("west");
+        });
+    }
+
+    private void goRoom(String direction)
+    {
+        game.setCurrentRoom(game.getCurrentRoom().getExit(direction));
+        currentRoomText.setText(game.getCurrentRoom().getLongDescription());
+        setDirectionButtonEnabled();
+        setInvestigationItems();
+    }
+
+    private void createInvestigationView()
+    {
+        investigateNoItemsTextHolder = new MyPanel(Color.BLACK, 200, 100, 200, 20, window);
+        investigateNoItemsTextHolder.setLayout(new GridLayout(1, 1));
+        ((GridLayout)investigateNoItemsTextHolder.getLayout()).setVgap(10);
+        investigateNoItemsTextHolder.setVisible(false);
+
+        noItemsText = new MyTextArea("No items found in this location.", Color.BLACK, Color.WHITE, 0, 0, 20, 10, investigateNoItemsTextHolder);
+
+        investigateItemsHolder = new MyPanel(Color.BLACK, 100, 200, 150, 200, window);
+        investigateItemsHolder.setLayout(new GridLayout(1, 1));
+        investigateItemsHolder.setVisible(false);
+    }
+
+    private void setInvestigationItems()
+    {
+        investigateItemsHolder.removeAll();
+        if (game.getCurrentRoom().getItems().size() == 0)
+        {
+            return;
+        }
+        investigateItemsHolder.setLayout(new GridLayout(5,1));
+        ((GridLayout)investigateItemsHolder.getLayout()).setVgap(10);
+
+        for(Item item: game.getCurrentRoom().getItems()) {
+            MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
+        }
     }
 
     private void createHelpPage()
@@ -139,6 +223,11 @@ public class GameUI
         moveCommand.addActionListener(e ->
         {
             commands(moveButtonHolder, moveCommand, true);
+        });
+
+        investigateCommand.addActionListener(e ->
+        {
+            commands(game.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
         });
 
         helpCommand.addActionListener(e ->
