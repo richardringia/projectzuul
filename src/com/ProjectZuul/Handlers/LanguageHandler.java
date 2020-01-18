@@ -1,4 +1,4 @@
-package Handlers;
+package com.ProjectZuul.Handlers;
 
 public class LanguageHandler {
 

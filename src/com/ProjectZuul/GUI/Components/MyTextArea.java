@@ -1,4 +1,4 @@
-package GUI.Components;
+package com.ProjectZuul.GUI.Components;
 
 import javax.swing.*;
 import java.awt.*;

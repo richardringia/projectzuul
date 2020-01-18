@@ -1,7 +1,7 @@
-package GUI;
+package com.ProjectZuul.GUI;
 
-import GUI.Components.*;
-import Zuul.Game;
+import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
 import java.awt.*;

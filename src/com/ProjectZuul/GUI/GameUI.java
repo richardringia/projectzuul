@@ -1,11 +1,10 @@
-package GUI;
+package com.ProjectZuul.GUI;
 
-import GUI.Components.MyButton;
-import GUI.Components.MyPanel;
-import GUI.Components.MyTextArea;
-import Handlers.MapHandler;
-import Models.Item;
-import Zuul.Game;
+
+import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.Handlers.MapHandler;
+import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -215,7 +214,7 @@ public class GameUI
         ((GridLayout)quitMenuHolder.getLayout()).setVgap(10);
         quitMenuHolder.setVisible(false);
 
-        quitToMenu = new MyButton("Quit to Main Menu", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
+        quitToMenu = new MyButton("Quit to com.ProjectZuul.Main Menu", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
         quitToDesktop = new MyButton("Quit to Desktop", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
 
         setQuitButtonListeners();

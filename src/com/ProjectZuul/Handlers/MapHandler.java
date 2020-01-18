@@ -1,4 +1,4 @@
-package Handlers;
+package com.ProjectZuul.Handlers;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -8,8 +8,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
-import GUI.Components.RoomPanel;
-import Models.*;
+import com.ProjectZuul.GUI.Components.RoomPanel;
+import com.ProjectZuul.Models.*;
 
 public class MapHandler {
 

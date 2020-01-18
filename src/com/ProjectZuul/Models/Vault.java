@@ -1,4 +1,4 @@
-package Models;
+package com.ProjectZuul.Models;
 
 public class Vault extends Item {
     private Item key;

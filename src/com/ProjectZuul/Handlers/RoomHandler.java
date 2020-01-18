@@ -1,10 +1,11 @@
-package Handlers;
+package com.ProjectZuul.Handlers;
+
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.*; // TODO: CHANGE
 
-import Models.*;
+import com.ProjectZuul.Models.*;
 
 /**
  *

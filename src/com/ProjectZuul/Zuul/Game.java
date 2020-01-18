@@ -1,10 +1,11 @@
-package Zuul;
+package com.ProjectZuul.Zuul;
+
+import com.ProjectZuul.Models.*;
+import com.ProjectZuul.Handlers.*;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.*;
-import Models.*;
-import Handlers.*;
 /**
  *  This class is the main class of the "World of Zuul" application.
  *  "World of Zuul" is a very simple, text based adventure game.  Users
@@ -51,7 +52,7 @@ public class Game
     }
 
     /**
-     *  Main play routine.  Loops until end of play.
+     *  com.ProjectZuul.Main play routine.  Loops until end of play.
      */
     public void play()
     {

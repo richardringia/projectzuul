@@ -1,4 +1,4 @@
-package com;
+package com.ProjectZuul;
 
 import com.ProjectZuul.GUI.*;
 

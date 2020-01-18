@@ -1,4 +1,4 @@
-package Zuul;
+package com.ProjectZuul.Zuul;
 import java.util.HashMap;
 
 /**

@@ -1,9 +1,9 @@
-package GUI;
+package com.ProjectZuul.GUI;
 
-import GUI.Components.MyButton;
-import GUI.Components.MyLabel;
-import GUI.Components.MyPanel;
-import GUI.Components.MyTextArea;
+import com.ProjectZuul.GUI.Components.MyButton;
+import com.ProjectZuul.GUI.Components.MyLabel;
+import com.ProjectZuul.GUI.Components.MyPanel;
+import com.ProjectZuul.GUI.Components.MyTextArea;
 
 import javax.swing.*;
 import java.awt.*;

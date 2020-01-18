@@ -1,4 +1,4 @@
-package Models;
+package com.ProjectZuul.Models;
 
 import java.util.Set;
 import java.util.HashMap;

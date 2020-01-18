@@ -1,10 +1,15 @@
-package Handlers;
+package com.ProjectZuul.Handlers;
+
+//package com.ProjectZuul.Handlers;
+
+
+import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Models.Room;
+import com.ProjectZuul.Zuul.Game;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import Models.*;
-import Zuul.*;
 /**
  * Deze class voorzorgt het maken van het spel.
  * Dus alle kamers en items worden hier gegenereerd.
