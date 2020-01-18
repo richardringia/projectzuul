@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.target=ItemHandler
-comment1.params=rooms\ vaultRoom\ mapRoom\ keysRoom
-comment1.target=java.util.List\ createItems(java.util.List,\ Models.Room,\ Models.Room,\ Models.Room)
-numComments=2

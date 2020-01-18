@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=MyPanel
+comment1.params=background\ x\ y\ width\ height\ parent
+comment1.target=MyPanel(java.awt.Color,\ int,\ int,\ int,\ int,\ java.awt.Container)
+numComments=2

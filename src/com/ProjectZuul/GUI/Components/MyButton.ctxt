@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=MyButton
+comment1.params=text\ background\ foreground\ bounds\ parent
+comment1.target=MyButton(java.lang.String,\ java.awt.Color,\ java.awt.Color,\ java.awt.Rectangle,\ java.awt.Container)
+numComments=2

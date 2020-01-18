@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=GameHandler
+comment0.text=\r\n\ Deze\ class\ voorzorgt\ het\ maken\ van\ het\ spel.\r\n\ Dus\ alle\ kamers\ en\ items\ worden\ hier\ gegenereerd.\r\n
+comment1.params=
+comment1.target=GameHandler()
+comment2.params=
+comment2.target=void\ startTimer()
+comment3.params=
+comment3.target=void\ run()
+comment4.params=
+comment4.target=java.util.List\ getRoomList()
+comment5.params=
+comment5.target=java.util.List\ getItemList()
+comment6.params=gameInstance
+comment6.target=void\ setGameInstance(com.ProjectZuul.Zuul.Game)
+comment7.params=
+comment7.target=void\ updateRoom()
+numComments=8

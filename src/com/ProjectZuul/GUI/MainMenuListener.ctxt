@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=MainMenuListener
+comment1.params=visibility
+comment1.target=void\ setMainMenuVisibility(boolean)
+numComments=2
