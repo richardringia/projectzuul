@@ -26,20 +26,6 @@ public class MapHandler {
         this.roomList = roomList;
         currentRoom = roomList.get(0);
         this.draw();
-
-
-        Component[] components = frame.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            System.out.println("Componenet name - " + components[i].getName());
-            System.out.println(Arrays.toString(frame.getComponents()));
-            if (components[i] instanceof JPanel) {
-
-                Component s[] = ((JPanel) components[i]).getComponents();
-                for (int j = 0; j < s.length; j++) {
-                    System.out.println("Sub Componenet name - " + s[j].getName());
-                }
-            }
-        }
     }
 
     public JPanel getMap() {
@@ -99,11 +85,26 @@ public class MapHandler {
 
     }
 
-    private void update() {
-//        System.out.println("Update");
-    }
-
-    public void updateRoom(Room room) {
-        this.currentRoom = room;
+    public void updateRoom(Room _room) {
+        this.currentRoom = _room;
+        Component[] components = frame.getComponents();
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                Component[] innerComponents = ((JPanel) component).getComponents();
+                for (Object object : innerComponents) {
+                    if (object instanceof RoomPanel) {
+                        RoomPanel roomPanel = ((RoomPanel) object);
+                        Room room = roomPanel.getRoom();
+                        if (room != null) {
+                            if (room == _room) {
+                                roomPanel.setActive();
+                            } else {
+                                roomPanel.setNotActive();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

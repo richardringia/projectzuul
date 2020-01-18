@@ -22,13 +22,20 @@ public class RoomPanel extends JPanel {
         }
         this.setBackground(Color.BLACK);
     }
-
-    public void togglePlayerIsInRoom() {
-        this.playerIsInRoom = !this.playerIsInRoom;
-    }
-
+    
     public Room getRoom() {
         return this.room;
     }
 
+    public void setActive() {
+        this.setBackground(Color.WHITE);
+        this.getComponent(0).setForeground(Color.BLACK);
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+
+    public void setNotActive() {
+        this.setBackground(Color.BLACK);
+        this.getComponent(0).setForeground(Color.WHITE);
+        this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+    }
 }

@@ -31,6 +31,8 @@ public class GameUI
     MyTextArea currentRoomText;
     MyTextArea noItemsText;
 
+    MapHandler mapHandler;
+
     boolean gameScreenCreated = false;
 
     public GameUI(GUI gui)
@@ -150,6 +152,7 @@ public class GameUI
     {
         game.setCurrentRoom(game.getCurrentRoom().getExit(direction));
         currentRoomText.setText(game.getCurrentRoom().getLongDescription());
+        mapHandler.updateRoom(game.getCurrentRoom());
         setDirectionButtonEnabled();
         setInvestigationItems();
     }
@@ -280,8 +283,9 @@ public class GameUI
     }
 
     private void createMap() {
-        MapHandler mapHandler = new MapHandler(game.getRoomsList());
+        mapHandler = new MapHandler(game.getRoomsList());
         map = mapHandler.getMap();
+        mapHandler.updateRoom(game.getCurrentRoom());
         window.add(map);
     }
 }
