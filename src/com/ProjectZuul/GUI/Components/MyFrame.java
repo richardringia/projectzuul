@@ -30,6 +30,7 @@ public class MyFrame extends JFrame
 
             if (System.getProperty("os.name").startsWith("Mac OS X")) {
                 Taskbar.getTaskbar().setIconImage(ImageIO.read(url32));
+
             } else {
                 this.setIconImages(icons);
             }

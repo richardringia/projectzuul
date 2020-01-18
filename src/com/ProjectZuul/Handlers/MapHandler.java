@@ -25,7 +25,7 @@ public class MapHandler {
     public MapHandler(List<Room> roomList) {
         this.roomList = roomList;
         currentRoom = roomList.get(0);
-        this.start();
+        this.draw();
 
 
         Component[] components = frame.getComponents();
@@ -46,22 +46,8 @@ public class MapHandler {
         return this.frame;
     }
 
-
-    private void start() {
-        this.draw();
-        ScheduledExecutorService executor = Executors
-                .newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                update();
-            }
-        }, 0, 1000 / FPS, TimeUnit.MILLISECONDS);
-    }
-
     private void draw() {
         this.frame = new JPanel();
-//        frame.setSize(600, 600);
         frame.setBackground(Color.BLACK);
         frame.setBounds(600, 0, 600, 600);
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
@@ -115,5 +101,9 @@ public class MapHandler {
 
     private void update() {
 //        System.out.println("Update");
+    }
+
+    public void updateRoom(Room room) {
+        this.currentRoom = room;
     }
 }
