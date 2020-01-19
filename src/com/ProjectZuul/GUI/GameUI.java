@@ -96,15 +96,40 @@ public class GameUI
 
     private void createDirectionButtons()
     {
-        moveButtonHolder = new MyPanel(Color.BLACK, 225, 300, 150, 200, window);
-        moveButtonHolder.setLayout(new GridLayout(5, 1));
-        ((GridLayout)moveButtonHolder.getLayout()).setVgap(10);
+        moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 300, 150, window);
+        moveButtonHolder.setLayout(new GridLayout(4, 4));
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                if (y == 0 && x == 2) {
+                    north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero);
+                    moveButtonHolder.add(north);
+                } else if (y == 1 && x == 1) {
+                    west = new MyButton("West", Color.BLACK, Color.WHITE, positionzero);
+                    moveButtonHolder.add(west);
+                } else if (y == 1 && x == 3) {
+                    east = new MyButton("East", Color.BLACK, Color.WHITE, positionzero);
+                    moveButtonHolder.add(east);
+                } else if (y == 2 && x == 2) {
+                    south = new MyButton("South", Color.BLACK, Color.WHITE, positionzero);
+                    moveButtonHolder.add(south);
+                } else if (y == 3 && x == 0) {
+                    back = new MyButton("Back", Color.BLACK, Color.WHITE, positionzero);
+                    moveButtonHolder.add(back);
+                } else {
+                    moveButtonHolder.add(new EmptyComponent());
+                }
+            }
+        }
 
-        north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-        west = new MyButton("West", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-        east = new MyButton("East", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-        south = new MyButton("South", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-        back = new MyButton("Back", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
+
+
+//        ((GridLayout)moveButtonHolder.getLayout()).setVgap(10);
+
+//        north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
+//
+//
+//
+//
 
         setDirectionButtonEnabled();
         setDirectionButtonListeners();

@@ -22,7 +22,7 @@ public class RoomPanel extends JPanel {
         }
         this.setBackground(Color.BLACK);
     }
-    
+
     public Room getRoom() {
         return this.room;
     }
