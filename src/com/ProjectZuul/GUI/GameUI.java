@@ -4,10 +4,12 @@ package com.ProjectZuul.GUI;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.Handlers.MapHandler;
 import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Models.Room;
 import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Stack;
 
 public class GameUI
 {
@@ -32,6 +34,7 @@ public class GameUI
     MyTextArea noItemsText;
 
     MapHandler mapHandler;
+    Stack<Room> previousRoom;
 
     boolean gameScreenCreated = false;
 
@@ -39,6 +42,7 @@ public class GameUI
     {
         this.gui = gui;
         positionzero = new Rectangle();
+        previousRoom = new Stack<>();
         createGame();
     }
 
@@ -126,6 +130,8 @@ public class GameUI
         east.setEnabled(game.getCurrentRoom().getExit("east") != null);
         south.setEnabled(game.getCurrentRoom().getExit("south") != null);
         west.setEnabled(game.getCurrentRoom().getExit("west") != null);
+
+        back.setEnabled(previousRoom.size() != 0);
     }
 
     private void setDirectionButtonListeners()
@@ -146,13 +152,35 @@ public class GameUI
         {
             goRoom("west");
         });
+        back.addActionListener(e ->
+        {
+            goBackRoom();
+        });
     }
 
     private void goRoom(String direction)
     {
+        if (previousRoom.size() != 0 && game.getCurrentRoom().getExit(direction) == previousRoom.lastElement())
+        {
+            goBackRoom();
+            return;
+        }
+
+        previousRoom.push(game.getCurrentRoom());
         game.setCurrentRoom(game.getCurrentRoom().getExit(direction));
         currentRoomText.setText(game.getCurrentRoom().getLongDescription());
         mapHandler.updateRoom(game.getCurrentRoom());
+
+        setDirectionButtonEnabled();
+        setInvestigationItems();
+    }
+
+    private void goBackRoom()
+    {
+        game.setCurrentRoom(previousRoom.pop());
+        currentRoomText.setText(game.getCurrentRoom().getLongDescription());
+        mapHandler.updateRoom(game.getCurrentRoom());
+
         setDirectionButtonEnabled();
         setInvestigationItems();
     }
