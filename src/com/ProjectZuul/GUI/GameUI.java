@@ -14,8 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
 
-public class GameUI implements SetInactiveListener
-{
+public class GameUI implements SetInactiveListener {
     Game game;
     GUI gui;
 
@@ -45,8 +44,7 @@ public class GameUI implements SetInactiveListener
 
     boolean gameScreenCreated = false;
 
-    public GameUI(GUI gui)
-    {
+    public GameUI(GUI gui) {
         this.gui = gui;
         positionzero = new Rectangle();
         previousRoom = new Stack<>();
@@ -54,19 +52,17 @@ public class GameUI implements SetInactiveListener
         createGame();
     }
 
-    public void createGame()
-    {
+    public void createGame() {
         window = gui.getWindow();
         gui.setMainMenuVisibility(false);
 
-        if (gameScreenCreated)
-        {
+        if (gameScreenCreated) {
             //setDefaultGameValues();
             return;
         }
 
         game = new Game();
-        currentRoomText = new MyTextArea(game.getCurrentRoom().getLongDescription(),  Color.BLACK, Color.WHITE,  100, 100, 400, 200, window);
+        currentRoomText = new MyTextArea(game.getCurrentRoom().getLongDescription(), Color.BLACK, Color.WHITE, 100, 100, 400, 200, window);
 
         createCommandButtons();
         createDirectionButtons();
@@ -79,8 +75,7 @@ public class GameUI implements SetInactiveListener
         createInventory();
     }
 
-    private void setDefaultGameValues()
-    {
+    private void setDefaultGameValues() {
         gameScreenCreated = true;
         commandButtonsHolder.setVisible(true);
         setCurrentSelectedCommandHolder(moveButtonHolder);
@@ -89,11 +84,10 @@ public class GameUI implements SetInactiveListener
         window.repaint();
     }
 
-    private void createCommandButtons()
-    {
+    private void createCommandButtons() {
         commandButtonsHolder = new MyPanel(Color.BLACK, 20, 20, 500, 40, window);
         commandButtonsHolder.setLayout(new GridLayout(1, 10));
-        ((GridLayout)commandButtonsHolder.getLayout()).setHgap(10);
+        ((GridLayout) commandButtonsHolder.getLayout()).setHgap(10);
 
         moveCommand = new MyButton("Move", Color.GRAY, Color.WHITE, positionzero, commandButtonsHolder);
         investigateCommand = new MyButton("Investigate", Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
@@ -103,8 +97,7 @@ public class GameUI implements SetInactiveListener
         setCommandButtonListeners();
     }
 
-    private void createDirectionButtons()
-    {
+    private void createDirectionButtons() {
         moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 300, 150, window);
         moveButtonHolder.setLayout(new GridLayout(4, 4));
         for (int y = 0; y < 4; y++) {
@@ -147,8 +140,7 @@ public class GameUI implements SetInactiveListener
         window.repaint();
     }*/
 
-    private void setDirectionButtonEnabled()
-    {
+    private void setDirectionButtonEnabled() {
         north.setEnabled(game.getCurrentRoom().getExit("north") != null);
         east.setEnabled(game.getCurrentRoom().getExit("east") != null);
         south.setEnabled(game.getCurrentRoom().getExit("south") != null);
@@ -157,8 +149,7 @@ public class GameUI implements SetInactiveListener
         back.setEnabled(previousRoom.size() != 0);
     }
 
-    private void setDirectionButtonListeners()
-    {
+    private void setDirectionButtonListeners() {
         north.addActionListener(e ->
         {
             goRoom("north");
@@ -181,10 +172,8 @@ public class GameUI implements SetInactiveListener
         });
     }
 
-    private void goRoom(String direction)
-    {
-        if (previousRoom.size() != 0 && game.getCurrentRoom().getExit(direction) == previousRoom.lastElement())
-        {
+    private void goRoom(String direction) {
+        if (previousRoom.size() != 0 && game.getCurrentRoom().getExit(direction) == previousRoom.lastElement()) {
             goBackRoom();
             return;
         }
@@ -198,8 +187,7 @@ public class GameUI implements SetInactiveListener
         setInvestigationItems();
     }
 
-    private void goBackRoom()
-    {
+    private void goBackRoom() {
         game.setCurrentRoom(previousRoom.pop());
         currentRoomText.setText(game.getCurrentRoom().getLongDescription());
         mapHandler.updateRoom(game.getCurrentRoom());
@@ -208,11 +196,10 @@ public class GameUI implements SetInactiveListener
         setInvestigationItems();
     }
 
-    private void createInvestigationView()
-    {
+    private void createInvestigationView() {
         investigateNoItemsTextHolder = new MyPanel(Color.BLACK, 200, 100, 200, 20, window);
         investigateNoItemsTextHolder.setLayout(new GridLayout(1, 1));
-        ((GridLayout)investigateNoItemsTextHolder.getLayout()).setVgap(10);
+        ((GridLayout) investigateNoItemsTextHolder.getLayout()).setVgap(10);
         investigateNoItemsTextHolder.setVisible(false);
 
         noItemsText = new MyTextArea("No items found in this location.", Color.BLACK, Color.WHITE, 0, 0, 20, 10, investigateNoItemsTextHolder);
@@ -222,17 +209,15 @@ public class GameUI implements SetInactiveListener
         investigateItemsHolder.setVisible(false);
     }
 
-    private void setInvestigationItems()
-    {
+    private void setInvestigationItems() {
         investigateItemsHolder.removeAll();
-        if (game.getCurrentRoom().getItems().size() == 0)
-        {
+        if (game.getCurrentRoom().getItems().size() == 0) {
             return;
         }
-        investigateItemsHolder.setLayout(new GridLayout(5,1));
-        ((GridLayout)investigateItemsHolder.getLayout()).setVgap(10);
+        investigateItemsHolder.setLayout(new GridLayout(5, 1));
+        ((GridLayout) investigateItemsHolder.getLayout()).setVgap(10);
 
-        for(Item item: game.getCurrentRoom().getItems()) {
+        for (Item item : game.getCurrentRoom().getItems()) {
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
             itemButton.addActionListener(e -> {
                 inventoryHandler.addItem(item, game.getCurrentRoom());
@@ -242,13 +227,12 @@ public class GameUI implements SetInactiveListener
         }
     }
 
-    private void createHelpPage()
-    {
+    private void createHelpPage() {
         helpTextHolder = new MyPanel(Color.BLACK, 100, 100, 400, 250, window);
         helpTextHolder.setLayout(new GridLayout(1, 1));
         helpTextHolder.setVisible(false);
 
-        helpPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  0, 0, 0, 0, helpTextHolder);
+        helpPageText = new MyTextArea("", Color.BLACK, Color.WHITE, 0, 0, 0, 0, helpTextHolder);
 
         helpPageText.setText("DIT IS EEN HELP PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
                 "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
@@ -266,11 +250,10 @@ public class GameUI implements SetInactiveListener
                 "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
     }
 
-    private void createQuitButtons()
-    {
+    private void createQuitButtons() {
         quitMenuHolder = new MyPanel(Color.BLACK, 225, 200, 150, 80, window);
         quitMenuHolder.setLayout(new GridLayout(2, 1));
-        ((GridLayout)quitMenuHolder.getLayout()).setVgap(10);
+        ((GridLayout) quitMenuHolder.getLayout()).setVgap(10);
         quitMenuHolder.setVisible(false);
 
         quitToMenu = new MyButton("Main Menu", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
@@ -279,8 +262,7 @@ public class GameUI implements SetInactiveListener
         setQuitButtonListeners();
     }
 
-    private void setCommandButtonListeners()
-    {
+    private void setCommandButtonListeners() {
         moveCommand.addActionListener(e ->
         {
             commands(moveButtonHolder, moveCommand, true);
@@ -302,8 +284,7 @@ public class GameUI implements SetInactiveListener
         });
     }
 
-    private void setQuitButtonListeners()
-    {
+    private void setQuitButtonListeners() {
         quitToMenu.addActionListener(e ->
         {
             gui.setGameUIVisibility(false);
@@ -314,32 +295,29 @@ public class GameUI implements SetInactiveListener
     }
 
     @Override
-    public void setMenuVisibility(boolean visibility)
-    {
+    public void setMenuVisibility(boolean visibility) {
         commandButtonsHolder.setVisible(visibility);
         quitMenuHolder.setVisible(visibility);
         mapHandler.setMenuVisibility(visibility);
         inventoryHandler.setMenuVisibility(visibility);
     }
 
-    private void commands(Container holder, Container command, boolean selectedMove)
-    {
+    private void commands(Container holder, MyButton command, boolean selectedMove) {
         setCurrentSelectedCommandHolder(holder);
         setCurrentSelectedCommand(command);
 
         currentRoomText.setVisible(selectedMove);
     }
 
-    private void setCurrentSelectedCommandHolder(Container holder)
-    {
+    private void setCurrentSelectedCommandHolder(Container holder) {
         if (currentSelectedCommandHolder != null)
             currentSelectedCommandHolder.setVisible(false);
         currentSelectedCommandHolder = holder;
         currentSelectedCommandHolder.setVisible(true);
     }
 
-    private void setCurrentSelectedCommand(Container command)
-    {
+    private void setCurrentSelectedCommand(MyButton command) {
+//        command.setBackground();
         if (CurrentSelectedCommand != null)
             CurrentSelectedCommand.setBackground(Color.BLACK);
         CurrentSelectedCommand = command;

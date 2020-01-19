@@ -7,8 +7,6 @@ import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryHandler implements SetInactiveListener {
 
@@ -23,7 +21,7 @@ public class InventoryHandler implements SetInactiveListener {
     }
 
     private void init() {
-        this.inventory = new Inventory();
+        this.inventory = new Inventory(this.player);
         this.window.add(this.inventory);
     }
 

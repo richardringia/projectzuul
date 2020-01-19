@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Player {
     private int maxWeight = 10;
     private List<Item> itemList;
-    private InventoryHandler inventoryHandler;
 
     public Player() {
         this.itemList = new ArrayList<>();
@@ -34,11 +33,15 @@ public class Player {
                 .orElse(null);
     }
 
-    private int getTotalWeight() {
+    public int getTotalWeight() {
         int weight = 0;
         for (Item item: this.itemList) {
             weight += item.getWeight();
         }
         return weight;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
     }
 }

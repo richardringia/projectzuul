@@ -2,8 +2,11 @@ package com.ProjectZuul.GUI.Components;
 
 import com.ProjectZuul.GUI.GUI;
 import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Models.Player;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.concurrent.Flow;
 
@@ -18,12 +21,17 @@ public class Inventory extends JPanel {
     private int gridRows = 3;
     private int gridCols = 5;
 
-    public Inventory() {
+    private Player player;
+    private JLabel jLabelTotalWeight;
+
+    public Inventory(Player player) {
+        this.player = player;
         this.setBounds(this.positionX, this.positionY, this.width, this.height);
         this.init();
     }
 
-    public Inventory(Rectangle rectangle) {
+    public Inventory(Player player, Rectangle rectangle) {
+        this.player = player;
         this.positionX = rectangle.x;
         this.positionY = rectangle.y;
         this.width = rectangle.width;
@@ -38,22 +46,40 @@ public class Inventory extends JPanel {
         this.innerPanel = new JPanel(new GridLayout(this.gridRows, this.gridCols));
         this.innerPanel.setBackground(Color.BLACK);
         this.innerPanel.setPreferredSize(new Dimension(this.width, this.height - 25));
-        this.innerPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        this.innerPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.WHITE), new EmptyBorder(10, 10, 10, 10)));
+        this.innerPanel.setLocation(50, 50);
         this.createInfoLabel();
         this.add(this.innerPanel);
     }
 
     private void createInfoLabel() {
+        JPanel labelFrame = new JPanel();
+        labelFrame.setBackground(Color.BLACK);
+        labelFrame.setPreferredSize(new Dimension(this.width, 25));
         JLabel label = new JLabel("Inventory");
-        label.setPreferredSize(new Dimension(this.width, 25));
+        label.setLocation(0, 0);
         label.setForeground(Color.WHITE);
-        this.add(label);
+        labelFrame.add(label);
+        this.jLabelTotalWeight = new JLabel(this.getTotalWeightText());
+        jLabelTotalWeight.setForeground(Color.GRAY);
+        labelFrame.add(jLabelTotalWeight);
+        this.add(labelFrame);
+    }
+
+    private String getTotalWeightText() {
+        return this.player.getTotalWeight() + " of " + this.player.getMaxWeight() + " Kg is used";
+    }
+
+    public void updateTotalWeight() {
+        this.jLabelTotalWeight.setText(this.getTotalWeightText());
     }
 
     public void addItem(Item item) {
         JLabel label = new JLabel(item.getName());
         label.setForeground(Color.WHITE);
+        this.updateTotalWeight();
         this.innerPanel.add(label);
-        this.innerPanel.updateUI();
+        this.updateUI();
     }
+
 }
