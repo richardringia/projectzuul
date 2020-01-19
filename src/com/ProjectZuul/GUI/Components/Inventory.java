@@ -70,7 +70,7 @@ public class Inventory extends JPanel {
         return this.player.getTotalWeight() + " of " + this.player.getMaxWeight() + " Kg is used";
     }
 
-    public void updateTotalWeight() {
+    private void updateTotalWeight() {
         this.jLabelTotalWeight.setText(this.getTotalWeightText());
     }
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_projectzuul" default="compile.module.projectzuul">
+  <dirname property="module.projectzuul.basedir" file="${ant.file.module_projectzuul}"/>
+  
+  <property name="module.jdk.home.projectzuul" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.projectzuul" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.projectzuul" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.projectzuul" value="-encoding UTF-8 -source 13 -target 13 ${compiler.args}"/>
+  
+  <property name="projectzuul.output.dir" value="${module.projectzuul.basedir}/../../output/production/projectzuul"/>
+  <property name="projectzuul.testoutput.dir" value="${module.projectzuul.basedir}/../../output/test/projectzuul"/>
+  
+  <path id="projectzuul.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="projectzuul.module.production.classpath">
+    <path refid="${module.jdk.classpath.projectzuul}"/>
+  </path>
+  
+  <path id="projectzuul.runtime.production.module.classpath">
+    <pathelement location="${projectzuul.output.dir}"/>
+  </path>
+  
+  <path id="projectzuul.module.classpath">
+    <path refid="${module.jdk.classpath.projectzuul}"/>
+    <pathelement location="${projectzuul.output.dir}"/>
+  </path>
+  
+  <path id="projectzuul.runtime.module.classpath">
+    <pathelement location="${projectzuul.testoutput.dir}"/>
+    <pathelement location="${projectzuul.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.projectzuul">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.projectzuul">
+    <patternset refid="excluded.from.module.projectzuul"/>
+  </patternset>
+  
+  <path id="projectzuul.module.sourcepath">
+    <dirset dir="${module.projectzuul.basedir}/../../projectzuul">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.projectzuul" depends="compile.module.projectzuul.production,compile.module.projectzuul.tests" description="Compile module projectzuul"/>
+  
+  <target name="compile.module.projectzuul.production" depends="register.custom.compilers" description="Compile module projectzuul; production classes">
+    <mkdir dir="${projectzuul.output.dir}"/>
+    <javac2 destdir="${projectzuul.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.projectzuul}/javac">
+      <compilerarg line="${compiler.args.projectzuul}"/>
+      <bootclasspath refid="projectzuul.module.bootclasspath"/>
+      <classpath refid="projectzuul.module.production.classpath"/>
+      <src refid="projectzuul.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.projectzuul"/>
+    </javac2>
+    
+    <copy todir="${projectzuul.output.dir}">
+      <fileset dir="${module.projectzuul.basedir}/../src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.projectzuul.tests" depends="register.custom.compilers,compile.module.projectzuul.production" description="compile module projectzuul; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.projectzuul" description="cleanup module">
+    <delete dir="${projectzuul.output.dir}"/>
+    <delete dir="${projectzuul.testoutput.dir}"/>
+  </target>
+</project>

@@ -3,11 +3,13 @@ package com.ProjectZuul.GUI;
 
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
+import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Handlers.MapHandler;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
+import com.ProjectZuul.Models.Vault;
 import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
@@ -26,6 +28,7 @@ public class GameUI implements SetInactiveListener {
     MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
     MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
     JPanel map;
+    ActionMenu actionMenu;
 
     MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
     MyButton north, south, east, west, back;
@@ -37,6 +40,7 @@ public class GameUI implements SetInactiveListener {
 
     MapHandler mapHandler;
     InventoryHandler inventoryHandler;
+    ActionHandler actionHandler;
 
     Stack<Room> previousRoom;
 
@@ -73,6 +77,7 @@ public class GameUI implements SetInactiveListener {
         setDefaultGameValues();
         createMap();
         createInventory();
+        createActionMenu();
     }
 
     private void setDefaultGameValues() {
@@ -220,9 +225,23 @@ public class GameUI implements SetInactiveListener {
         for (Item item : game.getCurrentRoom().getItems()) {
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
             itemButton.addActionListener(e -> {
-                inventoryHandler.addItem(item, game.getCurrentRoom());
-                investigateItemsHolder.remove(itemButton);
-                window.repaint();
+                if (item.isCanPickup()) {
+                    actionHandler.createMenuWithPickup(e2 -> {
+                        inventoryHandler.addItem(item, game.getCurrentRoom());
+                        investigateItemsHolder.remove(itemButton);
+                        window.repaint();
+                    });
+                } else if (item instanceof Vault) {
+                    Item key = player.getItem("Vault keys");
+                    actionHandler.createMenuFromVault(e2 -> {
+                        // YOU WIN
+                        Vault vault = (Vault)item;
+                        vault.openVault(key);
+                        System.out.println("YOU WIN!!!!");
+                    });
+                } else {
+                    actionHandler.createMenu();
+                }
             });
         }
     }
@@ -333,5 +352,11 @@ public class GameUI implements SetInactiveListener {
 
     private void createInventory() {
         inventoryHandler = new InventoryHandler(this.window, this.player);
+    }
+
+    private void createActionMenu() {
+        actionMenu = new ActionMenu();
+        actionHandler = new ActionHandler(actionMenu);
+        window.add(actionMenu);
     }
 }
