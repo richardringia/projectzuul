@@ -2,8 +2,10 @@ package com.ProjectZuul.GUI;
 
 
 import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Handlers.MapHandler;
 import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
 import com.ProjectZuul.Zuul.Game;
 
@@ -34,7 +36,11 @@ public class GameUI
     MyTextArea noItemsText;
 
     MapHandler mapHandler;
+    InventoryHandler inventoryHandler;
+
     Stack<Room> previousRoom;
+
+    Player player;
 
     boolean gameScreenCreated = false;
 
@@ -43,6 +49,7 @@ public class GameUI
         this.gui = gui;
         positionzero = new Rectangle();
         previousRoom = new Stack<>();
+        player = new Player();
         createGame();
     }
 
@@ -68,6 +75,7 @@ public class GameUI
         createQuitButtons();
         setDefaultGameValues();
         createMap();
+        createInventory();
     }
 
     private void setDefaultGameValues()
@@ -120,17 +128,6 @@ public class GameUI
                 }
             }
         }
-
-
-
-//        ((GridLayout)moveButtonHolder.getLayout()).setVgap(10);
-
-//        north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero, moveButtonHolder);
-//
-//
-//
-//
-
         setDirectionButtonEnabled();
         setDirectionButtonListeners();
     }
@@ -236,6 +233,9 @@ public class GameUI
 
         for(Item item: game.getCurrentRoom().getItems()) {
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
+            itemButton.addActionListener(e -> {
+                inventoryHandler.addItem(item, game.getCurrentRoom());
+            });
         }
     }
 
@@ -340,5 +340,9 @@ public class GameUI
         map = mapHandler.getMap();
         mapHandler.updateRoom(game.getCurrentRoom());
         window.add(map);
+    }
+
+    private void createInventory() {
+        inventoryHandler = new InventoryHandler(this.window, this.player);
     }
 }

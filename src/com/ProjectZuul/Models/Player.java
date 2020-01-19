@@ -1,5 +1,7 @@
 package com.ProjectZuul.Models;
 
+import com.ProjectZuul.Handlers.InventoryHandler;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 public class Player {
     private int maxWeight = 10;
     private List<Item> itemList;
+    private InventoryHandler inventoryHandler;
 
     public Player() {
         this.itemList = new ArrayList<>();
@@ -38,5 +41,4 @@ public class Player {
         }
         return weight;
     }
-
 }

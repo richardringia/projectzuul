@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import com.ProjectZuul.GUI.Components.RoomPanel;
 import com.ProjectZuul.Models.*;
@@ -20,6 +21,8 @@ public class MapHandler {
     private int gridLength = 3;
     private int gridHeight = 5;
     private Room currentRoom;
+    private int height = 300;
+    private int width = 300;
 
 
     public MapHandler(List<Room> roomList) {
@@ -35,15 +38,15 @@ public class MapHandler {
     private void draw() {
         this.frame = new JPanel();
         frame.setBackground(Color.BLACK);
-        frame.setBounds(600, 0, 600, 600);
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+        frame.setBounds(850, 0, this.width + 10, this.height + 10);
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(gridHeight, gridLength));
         mainPanel.setBackground(Color.BLACK);
         for (int y = 0; y < this.gridHeight; y++) {
             for (int x = 0; x < this.gridLength; x++) {
-                RoomPanel panel = new RoomPanel(findRoom(x, y));
+                RoomPanel panel = new RoomPanel(findRoom(x, y), new Dimension(this.width / this.gridLength, this.height / this.gridHeight));
                 mainPanel.add(panel);
             }
         }

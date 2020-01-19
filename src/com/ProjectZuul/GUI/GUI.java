@@ -30,6 +30,12 @@ public class GUI
     private void createWindow()
     {
         window = new MyFrame();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(window);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public JFrame getWindow()

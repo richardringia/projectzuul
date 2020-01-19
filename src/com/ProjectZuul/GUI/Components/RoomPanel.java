@@ -9,15 +9,15 @@ import java.awt.*;
 public class RoomPanel extends JPanel {
 
     private Room room;
-    private boolean playerIsInRoom = false;
 
-    public RoomPanel(Room room) {
+    public RoomPanel(Room room, Dimension dimension) {
+        super(new GridLayout());
         this.room = room;
-        this.setPreferredSize(new Dimension(100, 100));
+        this.setPreferredSize(dimension);
         if (this.room != null) {
-            JLabel label = new JLabel(room.getName());
+            JLabel label = new JLabel(room.getName(), SwingConstants.CENTER);
             label.setForeground(Color.WHITE);
-            this.add(label);
+            this.add(label, BorderLayout.CENTER);
             this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         }
         this.setBackground(Color.BLACK);
