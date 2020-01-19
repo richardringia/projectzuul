@@ -4,11 +4,12 @@ import com.ProjectZuul.GUI.Components.MyButton;
 import com.ProjectZuul.GUI.Components.MyLabel;
 import com.ProjectZuul.GUI.Components.MyPanel;
 import com.ProjectZuul.GUI.Components.MyTextArea;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu implements MainMenuListener
+public class MainMenu implements SetInactiveListener
 {
     GUI gui;
     JFrame window;
@@ -22,6 +23,7 @@ public class MainMenu implements MainMenuListener
     MyTextArea aboutPageText;
 
     boolean aboutPageCreated = false;
+    boolean gameCreated = false;
 
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
@@ -52,7 +54,15 @@ public class MainMenu implements MainMenuListener
     {
         startButton.addActionListener(e ->
         {
-            gui.createGame();
+            if (!gameCreated)
+            {
+                gui.createGame();
+                gameCreated = true;
+            }
+            else
+            {
+                gui.setGameUIVisibility(true);
+            }
         });
 
         aboutButton.addActionListener(e -> createAboutPage());
@@ -61,7 +71,7 @@ public class MainMenu implements MainMenuListener
     }
 
     @Override
-    public void setMainMenuVisibility(boolean visibility)
+    public void setMenuVisibility(boolean visibility)
     {
         titleNamePanel.setVisible(visibility);
         titleNameLabel.setVisible(visibility);
@@ -72,7 +82,7 @@ public class MainMenu implements MainMenuListener
 
     private void createAboutPage()
     {
-        setMainMenuVisibility(false);
+        gui.setMainMenuVisibility(false);
         if (!aboutPageCreated) {
             aboutPageBack = new MyButton("< BACK", Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
             aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  100, 100, 400, 250, window);
@@ -103,7 +113,7 @@ public class MainMenu implements MainMenuListener
     {
         aboutPageBack.addActionListener(e ->
         {
-            setMainMenuVisibility(true);
+            gui.setMainMenuVisibility(true);
             setAboutPageActive(false);
         });
     }

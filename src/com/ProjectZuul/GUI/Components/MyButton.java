@@ -9,7 +9,7 @@ public class MyButton extends JButton
     {
         this.setText(text);
         this.setBackground(background);
-        this.setForeground(foreground);
+        this.setForeground(Color.BLACK);
         this.setBounds(bounds);
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.setFocusPainted(false);
@@ -19,7 +19,7 @@ public class MyButton extends JButton
     {
         this.setText(text);
         this.setBackground(background);
-        this.setForeground(foreground);
+        this.setForeground(Color.BLACK);
         this.setBounds(bounds);
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.setFocusPainted(false);

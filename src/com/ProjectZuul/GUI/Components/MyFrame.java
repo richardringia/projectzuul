@@ -13,7 +13,7 @@ public class MyFrame extends JFrame
     {
         this.setSize(1200, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(Color.black);
+        this.getContentPane().setBackground(Color.BLACK);
         this.setLayout(null);
         this.setTitle("Zuul");
 

@@ -2,6 +2,7 @@ package com.ProjectZuul.GUI;
 
 
 import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Handlers.MapHandler;
 import com.ProjectZuul.Models.Item;
@@ -13,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
 
-public class GameUI
+public class GameUI implements SetInactiveListener
 {
     Game game;
     GUI gui;
@@ -235,6 +236,8 @@ public class GameUI
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
             itemButton.addActionListener(e -> {
                 inventoryHandler.addItem(item, game.getCurrentRoom());
+                investigateItemsHolder.remove(itemButton);
+                window.repaint();
             });
         }
     }
@@ -303,12 +306,20 @@ public class GameUI
     {
         quitToMenu.addActionListener(e ->
         {
-            commandButtonsHolder.setVisible(false);
-            quitMenuHolder.setVisible(false);
+            gui.setGameUIVisibility(false);
             gui.setMainMenuVisibility(true);
         });
 
         quitToDesktop.addActionListener(e -> gui.quitGame());
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visibility)
+    {
+        commandButtonsHolder.setVisible(visibility);
+        quitMenuHolder.setVisible(visibility);
+        mapHandler.setMenuVisibility(visibility);
+        inventoryHandler.setMenuVisibility(visibility);
     }
 
     private void commands(Container holder, Container command, boolean selectedMove)

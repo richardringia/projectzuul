@@ -1,10 +1,10 @@
 package com.ProjectZuul.GUI;
 
 import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GUI
 {
@@ -12,7 +12,9 @@ public class GUI
     GameUI gameUI;
 
     JFrame window;
-    MainMenuListener mainMenuListener;
+
+    SetInactiveListener mainMenuListener;
+    SetInactiveListener gameUIListener;
 
     public static void main(String[] args) {
         new GUI();
@@ -24,6 +26,7 @@ public class GUI
         createWindow();
         mainMenuListener = new MainMenu(this);
 
+        //window.add(new TestPane());
         window.setVisible(true);
     }
 
@@ -45,16 +48,22 @@ public class GUI
 
     void createGame()
     {
-        new GameUI(this);
+        gameUIListener = new GameUI(this);
+    }
+
+    void setGameUIVisibility(boolean visibility)
+    {
+        gameUIListener.setMenuVisibility(visibility);
     }
 
     void setMainMenuVisibility(boolean visibility)
     {
-        mainMenuListener.setMainMenuVisibility(visibility);
+        mainMenuListener.setMenuVisibility(visibility);
     }
 
     void quitGame()
     {
         window.dispose();
     }
+
 }

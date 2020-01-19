@@ -1,5 +1,6 @@
 package com.ProjectZuul.GUI.Components;
 
+import com.ProjectZuul.GUI.GUI;
 import com.ProjectZuul.Models.Item;
 
 import javax.swing.*;
@@ -50,9 +51,9 @@ public class Inventory extends JPanel {
     }
 
     public void addItem(Item item) {
-        System.out.println(item.getName());
         JLabel label = new JLabel(item.getName());
         label.setForeground(Color.WHITE);
         this.innerPanel.add(label);
+        this.innerPanel.updateUI();
     }
 }

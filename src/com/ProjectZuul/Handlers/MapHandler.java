@@ -1,18 +1,15 @@
 package com.ProjectZuul.Handlers;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import com.ProjectZuul.GUI.Components.RoomPanel;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.*;
 
-public class MapHandler {
+public class MapHandler implements SetInactiveListener
+{
 
     private static final int FPS = 60;
 
@@ -109,5 +106,10 @@ public class MapHandler {
                 }
             }
         }
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visibility) {
+
     }
 }

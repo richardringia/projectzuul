@@ -1,6 +1,7 @@
 package com.ProjectZuul.Handlers;
 
 import com.ProjectZuul.GUI.Components.Inventory;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryHandler {
+public class InventoryHandler implements SetInactiveListener {
 
     private JFrame window;
     private Inventory inventory;
@@ -35,5 +36,10 @@ public class InventoryHandler {
                 System.out.println(room.getName());
             }
         }
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visibility) {
+
     }
 }

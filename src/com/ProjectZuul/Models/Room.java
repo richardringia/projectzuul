@@ -114,7 +114,9 @@ public class Room
     }
 
     public void removeItem(Item item) {
+        System.out.println(this.itemList.size());
         this.itemList.remove(item);
+        System.out.println(this.itemList.size());
     }
 
     public String getName() {
