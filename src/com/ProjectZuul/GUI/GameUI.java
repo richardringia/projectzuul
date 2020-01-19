@@ -14,41 +14,48 @@ import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Stack;
 
-public class GameUI implements SetInactiveListener {
-    Game game;
-    GUI gui;
+public class GameUI implements SetInactiveListener
+{
+    private Game game;
+    private GUI gui;
 
-    JFrame window;
-    Rectangle positionzero;
+    private Timer timer;
+    private long startTime = -1;
+    private long duration = 50000;
 
-    Container currentSelectedCommandHolder, CurrentSelectedCommand;
+    private Player player;
 
-    MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
-    MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
-    JPanel map;
+    private JFrame window;
+    private Rectangle positionzero;
+
     ActionMenu actionMenu;
+    private Container currentSelectedCommandHolder, CurrentSelectedCommand;
 
-    MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
-    MyButton north, south, east, west, back;
-    MyButton quitToMenu, quitToDesktop;
+    private MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
+    private MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
 
-    MyTextArea helpPageText;
-    MyTextArea currentRoomText;
-    MyTextArea noItemsText;
+    private MyLabel timeLabel, timeLeftText;
+    private JPanel map;
 
-    MapHandler mapHandler;
-    InventoryHandler inventoryHandler;
     ActionHandler actionHandler;
+    private MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
+    private MyButton north, south, east, west, back;
+    private MyButton quitToMenu, quitToDesktop;
 
-    Stack<Room> previousRoom;
+    private MyTextArea helpPageText;
+    private MyTextArea currentRoomText;
+    private MyTextArea noItemsText;
 
-    Player player;
+    private MapHandler mapHandler;
+    private InventoryHandler inventoryHandler;
 
-    boolean gameScreenCreated = false;
+    private Stack<Room> previousRoom;
 
-    public GameUI(GUI gui) {
+    public GameUI(GUI gui)
+    {
         this.gui = gui;
         positionzero = new Rectangle();
         previousRoom = new Stack<>();
@@ -59,11 +66,6 @@ public class GameUI implements SetInactiveListener {
     public void createGame() {
         window = gui.getWindow();
         gui.setMainMenuVisibility(false);
-
-        if (gameScreenCreated) {
-            //setDefaultGameValues();
-            return;
-        }
 
         game = new Game();
         currentRoomText = new MyTextArea(game.getCurrentRoom().getLongDescription(), Color.BLACK, Color.WHITE, 100, 100, 400, 200, window);
@@ -78,13 +80,15 @@ public class GameUI implements SetInactiveListener {
         createMap();
         createInventory();
         createActionMenu();
+        startTimer();
     }
 
-    private void setDefaultGameValues() {
-        gameScreenCreated = true;
+    private void setDefaultGameValues()
+    {
         commandButtonsHolder.setVisible(true);
         setCurrentSelectedCommandHolder(moveButtonHolder);
         setCurrentSelectedCommand(moveCommand);
+        currentRoomText.setVisible(true);
 
         window.repaint();
     }
@@ -102,11 +106,12 @@ public class GameUI implements SetInactiveListener {
         setCommandButtonListeners();
     }
 
-    private void createDirectionButtons() {
-        moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 300, 150, window);
-        moveButtonHolder.setLayout(new GridLayout(4, 4));
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
+    private void createDirectionButtons()
+    {
+        moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 400, 200, window);
+        moveButtonHolder.setLayout(new GridLayout(5, 5));
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
                 if (y == 0 && x == 2) {
                     north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(north);
@@ -122,13 +127,53 @@ public class GameUI implements SetInactiveListener {
                 } else if (y == 3 && x == 0) {
                     back = new MyButton("Back", Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(back);
-                } else {
+                }
+                else if (y == 4 && x == 3)
+                {
+                    timeLeftText = new MyLabel("Time Left:", Color.WHITE, new Font("Arial", Font.PLAIN, 13), moveButtonHolder);
+                    timeLeftText.setHorizontalAlignment(SwingConstants.CENTER);
+                }
+                else if (y == 4 && x == 4) {
+                    timeLabel = new MyLabel("...", Color.WHITE, new Font("Arial", Font.PLAIN, 15), moveButtonHolder);
+                    timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                }
+                else {
                     moveButtonHolder.add(new EmptyComponent());
                 }
             }
         }
         setDirectionButtonEnabled();
         setDirectionButtonListeners();
+    }
+
+    private void startTimer()
+    {
+        timer = new Timer(10, e -> {
+            if (startTime < 0) {
+                startTime = System.currentTimeMillis();
+            }
+
+            long now = System.currentTimeMillis();
+            long clockTime = now - startTime;
+            if (clockTime >= duration) {
+                clockTime = duration;
+                timer.stop();
+            }
+
+            if (clockTime >= duration - 30000)
+            {
+                timeLeftText.setForeground(Color.RED);
+                timeLabel.setForeground(Color.RED);
+            }
+
+            SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+            timeLabel.setText(df.format(duration - clockTime));
+        });
+        timer.setInitialDelay(0);
+        if (!timer.isRunning()) {
+            startTime = -1;
+            timer.start();
+        }
     }
 
     /*private void setDirectionButtonsVisibility(MyButton direction, String directionString)
@@ -314,9 +359,15 @@ public class GameUI implements SetInactiveListener {
     }
 
     @Override
-    public void setMenuVisibility(boolean visibility) {
+    public void setMenuVisibility(boolean visibility)
+    {
+        if (visibility)
+        {
+            setDefaultGameValues();
+        }
+
         commandButtonsHolder.setVisible(visibility);
-        quitMenuHolder.setVisible(visibility);
+        currentSelectedCommandHolder.setVisible(visibility);
         mapHandler.setMenuVisibility(visibility);
         inventoryHandler.setMenuVisibility(visibility);
     }
@@ -328,9 +379,11 @@ public class GameUI implements SetInactiveListener {
         currentRoomText.setVisible(selectedMove);
     }
 
-    private void setCurrentSelectedCommandHolder(Container holder) {
-        if (currentSelectedCommandHolder != null)
+    private void setCurrentSelectedCommandHolder(Container holder)
+    {
+        if (currentSelectedCommandHolder != null) {
             currentSelectedCommandHolder.setVisible(false);
+        }
         currentSelectedCommandHolder = holder;
         currentSelectedCommandHolder.setVisible(true);
     }

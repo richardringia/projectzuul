@@ -61,6 +61,7 @@ public class MainMenu implements SetInactiveListener
             }
             else
             {
+                gui.setMainMenuVisibility(false);
                 gui.setGameUIVisibility(true);
             }
         });

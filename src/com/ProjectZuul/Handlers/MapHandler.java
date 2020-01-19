@@ -110,6 +110,6 @@ public class MapHandler implements SetInactiveListener
 
     @Override
     public void setMenuVisibility(boolean visibility) {
-
+        frame.setVisible(visibility);
     }
 }

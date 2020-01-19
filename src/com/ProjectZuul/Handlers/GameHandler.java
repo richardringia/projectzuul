@@ -25,6 +25,7 @@ public class GameHandler {
 
 
     public GameHandler() {
+        System.out.println("GAMEHANLER");
         RoomHandler roomHandler = new RoomHandler();
         roomList = roomHandler.getRoomList();
         RoomHandler room = new RoomHandler();

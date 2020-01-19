@@ -13,6 +13,7 @@ public class InventoryHandler implements SetInactiveListener {
     private JFrame window;
     private Inventory inventory;
     private Player player;
+    SetInactiveListener inventoryListener;
 
     public InventoryHandler(JFrame window, Player player) {
         this.window = window;
@@ -22,6 +23,7 @@ public class InventoryHandler implements SetInactiveListener {
 
     private void init() {
         this.inventory = new Inventory(this.player);
+        inventoryListener = inventory;
         this.window.add(this.inventory);
     }
 
@@ -38,6 +40,6 @@ public class InventoryHandler implements SetInactiveListener {
 
     @Override
     public void setMenuVisibility(boolean visibility) {
-
+        inventoryListener.setMenuVisibility(visibility);
     }
 }

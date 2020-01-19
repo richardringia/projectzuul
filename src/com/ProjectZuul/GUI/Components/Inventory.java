@@ -1,6 +1,7 @@
 package com.ProjectZuul.GUI.Components;
 
 import com.ProjectZuul.GUI.GUI;
+import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 
@@ -10,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.concurrent.Flow;
 
-public class Inventory extends JPanel {
+public class Inventory extends JPanel implements SetInactiveListener {
 
     private int positionX = 600;
     private int positionY = 400;
@@ -82,4 +83,8 @@ public class Inventory extends JPanel {
         this.updateUI();
     }
 
+    @Override
+    public void setMenuVisibility(boolean visibility) {
+        this.setVisible(visibility);
+    }
 }
