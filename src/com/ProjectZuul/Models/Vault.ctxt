@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Vault
-comment1.params=key\ room
-comment1.target=Vault(Item,\ Room)
-comment2.params=item
-comment2.target=boolean\ openVault(Item)
-numComments=3
