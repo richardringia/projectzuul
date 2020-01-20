@@ -24,7 +24,7 @@ public class GameUI implements SetInactiveListener
 
     private Timer timer;
     private long startTime = -1;
-    private long duration = 50000;
+    private long duration = 5000;
 
     private Player player;
 
@@ -37,7 +37,7 @@ public class GameUI implements SetInactiveListener
     private MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
     private MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
 
-    private MyLabel timeLabel, timeLeftText;
+    private MyLabel timeLabel, timeLeftText, gameOver;
     private JPanel map;
 
     ActionHandler actionHandler;
@@ -150,12 +150,23 @@ public class GameUI implements SetInactiveListener
     {
         timer = new Timer(10, e -> {
             if (startTime < 0) {
+
                 startTime = System.currentTimeMillis();
             }
 
             long now = System.currentTimeMillis();
             long clockTime = now - startTime;
-            if (clockTime >= duration) {
+            if (clockTime >= duration)
+            {
+                window.getContentPane().removeAll();
+                window.repaint();
+                gameOver = new MyLabel("GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), window);
+                gameOver.setBounds(0, 0, 1185, 560);
+                gameOver.setVisible(true);
+                gameOver.setOpaque(true);
+                gameOver.setHorizontalAlignment(SwingConstants.CENTER);
+                gameOver.setVerticalAlignment(SwingConstants.CENTER);
+
                 clockTime = duration;
                 timer.stop();
             }
@@ -377,6 +388,7 @@ public class GameUI implements SetInactiveListener
         setCurrentSelectedCommand(command);
 
         currentRoomText.setVisible(selectedMove);
+        window.repaint();
     }
 
     private void setCurrentSelectedCommandHolder(Container holder)

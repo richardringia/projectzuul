@@ -40,7 +40,7 @@ public class RoomHandler {
         Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
 
         // create the rooms
-        square = new Room("Square", "You are outside of an abandoned school building, inside are some important documents which are very important. Retrieve the documents and get a big reward. " +
+        square = new Room("Square", "You are outside of an abandoned school building, inside are some documents which are very important. Retrieve the documents and get a big reward. " +
                 "Don't get killed on the way, good luck!");
 
         hallway = new Room("Hallway","You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.");
