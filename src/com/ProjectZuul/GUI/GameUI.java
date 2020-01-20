@@ -2,6 +2,8 @@ package com.ProjectZuul.GUI;
 
 
 import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.GUI.Fade.FadeController;
+import com.ProjectZuul.GUI.Fade.FadePanel;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
@@ -40,6 +42,8 @@ public class GameUI implements SetInactiveListener
     private MyLabel timeLabel, timeLeftText, gameOver;
     private JPanel map;
 
+    FadePanel gameFinishedPanel;
+
     ActionHandler actionHandler;
     private MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
     private MyButton north, south, east, west, back;
@@ -57,14 +61,20 @@ public class GameUI implements SetInactiveListener
     public GameUI(GUI gui)
     {
         this.gui = gui;
+
+        window = gui.getWindow();
+
+        gameFinishedPanel = new FadePanel(Color.WHITE, 0, 0, 1185, 560, window, 0, true);
+        window.add(gameFinishedPanel);
+
         positionzero = new Rectangle();
         previousRoom = new Stack<>();
         player = new Player();
+
         createGame();
     }
 
     public void createGame() {
-        window = gui.getWindow();
         gui.setMainMenuVisibility(false);
 
         game = new Game();
@@ -158,15 +168,7 @@ public class GameUI implements SetInactiveListener
             long clockTime = now - startTime;
             if (clockTime >= duration)
             {
-                window.getContentPane().removeAll();
-                window.repaint();
-                gameOver = new MyLabel("GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), window);
-                gameOver.setBounds(0, 0, 1185, 560);
-                gameOver.setVisible(true);
-                gameOver.setOpaque(true);
-                gameOver.setHorizontalAlignment(SwingConstants.CENTER);
-                gameOver.setVerticalAlignment(SwingConstants.CENTER);
-
+                fadeGameFinishedScreen(false);
                 clockTime = duration;
                 timer.stop();
             }
@@ -185,6 +187,30 @@ public class GameUI implements SetInactiveListener
             startTime = -1;
             timer.start();
         }
+    }
+
+    private void fadeGameFinishedScreen(boolean victory)
+    {
+        FadeController controller = new FadeController(2000);
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        window.getContentPane().removeAll();
+                        window.add(gameFinishedPanel);
+                        window.repaint();
+                    }
+                },2000);
+
+
+        gameOver = new MyLabel("GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), gameFinishedPanel);
+        gameOver.setBounds(0, 0, 1185, 560);
+        gameOver.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOver.setVerticalAlignment(SwingConstants.CENTER);
+
+        controller.add(gameFinishedPanel);
+        controller.start();
     }
 
     /*private void setDirectionButtonsVisibility(MyButton direction, String directionString)

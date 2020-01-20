@@ -32,19 +32,19 @@ public class GameHandler {
         itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
     }
     
-    public void startTimer()
-    {
+    public void startTimer() {
         System.out.println("TIMER RUNNING");
-        new java.util.Timer().schedule( 
-        new java.util.TimerTask() {
-            @Override
-            public void run() {
-                 gameInstance.setBecomePossessed(true);
-            }
-        }, 
-        5000 
-);
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        gameInstance.setBecomePossessed(true);
+                    }
+                },
+                5000
+        );
     }
+
     public List<Room> getRoomList()
     {
         return this.roomList;
