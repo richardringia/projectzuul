@@ -26,7 +26,7 @@ public class GameUI implements SetInactiveListener
 
     private Timer timer;
     private long startTime = -1;
-    private long duration = 5000;
+    private long duration = 500000;
 
     private Player player;
 
@@ -204,7 +204,7 @@ public class GameUI implements SetInactiveListener
                 },2000);
 
 
-        gameOver = new MyLabel("GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), gameFinishedPanel);
+        gameOver = new MyLabel(victory ? "YOU WON" : "GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), gameFinishedPanel);
         gameOver.setBounds(0, 0, 1185, 560);
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
         gameOver.setVerticalAlignment(SwingConstants.CENTER);
@@ -318,8 +318,10 @@ public class GameUI implements SetInactiveListener
                     actionHandler.createMenuFromVault(e2 -> {
                         // YOU WIN
                         Vault vault = (Vault)item;
-                        vault.openVault(key);
-                        System.out.println("YOU WIN!!!!");
+                        if (vault.openVault(key)) {
+                            System.out.println("YOU WIN!!!!");
+                            this.fadeGameFinishedScreen(true);
+                        }
                     });
                 } else {
                     actionHandler.createMenu();
