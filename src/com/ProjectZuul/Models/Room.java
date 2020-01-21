@@ -78,12 +78,12 @@ public class Room
      */
     private String getExitString()
     {
-        String returnString = "To which direction would you like to move? \n";
+        StringBuilder returnString = new StringBuilder("To which direction would you like to move? \n");
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
-            returnString += " \n" + exit;
+            returnString.append(" \n").append(exit);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     /**

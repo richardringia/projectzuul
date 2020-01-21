@@ -16,6 +16,7 @@ public class MyTextArea extends JTextArea
         this.setLineWrap(true);
         this.setWrapStyleWord(true);
         this.setFont(gameFont);
+        this.setEditable(false);
 
         parent.add(this);
     }

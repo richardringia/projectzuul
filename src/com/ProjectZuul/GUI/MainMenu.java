@@ -38,14 +38,14 @@ public class MainMenu implements SetInactiveListener
         window = gui.getWindow();
 
         //titleNamePanel = createJPanel(Color.BLACK, 0, 0, 600, 100, window);
-        titleNamePanel = new MyPanel(Color.BLACK, 0, 0, 600, 100, window);
+        titleNamePanel = new MyPanel(Color.BLACK, 300, 0, 600, 100, window);
 
         //titleNameLabel = createJLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
         titleNameLabel = new MyLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
 
-        startButton = new MyButton("START", Color.BLACK, Color.WHITE,  new Rectangle(250, 150, 100, 35), window);
-        aboutButton = new MyButton("ABOUT", Color.BLACK, Color.WHITE, new Rectangle(250, 200, 100, 35), window);
-        quitButton = new MyButton("QUIT", Color.BLACK, Color.WHITE, new Rectangle(250, 300, 100, 35), window);
+        startButton = new MyButton("START", Color.BLACK, Color.WHITE,  new Rectangle(550, 150, 100, 35), window);
+        aboutButton = new MyButton("ABOUT", Color.BLACK, Color.WHITE, new Rectangle(550, 200, 100, 35), window);
+        quitButton = new MyButton("QUIT", Color.BLACK, Color.WHITE, new Rectangle(550, 300, 100, 35), window);
 
         setMainMenuListeners();
     }
