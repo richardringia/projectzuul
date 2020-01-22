@@ -30,9 +30,9 @@ public class ActionHandler {
         this.after();
     }
 
-    public void createMenu(ActionListener actionListener, String customButtonText) {
+    public void createMenu(ActionListener actionListener, String customButtonText, boolean canDrop) {
         this.before();
-        this.actionMenu.add(this.createButton(customButtonText, actionListener));
+        this.actionMenu.add(this.createButton(customButtonText, actionListener, !canDrop, "Item can not be dropped!"));
         this.after();
     }
 

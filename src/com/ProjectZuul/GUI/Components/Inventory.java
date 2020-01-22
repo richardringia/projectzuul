@@ -142,7 +142,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
                 this.innerPanel.remove(jButton);
                 this.updateTotalWeight();
                 this.updateUI();
-            }, "Drop");
+            }, "Drop", item.isCanDrop());
         });
         this.updateTotalWeight();
         this.innerPanel.add(jButton);
