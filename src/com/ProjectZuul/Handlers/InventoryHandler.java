@@ -1,6 +1,7 @@
 package com.ProjectZuul.Handlers;
 
 import com.ProjectZuul.GUI.Components.Inventory;
+import com.ProjectZuul.GUI.GameUI;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
@@ -33,6 +34,15 @@ public class InventoryHandler implements SetInactiveListener {
             if (this.player.addItem(item)) {
                 this.inventory.addItem(item);
                 room.removeItem(item);
+            }
+        }
+    }
+
+    public void dropItem(Item item) {
+        if (item.isCanPickup() && item.isCanDrop()) {
+            if (this.player.removeItem(item)) {
+
+                this.player.addItemToRoom(item);
             }
         }
     }

@@ -13,6 +13,7 @@ public class Item {
     private String name; // The name of the item
     private boolean canPickup; // This bool is used for checking if the item can be picked up
     private int weight; // The weight of the item
+    private boolean canDrop;
 
     /**
      * @param name
@@ -23,6 +24,7 @@ public class Item {
         this.name = name;
         this.weight = 0;
         this.canPickup = false;
+        this.canDrop = false;
     }
 
     /**
@@ -35,6 +37,12 @@ public class Item {
         this.name = name;
         this.weight = weight;
         this.canPickup = true;
+        this.canDrop = true;
+    }
+
+    public Item(String name, int weight, boolean canDrop) {
+        this(name, weight);
+        this.canDrop = canDrop;
     }
 
     /**
@@ -94,5 +102,9 @@ public class Item {
      */
     public boolean isCanPickup() {
         return this.canPickup;
+    }
+
+    public boolean isCanDrop() {
+        return canDrop;
     }
 }

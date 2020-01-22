@@ -46,7 +46,7 @@ public class Game
         currentRoom = roomsList.get(0); 
 
         itemsList = new ArrayList<>();
-        player = new Player();
+        player = new Player(null);
         itemsList = main.getItemList();
         parser = new Parser();
     }

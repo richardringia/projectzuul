@@ -2,73 +2,83 @@ package com.ProjectZuul.Handlers;
 
 import com.ProjectZuul.GUI.ActionMenu;
 import com.ProjectZuul.GUI.Components.MyButton;
-import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ActionHandler {
 
-    ActionMenu actionMenu;
+    private ActionMenu actionMenu;
+
 
     public ActionHandler(ActionMenu actionMenu) {
         this.actionMenu = actionMenu;
     }
 
-
-    public void createMenuWithPickup(ActionListener action, Player player, int itemWeight) {
+    private void before() {
         this.actionMenu.reset();
-        this.actionMenu.add(this.createPickupButton(action, player.isInventoryFull(itemWeight)));
+    }
+
+    private void after() {
         this.actionMenu.add(this.createCancelButton());
         this.actionMenu.updateUI();
     }
 
     public void createMenu() {
-        this.actionMenu.reset();
-        this.actionMenu.add(this.createCancelButton());
-        this.actionMenu.updateUI();
+        this.before();
+        this.after();
     }
 
-    public void createMenuFromVault(ActionListener action, boolean canOpenVault) {
-        this.actionMenu.reset();
-        this.actionMenu.add(this.createOpenButton(action, !canOpenVault));
-        this.actionMenu.add(this.createCancelButton());
-        this.actionMenu.updateUI();
+    public void createMenu(ActionListener actionListener, String customButtonText) {
+        this.before();
+        this.actionMenu.add(this.createButton(customButtonText, actionListener));
+        this.after();
     }
 
-    private MyButton createOpenButton(ActionListener action, boolean disabled) {
-        MyButton button = this.createButton("Open");
-        button.setEnabled(!disabled, "The vault can not be opened. Please find the 'Vault keys'!");
-        button.addActionListener(action);
-        button.addActionListener(e -> {
-            this.actionMenu.reset();
-        });
-        return button;
+    public void createMenu(ActionListener actionListener, boolean canOpenVault) {
+        this.before();
+        this.actionMenu.add(this.createOpenButton(actionListener, !canOpenVault));
+        this.after();
     }
 
-    private MyButton createPickupButton(ActionListener action, boolean disabled) {
-        MyButton button = this.createButton("Pick up");
-        button.setEnabled(!disabled, "The inventory is full. Please drop some items!");
-        button.addActionListener(action);
-        button.addActionListener(e -> {
-            this.actionMenu.reset();
-        });
-        return button;
-    }
-
-    private MyButton createCancelButton() {
-        MyButton button = new MyButton("Cancel", Color.BLACK, Color.WHITE, new Dimension(140, 30));
-        button.addActionListener(e -> this.actionMenu.reset());
-        return button;
+    public void createMenu(ActionListener actionListener, Player player, int itemWeight) {
+        this.before();
+        this.actionMenu.add(this.createPickupButton(actionListener, player.isInventoryFull(itemWeight)));
+        this.after();
     }
 
     private MyButton createButton(String text) {
-        return new MyButton(text, Color.BLACK, Color.WHITE, new Dimension(140, 30));
+        MyButton myButton = new MyButton(text, Color.BLACK, Color.WHITE, new Dimension(140, 30));
+        myButton.addActionListener(e -> {
+            this.actionMenu.reset();
+        });
+        return myButton;
     }
+
+    private MyButton createButton(String text, ActionListener actionListener) {
+        MyButton myButton = this.createButton(text);
+        myButton.addActionListener(actionListener);
+        return myButton;
+    }
+
+    private MyButton createButton(String text, ActionListener actionListener, boolean disabled, String message) {
+        MyButton myButton = this.createButton(text, actionListener);
+        myButton.setEnabled(!disabled, message);
+        return myButton;
+    }
+
+    private MyButton createOpenButton(ActionListener action, boolean disabled) {
+        return this.createButton("Open", action, disabled, "The vault can not be opened. Please find the 'Vault keys'!");
+    }
+
+    private MyButton createPickupButton(ActionListener action, boolean disabled) {
+        return this.createButton("Pick up", action, disabled, "The inventory is full. Please drop some items!");
+    }
+
+    private MyButton createCancelButton() {
+        return this.createButton("Cancel");
+    }
+
 
 }

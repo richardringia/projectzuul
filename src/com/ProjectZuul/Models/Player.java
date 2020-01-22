@@ -1,5 +1,7 @@
 package com.ProjectZuul.Models;
 
+import com.ProjectZuul.GUI.GameUI;
+import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
 
 import javax.print.DocFlavor;
@@ -13,8 +15,10 @@ import java.util.ArrayList;
 public class Player {
     private int maxWeight = 10;
     private List<Item> itemList;
+    private GameUI gameUI;
 
-    public Player() {
+    public Player(GameUI gameUI) {
+        this.gameUI = gameUI;
         this.itemList = new ArrayList<>();
     }
 
@@ -60,5 +64,26 @@ public class Player {
 
     public boolean isInventoryFull(int itemWeight) {
         return (this.getTotalWeight() + itemWeight) > this.maxWeight;
+    }
+
+    public boolean removeItem(Item item) {
+        return itemList.remove(item);
+    }
+
+    public Room getCurrentRoom() {
+        return this.gameUI.getGame().getCurrentRoom();
+    }
+
+    public ActionHandler getActionHandler() {
+        return this.gameUI.getActionHandler();
+    }
+
+    public InventoryHandler getInventoryHandler() {
+        return this.gameUI.getInventoryHandler();
+    }
+
+    public void addItemToRoom(Item item) {
+        this.getCurrentRoom().addItem(item);
+        this.gameUI.setInvestigationItems();
     }
 }

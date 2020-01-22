@@ -70,7 +70,7 @@ public class GameUI implements SetInactiveListener
 
         positionzero = new Rectangle();
         previousRoom = new Stack<>();
-        player = new Player();
+        player = new Player(this);
 
         createGame();
     }
@@ -316,7 +316,7 @@ public class GameUI implements SetInactiveListener
         investigateItemsHolder.setVisible(false);
     }
 
-    private void setInvestigationItems() {
+    public void setInvestigationItems() {
         investigateItemsHolder.removeAll();
         if (game.getCurrentRoom().getItems().size() == 0) {
             return;
@@ -328,7 +328,7 @@ public class GameUI implements SetInactiveListener
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
             itemButton.addActionListener(e -> {
                 if (item.isCanPickup()) {
-                    actionHandler.createMenuWithPickup(e2 -> {
+                    actionHandler.createMenu(e2 -> {
                         inventoryHandler.addItem(item, game.getCurrentRoom());
                         investigateItemsHolder.remove(itemButton);
                         window.repaint();
@@ -336,7 +336,7 @@ public class GameUI implements SetInactiveListener
                 } else if (item instanceof Vault) {
                     Item key = player.getItem("Vault keys");
                     Vault vault = (Vault) item;
-                    actionHandler.createMenuFromVault(e2 -> {
+                    actionHandler.createMenu(e2 -> {
                         if (vault.canOpenVault(key)) {
                             this.fadeGameFinishedScreen(true);
                         }
@@ -475,5 +475,21 @@ public class GameUI implements SetInactiveListener
         actionMenu = new ActionMenu();
         actionHandler = new ActionHandler(actionMenu);
         window.add(actionMenu);
+    }
+
+    public Game getGame() {
+        return this.game;
+    }
+
+    public ActionHandler getActionHandler() {
+        return this.actionHandler;
+    }
+
+    public InventoryHandler getInventoryHandler() {
+        return this.inventoryHandler;
+    }
+
+    public MyPanel getInvestigateItemsHolder() {
+        return this.investigateItemsHolder;
     }
 }

@@ -1,6 +1,9 @@
 package com.ProjectZuul.GUI.Components;
 
+import com.ProjectZuul.GUI.GameUI;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
+import com.ProjectZuul.Handlers.ActionHandler;
+import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 
@@ -132,11 +135,23 @@ public class Inventory extends JPanel implements SetInactiveListener {
      * @param item the item
      */
     public void addItem(Item item) {
-        JLabel label = new JLabel(item.getName());
-        label.setForeground(Color.WHITE);
+        MyButton jButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, new Dimension(140, 30));
+        jButton.addActionListener(l -> {
+            this.player.getActionHandler().createMenu(e -> {
+                this.player.getInventoryHandler().dropItem(item);
+                this.innerPanel.remove(jButton);
+                this.updateTotalWeight();
+                this.updateUI();
+            }, "Drop");
+        });
         this.updateTotalWeight();
-        this.innerPanel.add(label);
+        this.innerPanel.add(jButton);
         this.updateUI();
+//        JLabel label = new JLabel(item.getName());
+//        label.setForeground(Color.WHITE);
+//        this.updateTotalWeight();
+//        this.innerPanel.add(label);
+//        this.updateUI();
     }
 
     @Override
