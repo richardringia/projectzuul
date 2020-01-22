@@ -33,10 +33,7 @@ public class GUI
         window = new MyFrame();
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-            //UIManager.put("nimbusBase", Color.BLACK);
             UIManager.put("nimbusBlueGrey", Color.BLACK);
-            //UIManager.getLookAndFeelDefaults().put("Button[Disabled].backgroundPainter", new ButtonPainter(new Color(0, 0, 0, 255), new Color(0, 0, 50, 255)));
-
             SwingUtilities.updateComponentTreeUI(window);
         } catch (Exception e) {
             e.printStackTrace();
