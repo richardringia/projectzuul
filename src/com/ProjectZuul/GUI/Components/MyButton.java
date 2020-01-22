@@ -2,6 +2,7 @@ package com.ProjectZuul.GUI.Components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class MyButton extends JButton {
 
@@ -12,6 +13,7 @@ public class MyButton extends JButton {
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.setFocusPainted(false);
         this.setOpaque(true);
+        ToolTipManager.sharedInstance().setInitialDelay(0);
     }
 
     public MyButton(String text, Color background, Color foreground, Dimension dimension) {

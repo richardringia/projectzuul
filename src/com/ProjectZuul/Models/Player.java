@@ -44,4 +44,9 @@ public class Player {
     public int getMaxWeight() {
         return maxWeight;
     }
+
+
+    public boolean isInventoryFull(int itemWeight) {
+        return (this.getTotalWeight() + itemWeight) > this.maxWeight;
+    }
 }

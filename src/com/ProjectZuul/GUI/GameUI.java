@@ -312,14 +312,13 @@ public class GameUI implements SetInactiveListener
                         inventoryHandler.addItem(item, game.getCurrentRoom());
                         investigateItemsHolder.remove(itemButton);
                         window.repaint();
-                    });
+                    }, this.player, item.getWeight());
                 } else if (item instanceof Vault) {
                     Item key = player.getItem("Vault keys");
                     actionHandler.createMenuFromVault(e2 -> {
                         // YOU WIN
-                        Vault vault = (Vault)item;
+                        Vault vault = (Vault) item;
                         if (vault.openVault(key)) {
-                            System.out.println("YOU WIN!!!!");
                             this.fadeGameFinishedScreen(true);
                         }
                     });
