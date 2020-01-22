@@ -25,17 +25,23 @@ public class InventoryHandler implements SetInactiveListener {
     private void init() {
         this.inventory = new Inventory(this.player);
         inventoryListener = inventory;
-        this.createFlashLight();
         this.window.add(this.inventory);
     }
 
-    private void createFlashLight() {
+    public void createFlashLight() {
         Item item = new Item("Flashlight", 4, false);
         if (this.player.addItem(item)) {
             this.inventory.addItem(item);
         }
     }
 
+    public void createMap()
+    {
+        Item item = new Item("Map", 4, false);
+        if (this.player.addItem(item)) {
+            this.inventory.addItem(item);
+        }
+    }
 
     public void addItem(Item item) {
         if (item.isCanPickup() && !this.player.isInventoryFull(item.getWeight())) {

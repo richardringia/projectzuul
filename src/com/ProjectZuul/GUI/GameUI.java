@@ -7,10 +7,7 @@ import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Fade.FadeController;
 import com.ProjectZuul.GUI.Fade.FadePanel;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
-import com.ProjectZuul.Handlers.ActionHandler;
-import com.ProjectZuul.Handlers.InventoryHandler;
-import com.ProjectZuul.Handlers.LanguageHandler;
-import com.ProjectZuul.Handlers.MapHandler;
+import com.ProjectZuul.Handlers.*;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
@@ -18,6 +15,7 @@ import com.ProjectZuul.Models.Vault;
 import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Stack;
@@ -28,7 +26,7 @@ public class GameUI implements SetInactiveListener {
 
     private Timer timer;
     private long startTime = -1;
-    private long duration = 2147483647;
+    private long duration = 500000;
 
     private Player player;
 
@@ -39,7 +37,7 @@ public class GameUI implements SetInactiveListener {
     private Container currentSelectedCommandHolder, CurrentSelectedCommand;
 
     private MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
-    private MyPanel investigateItemsHolder, investigateNoItemsTextHolder;
+    private MyPanel investigateItemsHolder, investigateNoItemsTextHolder, investigateTooDarkTextholder;
 
     private MyLabel timeLabel, timeLeftText, gameOver;
     private JPanel map;
@@ -50,10 +48,11 @@ public class GameUI implements SetInactiveListener {
     private MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
     private MyButton north, south, east, west, back;
     private MyButton quitToMenu, quitToDesktop;
+    private MyButton lockedRoomDirection;
 
     private MyTextArea helpPageText;
     private MyTextArea currentRoomText;
-    private MyTextArea noItemsText;
+    private MyTextArea noItemsText, tooDarkText;
 
     private MapHandler mapHandler;
     private InventoryHandler inventoryHandler;
@@ -65,6 +64,8 @@ public class GameUI implements SetInactiveListener {
     private LanguageHandler languageHandler;
 
     private Language language;
+
+    private boolean flashlightFound = false;
 
     public GameUI(GUI gui, GameMode gameMode, Language language) {
         this.gui = gui;
@@ -94,13 +95,15 @@ public class GameUI implements SetInactiveListener {
         createCommandButtons();
         createDirectionButtons();
         createInvestigationView();
-        setInvestigationItems();
         createHelpPage();
         createQuitButtons();
-        setDefaultGameValues();
         createMap();
         createInventory();
         createActionMenu();
+
+        setDefaultGameValues();
+        setInvestigationItems();
+
         startTimer();
     }
 
@@ -109,8 +112,30 @@ public class GameUI implements SetInactiveListener {
         setCurrentSelectedCommandHolder(moveButtonHolder);
         setCurrentSelectedCommand(moveCommand);
         currentRoomText.setVisible(true);
+        setDifficultyValues(gameMode);
 
         window.repaint();
+    }
+
+    private void setDifficultyValues(GameMode gameMode)
+    {
+        switch (gameMode)
+        {
+            case EASY:
+                inventoryHandler.createFlashLight();
+                inventoryHandler.createMap();
+                duration = 500000;
+                break;
+            case MEDIUM:
+                inventoryHandler.createFlashLight();
+                ItemHandler.setMapRoom(game.getRoomsList());
+                duration = 250000;
+                break;
+            case PRO:
+                ItemHandler.setFlashlightRoom(game.getRoomsList());
+                ItemHandler.setMapRoom(game.getRoomsList());
+                duration = 50000;
+        }
     }
 
     private void createCommandButtons() {
@@ -194,12 +219,12 @@ public class GameUI implements SetInactiveListener {
     private void fadeGameFinishedScreen(boolean victory) {
         FadeController controller = new FadeController(2000);
 
+        timer.stop();
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
                         window.getContentPane().removeAll();
-                        quitMenuHolder.setBackground(Color.RED);
                         quitMenuHolder.setVisible(true);
                         quitMenuHolder.setBounds(525, 400, 150, 80);
                         quitMenuHolder.setBackground(Color.WHITE);
@@ -234,10 +259,10 @@ public class GameUI implements SetInactiveListener {
     }*/
 
     private void setDirectionButtonEnabled() {
-        north.setEnabled(game.getCurrentRoom().getExit("north") != null);
-        east.setEnabled(game.getCurrentRoom().getExit("east") != null);
-        south.setEnabled(game.getCurrentRoom().getExit("south") != null);
-        west.setEnabled(game.getCurrentRoom().getExit("west") != null);
+        north.setEnabled(game.getCurrentRoom().getExit("north") != null, "There is no door in that direction.");
+        east.setEnabled(game.getCurrentRoom().getExit("east") != null, "There is no door in that direction.");
+        south.setEnabled(game.getCurrentRoom().getExit("south") != null, "There is no door in that direction.");
+        west.setEnabled(game.getCurrentRoom().getExit("west") != null, "There is no door in that direction.");
 
         back.setEnabled(previousRoom.size() != 0);
     }
@@ -267,7 +292,13 @@ public class GameUI implements SetInactiveListener {
 
     private void goRoom(String direction) {
         Room nextRoom = game.getCurrentRoom().getExit(direction);
+
+
+
         if (nextRoom.getDoorLocked()) {
+            lockedRoomDirection = direction.equals("north") ? north : direction.equals("west") ? west : east;
+            lockedRoomDirection.setEnabled(false, "The door in that direction appears to be locked.");
+
             if (player.getItemNames().contains(nextRoom.getUnlockItem())) {
                 nextRoom.setDoorLocked(false);
             } else {
@@ -306,6 +337,11 @@ public class GameUI implements SetInactiveListener {
 
         noItemsText = new MyTextArea(this.languageHandler.get("GAME_INVESTIGATE_NO_ITEMS"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateNoItemsTextHolder);
 
+        investigateTooDarkTextholder = new MyPanel(Color.BLACK, 100, 100, 400, 100, window);
+        investigateTooDarkTextholder.setLayout(new GridLayout(1, 1));
+        investigateTooDarkTextholder.setVisible(false);
+        tooDarkText = new MyTextArea("It's too dark to see anything!\nFind a flashlight to help you. \n\nFlashlight is the only visible item in investigate until you have obtained one. ", Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateTooDarkTextholder);
+
         investigateItemsHolder = new MyPanel(Color.BLACK, 225, 200, 150, 215, window);
         investigateItemsHolder.setLayout(new GridLayout(2, 1));
         ((GridLayout) investigateItemsHolder.getLayout()).setVgap(10);
@@ -314,6 +350,19 @@ public class GameUI implements SetInactiveListener {
 
     public void setInvestigationItems() {
         investigateItemsHolder.removeAll();
+
+        boolean hasFlashlight;
+        if (player.getItem("Flashlight") == null)
+        {
+            flashlightFound = false;
+            hasFlashlight = false;
+        }
+        else
+        {
+            hasFlashlight = true;
+            flashlightFound = true;
+        }
+
         if (game.getCurrentRoom().getItems().size() == 0) {
             return;
         }
@@ -321,12 +370,27 @@ public class GameUI implements SetInactiveListener {
         ((GridLayout) investigateItemsHolder.getLayout()).setVgap(10);
 
         for (Item item : game.getCurrentRoom().getItems()) {
+
+            if (!hasFlashlight && !item.getName().equals("Flashlight"))
+            {
+                System.out.println("PEPEPE");
+                continue;
+            }
+            if (item.getName().equals("Flashlight"))
+            {
+                flashlightFound = true;
+            }
+
             MyButton itemButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, positionzero, investigateItemsHolder);
             itemButton.addActionListener(e -> {
                 if (item.isCanPickup()) {
                     actionHandler.createMenu(e2 -> {
                         inventoryHandler.addItem(item);
                         investigateItemsHolder.remove(itemButton);
+                        if (item.getName().equals("Flashlight"))
+                        {
+                            setInvestigationItems();
+                        }
                         window.repaint();
                     }, this.player, item.getWeight());
                 } else if (item instanceof Vault) {
@@ -374,7 +438,13 @@ public class GameUI implements SetInactiveListener {
 
         investigateCommand.addActionListener(e ->
         {
-            commands(game.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
+            if (!flashlightFound)
+            {
+                commands(investigateTooDarkTextholder, investigateCommand, false);
+            }
+            else {
+                commands(game.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
+            }
         });
 
         helpCommand.addActionListener(e ->

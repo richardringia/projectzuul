@@ -10,12 +10,10 @@ import com.ProjectZuul.Models.*;
 public class ItemHandler {
 
     public static List<Item> createItems(List<Room> rooms, Room vaultRoom, Room mapRoom, Room keysRoom) {
-        Item map, vaultKeys, spiritVacuumCleaner, bookcase, vault, principlesKeys;
+        Item vaultKeys, spiritVacuumCleaner, bookcase, vault, principlesKeys;
 
-        map = new Item("Map", 2);
         vaultKeys = new Item("Vault keys", 2);
         principlesKeys = new Item("Principles keys", 2);
-        //flashlight = new Item("Flashlight", 3);
         spiritVacuumCleaner = new Item("Spirit vacuum cleaner", 8);
         bookcase = new Item("Bookcase");
         vault = new Vault(vaultKeys, vaultRoom);
@@ -24,13 +22,11 @@ public class ItemHandler {
         ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
 
         principlesKeys.setItemToRandomRoom(rooms, unavailableRooms);
-        map.setItemToRoom(rooms.get(0));
         vaultKeys.setItemToRoom(keysRoom);
-        //flashlight.setItemToRandomRoom(rooms, null);
-        spiritVacuumCleaner.setItemToRandomRoom(rooms, null);
+        spiritVacuumCleaner.setItemToRandomRoom(rooms);
         bookcase.setItemToRoom(mapRoom);
 
-        return new ArrayList<>(Arrays.asList(map, vaultKeys, spiritVacuumCleaner, bookcase, vault));
+        return new ArrayList<>(Arrays.asList(vaultKeys, spiritVacuumCleaner, bookcase, vault));
     }
 
     private static ArrayList<Room> getLockedRooms(List<Room> rooms)
@@ -38,5 +34,21 @@ public class ItemHandler {
         ArrayList<Room> lockedRooms = new ArrayList<>(rooms);
         lockedRooms.removeIf(e -> !e.getDoorLocked());
         return lockedRooms;
+    }
+
+    public static void setFlashlightRoom(List<Room> rooms)
+    {
+        ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
+        Item flashlight;
+        flashlight = new Item("Flashlight", 4);
+        flashlight.setItemToRandomRoom(rooms, unavailableRooms);
+    }
+
+    public static void setMapRoom(List<Room> rooms)
+    {
+        ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
+        Item map;
+        map = new Item("Map", 4);
+        map.setItemToRandomRoom(rooms, unavailableRooms);
     }
 }

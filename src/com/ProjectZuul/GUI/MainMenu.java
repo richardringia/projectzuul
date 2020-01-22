@@ -1,5 +1,6 @@
 package com.ProjectZuul.GUI;
 
+import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.MyButton;
 import com.ProjectZuul.GUI.Components.MyLabel;
@@ -16,14 +17,17 @@ public class MainMenu implements SetInactiveListener
     GUI gui;
     JFrame window;
 
+    private MyPanel languageButtonHolder, difficultyButtonHolder;
+    private MyButton dutchLanguageButton, englishLanguageButton, easyDifficultyButton, mediumDifficultyButton, hardDifficultybutton;
+
     MyLabel titleNameLabel;
 
     MyButton startButton, quitButton, aboutButton;
 
-    MyButton aboutPageBack;
-    MyTextArea aboutPageText;
+    MyButton aboutPageBack, startPageBack, startPageStartButton;
+    MyTextArea aboutPageText, startPageDifficultyText, startPageLanguageText;
 
-    boolean aboutPageCreated = false;
+    boolean aboutPageCreated = false, startPageCreated = false;
 
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
@@ -54,16 +58,8 @@ public class MainMenu implements SetInactiveListener
     {
         startButton.addActionListener(e ->
         {
-           // if (!gameCreated)
-            //{
-                gui.createGame();
-               // gameCreated = true;
-            //}
-            //else
-            //{
-            //    gui.setMainMenuVisibility(false);
-            //    gui.setGameUIVisibility(true);
-           // }
+                //gui.createGame();
+            createStartPage();
         });
 
         aboutButton.addActionListener(e -> createAboutPage());
@@ -80,15 +76,138 @@ public class MainMenu implements SetInactiveListener
         quitButton.setVisible(visibility);
     }
 
+    private void createStartPage()
+    {
+        gui.setMainMenuVisibility(false);
+        if (!startPageCreated) {
+            startPageCreated = true;
+            startPageBack = new MyButton("< BACK", Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
+            startPageStartButton = new MyButton("START >", Color.BLACK, Color.WHITE, new Rectangle(1075, 15, 100, 35), window);
+
+            createLanguageButtons();
+            createDifficultyButtons();
+            window.repaint();
+        }
+        else
+        {
+            setStartPageActive(true);
+        }
+
+        setStartPageListeners();
+    }
+
+    private void createLanguageButtons()
+    {
+        languageButtonHolder = new MyPanel(Color.BLACK, 525, 175, 150, 80, window);
+        languageButtonHolder.setLayout(new GridLayout(2, 1));
+        ((GridLayout) languageButtonHolder.getLayout()).setVgap(10);
+
+        startPageLanguageText = new MyTextArea("Select a language.",  Color.BLACK, Color.WHITE,  535, 125, 125, 50, window);
+
+        dutchLanguageButton = new MyButton(this.languageHandler.get("Dutch"), Color.BLACK, Color.WHITE, new Rectangle(), languageButtonHolder);
+        englishLanguageButton = new MyButton(this.languageHandler.get("English"), Color.BLACK, Color.WHITE, new Rectangle(), languageButtonHolder);
+
+        dutchLanguageButton.setBackground(Color.GRAY);
+        gui.setLanguage(Language.NL);
+
+        setLanguageButtonsListeners();
+    }
+
+    private void createDifficultyButtons() {
+        difficultyButtonHolder = new MyPanel(Color.BLACK, 525, 375, 150, 120, window);
+        difficultyButtonHolder.setLayout(new GridLayout(3, 1));
+        ((GridLayout) difficultyButtonHolder.getLayout()).setVgap(10);
+
+        startPageDifficultyText = new MyTextArea("Select a difficulty.",  Color.BLACK, Color.WHITE,  540, 325, 120, 50, window);
+
+        easyDifficultyButton = new MyButton(this.languageHandler.get("Easy"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
+        mediumDifficultyButton = new MyButton(this.languageHandler.get("Medium"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
+        hardDifficultybutton = new MyButton(this.languageHandler.get("Hard"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
+
+        easyDifficultyButton.setBackground(Color.GRAY);
+        gui.setGameMode(GameMode.EASY);
+
+        setDifficultyButtonsListeners();
+    }
+
+    private void setLanguageButtonsListeners()
+    {
+        dutchLanguageButton.addActionListener(e ->
+        {
+            englishLanguageButton.setBackground(Color.BLACK);
+            dutchLanguageButton.setBackground(Color.GRAY);
+            gui.setLanguage(Language.NL);
+        });
+
+        englishLanguageButton.addActionListener(e ->
+        {
+            dutchLanguageButton.setBackground(Color.BLACK);
+            englishLanguageButton.setBackground(Color.GRAY);
+            gui.setLanguage(Language.EN);
+        });
+    }
+
+    private void setDifficultyButtonsListeners()
+    {
+        easyDifficultyButton.addActionListener(e ->
+        {
+            gui.setGameMode(GameMode.EASY);
+            easyDifficultyButton.setBackground(Color.GRAY);
+            hardDifficultybutton.setBackground(Color.BLACK);
+            mediumDifficultyButton.setBackground(Color.BLACK);
+        });
+
+        mediumDifficultyButton.addActionListener(e->
+        {
+            gui.setGameMode(GameMode.MEDIUM);
+            mediumDifficultyButton.setBackground(Color.GRAY);
+            hardDifficultybutton.setBackground(Color.BLACK);
+            easyDifficultyButton.setBackground(Color.BLACK);
+        });
+        hardDifficultybutton.addActionListener(e ->
+        {
+            gui.setGameMode(GameMode.PRO);
+            hardDifficultybutton.setBackground(Color.GRAY);
+            easyDifficultyButton.setBackground(Color.BLACK);
+            mediumDifficultyButton.setBackground(Color.BLACK);
+        });
+    }
+
+    private void setStartPageListeners()
+    {
+        startPageBack.addActionListener(e ->
+        {
+            gui.setMainMenuVisibility(true);
+            setStartPageActive(false);
+        });
+
+        startPageStartButton.addActionListener(e ->
+        {
+            setStartPageActive(false);
+            gui.createGame();
+        });
+    }
+
+    private void setStartPageActive(boolean active)
+    {
+        startPageBack.setVisible(active);
+        startPageStartButton.setVisible(active);
+        difficultyButtonHolder.setVisible(active);
+        startPageDifficultyText.setVisible(active);
+        languageButtonHolder.setVisible(active);
+        startPageLanguageText.setVisible(active);
+    }
+
     private void createAboutPage()
     {
         gui.setMainMenuVisibility(false);
         if (!aboutPageCreated) {
             aboutPageBack = new MyButton("< " + languageHandler.get("ABOUT_BACK").toUpperCase(), Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
-            aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  100, 100, 400, 250, window);
+            aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  400, 100, 400, 250, window);
             aboutPageText.setText(languageHandler.get("ABOUT_TEXT"));
 
             setAboutPageListeners();
+            aboutPageCreated = true;
         }
         else
         {

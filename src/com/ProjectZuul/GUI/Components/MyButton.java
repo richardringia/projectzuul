@@ -21,7 +21,6 @@ public class MyButton extends JButton {
                     setForeground(Color.WHITE);
                 } else {
                     setForeground(Color.GRAY);
-                    System.out.println(getBackground());
                 }
             }
             catch (Exception ex)
@@ -50,6 +49,10 @@ public class MyButton extends JButton {
         if (!this.isEnabled()) {
             ToolTipManager.sharedInstance().setInitialDelay(0);
             this.setToolTipText(message);
+        }
+        else
+        {
+            this.setToolTipText(null);
         }
     }
 }

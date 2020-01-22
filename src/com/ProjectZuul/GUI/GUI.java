@@ -16,6 +16,9 @@ public class GUI
     SetInactiveListener mainMenuListener;
     SetInactiveListener gameUIListener;
 
+    GameMode gameMode;
+    Language language;
+
     public static void main(String[] args) {
         new GUI();
     }
@@ -47,7 +50,7 @@ public class GUI
 
     void createGame()
     {
-        gameUIListener = new GameUI(this, GameMode.EASY, Language.EN);
+        gameUIListener = new GameUI(this, gameMode, language);
     }
 
     void setGameUIVisibility(boolean visibility)
@@ -74,6 +77,16 @@ public class GUI
         window.removeAll();
         window.dispose();
         //System.exit(0);
+    }
+
+    public void setGameMode(GameMode gameMode)
+    {
+        this.gameMode = gameMode;
+    }
+
+    public void setLanguage(Language language)
+    {
+        this.language = language;
     }
 
 }

@@ -61,11 +61,13 @@ public class Item {
                 listCopy.remove(room);
             }
         }
-        for (Room room : listCopy)
-        {
-            System.out.println(room.getName());
-        }
+
         this.setItemToRoom(listCopy.get(new Random().nextInt(listCopy.size())));
+    }
+
+    public void setItemToRandomRoom(List<Room> availableRooms) {
+        // Get a random room from the given rooms.
+        this.setItemToRoom(availableRooms.get(new Random().nextInt(availableRooms.size())));
     }
 
     /**
