@@ -1,6 +1,5 @@
 package com.ProjectZuul.GUI.Components;
 
-import com.ProjectZuul.GUI.GUI;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
@@ -9,28 +8,73 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.concurrent.Flow;
 
+/**
+ * The JPanel for Inventory. This class generates all components within the inventory
+ *
+ * @author Richard Ringia
+ */
 public class Inventory extends JPanel implements SetInactiveListener {
 
+    /**
+     * The position x in the JFrame
+     */
     private int positionX = 600;
+    /**
+     * The position y in the JFrame
+     */
     private int positionY = 400;
+    /**
+     * The width of the JPanel
+     */
     private int width = 560;
+    /**
+     * The height of the JPanel
+     */
     private int height = 150;
 
+    /**
+     * The inner JPanel where all the components will be stored
+     */
     private JPanel innerPanel;
+
+    /**
+     * The grid rows for the innerPanel
+     */
     private int gridRows = 3;
+    /**
+     * The grid cols for the innerPanel
+     */
     private int gridCols = 5;
 
+    /**
+     * The player of the game
+     */
     private Player player;
+
+    /**
+     * The label where the total weight will be displayed
+     */
     private JLabel jLabelTotalWeight;
 
+    /**
+     * Instantiates a new Inventory.
+     *
+     * @param player the player of the game
+     */
     public Inventory(Player player) {
         this.player = player;
         this.setBounds(this.positionX, this.positionY, this.width, this.height);
         this.init();
     }
 
+    /**
+     * Instantiates a new Inventory.
+     * With this function, a custom Rectangle will be added
+     *
+     * @param player    the player of the game
+     * @param rectangle custom rectangle for the inventory
+     */
     public Inventory(Player player, Rectangle rectangle) {
         this.player = player;
         this.positionX = rectangle.x;
@@ -41,6 +85,10 @@ public class Inventory extends JPanel implements SetInactiveListener {
         this.init();
     }
 
+    /**
+     * Initialise the inventory.
+     * The layout of this will be set and the innerPanel will be created
+     */
     private void init() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.BLACK);
@@ -53,6 +101,9 @@ public class Inventory extends JPanel implements SetInactiveListener {
         this.add(this.innerPanel);
     }
 
+    /**
+     *
+     */
     private void createInfoLabel() {
         JPanel labelFrame = new JPanel();
         labelFrame.setBackground(Color.BLACK);
@@ -75,6 +126,11 @@ public class Inventory extends JPanel implements SetInactiveListener {
         this.jLabelTotalWeight.setText(this.getTotalWeightText());
     }
 
+    /**
+     * Add item.
+     *
+     * @param item the item
+     */
     public void addItem(Item item) {
         JLabel label = new JLabel(item.getName());
         label.setForeground(Color.WHITE);

@@ -31,7 +31,6 @@ public class GUI
     private void createWindow()
     {
         window = new MyFrame();
-
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             //UIManager.put("nimbusBase", Color.BLACK);
@@ -42,6 +41,7 @@ public class GUI
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public JFrame getWindow()

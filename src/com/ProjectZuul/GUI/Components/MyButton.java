@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.awt.event.MouseEvent;
 
 public class MyButton extends JButton {
 
@@ -27,6 +28,7 @@ public class MyButton extends JButton {
             {
             }
         });
+        ToolTipManager.sharedInstance().setInitialDelay(0);
     }
 
     public MyButton(String text, Color background, Color foreground, Dimension dimension) {

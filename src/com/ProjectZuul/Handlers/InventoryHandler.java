@@ -29,7 +29,7 @@ public class InventoryHandler implements SetInactiveListener {
 
 
     public void addItem(Item item, Room room) {
-        if (item.isCanPickup()) {
+        if (item.isCanPickup() && !this.player.isInventoryFull(item.getWeight())) {
             if (this.player.addItem(item)) {
                 this.inventory.addItem(item);
                 room.removeItem(item);

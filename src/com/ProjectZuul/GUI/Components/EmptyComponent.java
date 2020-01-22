@@ -2,8 +2,13 @@ package com.ProjectZuul.GUI.Components;
 
 import java.awt.*;
 
-public class EmptyComponent extends Component {
-    public EmptyComponent() {
 
-    }
+/**
+ * The type Empty component.
+ */
+public class EmptyComponent extends Component {
+    /**
+     * Instantiates a new Empty component.
+     */
+    public EmptyComponent() { }
 }
