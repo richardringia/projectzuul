@@ -69,7 +69,6 @@ public class MainMenu implements SetInactiveListener
     @Override
     public void setMenuVisibility(boolean visibility)
     {
-        System.out.println(visibility);
         titleNameLabel.setVisible(visibility);
         startButton.setVisible(visibility);
         aboutButton.setVisible(visibility);

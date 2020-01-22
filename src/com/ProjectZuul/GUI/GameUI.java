@@ -265,16 +265,30 @@ public class GameUI implements SetInactiveListener
         });
     }
 
-    private void goRoom(String direction) {
+    private void goRoom(String direction)
+    {
+        Room nextRoom = game.getCurrentRoom().getExit(direction);
+        if (nextRoom.getDoorLocked())
+        {
+            if (player.getItemNames().contains(nextRoom.getUnlockItem()))
+            {
+                nextRoom.setDoorLocked(false);
+            }
+            else {
+                currentRoomText.setText("\nYou are trying to access the " + nextRoom.getName() + ", but the door seems to be locked!\n\n" +
+                        "Find a key to get inside this room.");
+                return;
+            }
+        }
         if (previousRoom.size() != 0 && game.getCurrentRoom().getExit(direction) == previousRoom.lastElement()) {
             goBackRoom();
             return;
         }
 
         previousRoom.push(game.getCurrentRoom());
-        game.setCurrentRoom(game.getCurrentRoom().getExit(direction));
-        currentRoomText.setText(game.getCurrentRoom().getLongDescription());
-        mapHandler.updateRoom(game.getCurrentRoom());
+        game.setCurrentRoom(nextRoom);
+        currentRoomText.setText(nextRoom.getLongDescription());
+        mapHandler.updateRoom(nextRoom);
 
         setDirectionButtonEnabled();
         setInvestigationItems();

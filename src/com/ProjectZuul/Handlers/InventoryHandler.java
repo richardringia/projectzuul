@@ -33,7 +33,6 @@ public class InventoryHandler implements SetInactiveListener {
             if (this.player.addItem(item)) {
                 this.inventory.addItem(item);
                 room.removeItem(item);
-                System.out.println(room.getName());
             }
         }
     }

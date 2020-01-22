@@ -25,7 +25,6 @@ public class GameHandler {
 
 
     public GameHandler() {
-        System.out.println("GAMEHANLER");
         RoomHandler roomHandler = new RoomHandler();
         roomList = roomHandler.getRoomList();
         RoomHandler room = new RoomHandler();
@@ -33,7 +32,6 @@ public class GameHandler {
     }
     
     public void startTimer() {
-        System.out.println("TIMER RUNNING");
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override

@@ -40,7 +40,6 @@ public class Game
      */
     public Game()
     {
-        System.out.println("dddddddd");
         main = new GameHandler();
         main.setGameInstance(this);
         roomsList = main.getRoomList();

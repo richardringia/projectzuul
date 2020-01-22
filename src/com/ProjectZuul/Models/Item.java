@@ -1,5 +1,7 @@
 package com.ProjectZuul.Models;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -36,13 +38,26 @@ public class Item {
     }
 
     /**
-     * @param availebleRooms
+     * @param availableRooms
      *
      * Put an item in a random room
      */
-    public void setItemToRandomRoom(List<Room> availebleRooms) {
+    public void setItemToRandomRoom(List<Room> availableRooms, List<Room> unavailableRooms) {
         // Get a random room from the given rooms.
-        this.setItemToRoom(availebleRooms.get(new Random().nextInt(availebleRooms.size())));
+        ArrayList<Room> listCopy = new ArrayList<>(availableRooms);
+
+        if (unavailableRooms != null)
+        {
+            for (Room room : unavailableRooms)
+            {
+                listCopy.remove(room);
+            }
+        }
+        for (Room room : listCopy)
+        {
+            System.out.println(room.getName());
+        }
+        this.setItemToRoom(listCopy.get(new Random().nextInt(listCopy.size())));
     }
 
     /**

@@ -50,7 +50,7 @@ public class RoomHandler {
         classRoom666 = new Room("ClassRoom666","You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?");
         canteen = new Room("Canteen","You are in a canteen, ghosts don't need food so they probably aren'there, or are they?");
         teachersRoom = new Room("TeachersRoom","Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.");
-        principlesOffice = new Room("PrincipleOffice","The principles office always holds something important, try looking around to see what you can find.");
+        principlesOffice = new Room("Principles Office","The principles office always holds something important, try looking around to see what you can find.", true, "Principles keys");
         toilets = new Room("Toilets","You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned... ");
         vaultRoom = new Room("VaultRoom","The vault room, could this be where you need to be, maybe investigate to see if can find something.");
 

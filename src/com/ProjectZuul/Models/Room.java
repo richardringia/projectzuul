@@ -24,6 +24,8 @@ public class Room
 {
     private String name;
     private String description;
+    private boolean doorLocked;
+    private String unlockItem;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private List<Item> itemList; // stores all the items in the room
 
@@ -39,6 +41,31 @@ public class Room
         this.description = description;
         exits = new HashMap<>();
         itemList = new ArrayList<>();
+    }
+
+    public Room(String name, String description, boolean doorLocked, String unlockItem)
+    {
+        this.name = name;
+        this.description = description;
+        this.unlockItem = unlockItem;
+        this.doorLocked = doorLocked;
+        exits = new HashMap<>();
+        itemList = new ArrayList<>();
+    }
+
+    public boolean getDoorLocked()
+    {
+        return doorLocked;
+    }
+
+    public void setDoorLocked(boolean unlock)
+    {
+        doorLocked = unlock;
+    }
+
+    public String getUnlockItem()
+    {
+        return unlockItem;
     }
 
     /**
@@ -114,9 +141,7 @@ public class Room
     }
 
     public void removeItem(Item item) {
-        System.out.println(this.itemList.size());
         this.itemList.remove(item);
-        System.out.println(this.itemList.size());
     }
 
     public String getName() {

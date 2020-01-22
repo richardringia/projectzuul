@@ -2,6 +2,7 @@ package com.ProjectZuul.Models;
 
 import com.ProjectZuul.Handlers.InventoryHandler;
 
+import javax.print.DocFlavor;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -31,6 +32,17 @@ public class Player {
                 .filter(item -> name.equals(item.getName()))
                 .findAny()
                 .orElse(null);
+    }
+
+    public ArrayList<String> getItemNames()
+    {
+        ArrayList<String> itemNames = new ArrayList<>();
+        for (Item item : itemList)
+        {
+            itemNames.add(item.getName());
+        }
+
+        return itemNames;
     }
 
     public int getTotalWeight() {
