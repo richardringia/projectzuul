@@ -1,5 +1,6 @@
 package com.ProjectZuul.GUI;
 
+import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Zuul.Game;
@@ -45,7 +46,7 @@ public class GUI
 
     void createGame()
     {
-        gameUIListener = new GameUI(this);
+        gameUIListener = new GameUI(this, GameMode.EASY);
     }
 
     void setGameUIVisibility(boolean visibility)

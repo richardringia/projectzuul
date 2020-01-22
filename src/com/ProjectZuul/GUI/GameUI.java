@@ -1,6 +1,7 @@
 package com.ProjectZuul.GUI;
 
 
+import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Fade.FadeController;
 import com.ProjectZuul.GUI.Fade.FadePanel;
@@ -8,7 +9,6 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Handlers.MapHandler;
-import com.ProjectZuul.Main;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
@@ -59,9 +59,12 @@ public class GameUI implements SetInactiveListener
 
     private Stack<Room> previousRoom;
 
-    public GameUI(GUI gui)
+    private GameMode gameMode;
+
+    public GameUI(GUI gui, GameMode gameMode)
     {
         this.gui = gui;
+        this.gameMode = gameMode;
 
         window = gui.getWindow();
 
@@ -494,5 +497,9 @@ public class GameUI implements SetInactiveListener
 
     public MapHandler getMapHandler() {
         return mapHandler;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
     }
 }
