@@ -431,7 +431,6 @@ public class GameUI implements SetInactiveListener
 
         commandButtonsHolder.setVisible(visibility);
         currentSelectedCommandHolder.setVisible(visibility);
-        mapHandler.setMenuVisibility(visibility);
         inventoryHandler.setMenuVisibility(visibility);
     }
 
@@ -491,5 +490,9 @@ public class GameUI implements SetInactiveListener
 
     public MyPanel getInvestigateItemsHolder() {
         return this.investigateItemsHolder;
+    }
+
+    public MapHandler getMapHandler() {
+        return mapHandler;
     }
 }

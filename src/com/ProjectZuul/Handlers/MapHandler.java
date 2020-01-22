@@ -26,6 +26,7 @@ public class MapHandler implements SetInactiveListener
         this.roomList = roomList;
         currentRoom = roomList.get(0);
         this.draw();
+        this.setMenuVisibility(false);
     }
 
     public JPanel getMap() {
