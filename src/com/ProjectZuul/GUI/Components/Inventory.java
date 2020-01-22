@@ -147,11 +147,6 @@ public class Inventory extends JPanel implements SetInactiveListener {
         this.updateTotalWeight();
         this.innerPanel.add(jButton);
         this.updateUI();
-//        JLabel label = new JLabel(item.getName());
-//        label.setForeground(Color.WHITE);
-//        this.updateTotalWeight();
-//        this.innerPanel.add(label);
-//        this.updateUI();
     }
 
     @Override
