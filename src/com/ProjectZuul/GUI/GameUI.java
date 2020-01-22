@@ -27,7 +27,7 @@ public class GameUI implements SetInactiveListener
 
     private Timer timer;
     private long startTime = -1;
-    private long duration = 5000;
+    private long duration = 2147483647;
 
     private Player player;
 
@@ -316,13 +316,12 @@ public class GameUI implements SetInactiveListener
                     }, this.player, item.getWeight());
                 } else if (item instanceof Vault) {
                     Item key = player.getItem("Vault keys");
+                    Vault vault = (Vault) item;
                     actionHandler.createMenuFromVault(e2 -> {
-                        // YOU WIN
-                        Vault vault = (Vault) item;
-                        if (vault.openVault(key)) {
+                        if (vault.canOpenVault(key)) {
                             this.fadeGameFinishedScreen(true);
                         }
-                    });
+                    }, vault.canOpenVault(key));
                 } else {
                     actionHandler.createMenu();
                 }

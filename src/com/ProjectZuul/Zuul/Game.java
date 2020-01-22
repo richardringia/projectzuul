@@ -297,7 +297,7 @@ public class Game
             Item item = currentRoom.getItem("Vault");
             if (item != null) {
                 Vault vault = (Vault)item;
-                if (vault.openVault(key)) {
+                if (vault.canOpenVault(key)) {
                     System.out.println("You won the game!");
                     return true;
                 }

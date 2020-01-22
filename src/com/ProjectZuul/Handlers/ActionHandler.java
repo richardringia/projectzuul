@@ -34,15 +34,16 @@ public class ActionHandler {
         this.actionMenu.updateUI();
     }
 
-    public void createMenuFromVault(ActionListener action) {
+    public void createMenuFromVault(ActionListener action, boolean canOpenVault) {
         this.actionMenu.reset();
-        this.actionMenu.add(this.createOpenButton(action));
+        this.actionMenu.add(this.createOpenButton(action, !canOpenVault));
         this.actionMenu.add(this.createCancelButton());
         this.actionMenu.updateUI();
     }
 
-    private MyButton createOpenButton(ActionListener action) {
+    private MyButton createOpenButton(ActionListener action, boolean disabled) {
         MyButton button = this.createButton("Open");
+        button.setEnabled(!disabled, "The vault can not be opened. Please find the 'Vault keys'!");
         button.addActionListener(action);
         button.addActionListener(e -> {
             this.actionMenu.reset();
@@ -52,10 +53,7 @@ public class ActionHandler {
 
     private MyButton createPickupButton(ActionListener action, boolean disabled) {
         MyButton button = this.createButton("Pick up");
-        button.setEnabled(!disabled);
-        if (disabled) {
-            button.setToolTipText("The inventory is full. Please drop some items!");
-        }
+        button.setEnabled(!disabled, "The inventory is full. Please drop some items!");
         button.addActionListener(action);
         button.addActionListener(e -> {
             this.actionMenu.reset();
