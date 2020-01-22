@@ -1,6 +1,7 @@
 package com.ProjectZuul.GUI;
 
 import com.ProjectZuul.Enums.GameMode;
+import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Zuul.Game;
@@ -22,7 +23,7 @@ public class GUI
     public GUI()
     {
         createWindow();
-        mainMenuListener = new MainMenu(this);
+        mainMenuListener = new MainMenu(this, Language.EN);
         window.setVisible(true);
     }
 
@@ -46,7 +47,7 @@ public class GUI
 
     void createGame()
     {
-        gameUIListener = new GameUI(this, GameMode.EASY);
+        gameUIListener = new GameUI(this, GameMode.EASY, Language.EN);
     }
 
     void setGameUIVisibility(boolean visibility)
@@ -62,7 +63,7 @@ public class GUI
     void quitToMainMenu()
     {
         window.getContentPane().removeAll();
-        mainMenuListener = new MainMenu(this);
+        mainMenuListener = new MainMenu(this, Language.EN);
         //new MainMenu(this);
         gameUIListener = null;
         window.repaint();

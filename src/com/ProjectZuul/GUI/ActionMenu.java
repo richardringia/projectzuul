@@ -1,5 +1,9 @@
 package com.ProjectZuul.GUI;
 
+import com.ProjectZuul.Enums.Language;
+import com.ProjectZuul.Handlers.LanguageHandler;
+import com.ProjectZuul.Models.Player;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +15,10 @@ public class ActionMenu extends JPanel {
 
     private JPanel actionPanel;
 
-    public ActionMenu() {
+    private LanguageHandler languageHandler;
+
+    public ActionMenu(Player player) {
+        this.languageHandler = player.getLanguageHandler();
         this.setBounds(600, 20, 150, 200);
         this.setBackground(Color.BLACK);
         this.setLayout(null);
@@ -22,7 +29,7 @@ public class ActionMenu extends JPanel {
 
 
     private void createTitleLabel() {
-        JLabel jLabel = new JLabel("Action menu");
+        JLabel jLabel = new JLabel(languageHandler.get("GAME_ACTION_MENU_TITLE"));
         jLabel.setBounds(0, 0, 150, 30);
         jLabel.setForeground(Color.WHITE);
         jLabel.setHorizontalAlignment(SwingConstants.CENTER);

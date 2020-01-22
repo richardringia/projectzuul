@@ -1,0 +1,2 @@
+ROOM_HALLWAY_ONE:Gang 1
+GAME_START:Spel beginnen

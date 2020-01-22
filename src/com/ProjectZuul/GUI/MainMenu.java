@@ -1,10 +1,12 @@
 package com.ProjectZuul.GUI;
 
+import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.MyButton;
 import com.ProjectZuul.GUI.Components.MyLabel;
 import com.ProjectZuul.GUI.Components.MyPanel;
 import com.ProjectZuul.GUI.Components.MyTextArea;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
+import com.ProjectZuul.Handlers.LanguageHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +27,12 @@ public class MainMenu implements SetInactiveListener
 
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
-    public MainMenu(GUI gui)
+    private LanguageHandler languageHandler;
+
+    public MainMenu(GUI gui, Language language)
     {
         this.gui = gui;
+        this.languageHandler = new LanguageHandler(language);
         createMainMenu();
     }
 
@@ -38,9 +43,9 @@ public class MainMenu implements SetInactiveListener
         titleNameLabel = new MyLabel("PROJECT ZUUL", Color.WHITE, titleFont, window);
         titleNameLabel.setBounds(485, 0, 500, 100);
 
-        startButton = new MyButton("START", Color.BLACK, Color.WHITE,  new Rectangle(550, 150, 100, 35), window);
-        aboutButton = new MyButton("ABOUT", Color.BLACK, Color.WHITE, new Rectangle(550, 200, 100, 35), window);
-        quitButton = new MyButton("QUIT", Color.BLACK, Color.WHITE, new Rectangle(550, 300, 100, 35), window);
+        startButton = new MyButton(languageHandler.get("MENU_START").toUpperCase(), Color.BLACK, Color.WHITE,  new Rectangle(550, 150, 100, 35), window);
+        aboutButton = new MyButton(languageHandler.get("MENU_ABOUT").toUpperCase(), Color.BLACK, Color.WHITE, new Rectangle(550, 200, 100, 35), window);
+        quitButton = new MyButton(languageHandler.get("MENU_QUIT").toUpperCase(), Color.BLACK, Color.WHITE, new Rectangle(550, 300, 100, 35), window);
 
         setMainMenuListeners();
     }
@@ -79,22 +84,9 @@ public class MainMenu implements SetInactiveListener
     {
         gui.setMainMenuVisibility(false);
         if (!aboutPageCreated) {
-            aboutPageBack = new MyButton("< BACK", Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
+            aboutPageBack = new MyButton("< " + languageHandler.get("ABOUT_BACK").toUpperCase(), Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
             aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  100, 100, 400, 250, window);
-            aboutPageText.setText("DIT IS EEN ABOUT PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+            aboutPageText.setText(languageHandler.get("ABOUT_TEXT"));
 
             setAboutPageListeners();
         }

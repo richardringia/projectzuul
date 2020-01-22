@@ -11,8 +11,10 @@ public class ActionHandler {
 
     private ActionMenu actionMenu;
 
+    private LanguageHandler languageHandler;
 
-    public ActionHandler(ActionMenu actionMenu) {
+    public ActionHandler(Player player, ActionMenu actionMenu) {
+        this.languageHandler = player.getLanguageHandler();
         this.actionMenu = actionMenu;
     }
 
@@ -69,15 +71,15 @@ public class ActionHandler {
     }
 
     private MyButton createOpenButton(ActionListener action, boolean disabled) {
-        return this.createButton("Open", action, disabled, "The vault can not be opened. Please find the 'Vault keys'!");
+        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_OPEN"), action, disabled, "The vault can not be opened. Please find the 'Vault keys'!");
     }
 
     private MyButton createPickupButton(ActionListener action, boolean disabled) {
-        return this.createButton("Pick up", action, disabled, "The inventory is full. Please drop some items!");
+        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_PICK_UP"), action, disabled, "The inventory is full. Please drop some items!");
     }
 
     private MyButton createCancelButton() {
-        return this.createButton("Cancel");
+        return this.createButton(this.languageHandler.get("GAME_CANCEL"));
     }
 
 

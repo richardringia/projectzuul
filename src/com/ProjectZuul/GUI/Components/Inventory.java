@@ -4,6 +4,7 @@ import com.ProjectZuul.GUI.GameUI;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
+import com.ProjectZuul.Handlers.LanguageHandler;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 
@@ -60,6 +61,8 @@ public class Inventory extends JPanel implements SetInactiveListener {
      */
     private JLabel jLabelTotalWeight;
 
+    private LanguageHandler languageHandler;
+
     /**
      * Instantiates a new Inventory.
      *
@@ -67,6 +70,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
      */
     public Inventory(Player player) {
         this.player = player;
+        this.languageHandler = player.getLanguageHandler();
         this.setBounds(this.positionX, this.positionY, this.width, this.height);
         this.init();
     }
@@ -78,8 +82,9 @@ public class Inventory extends JPanel implements SetInactiveListener {
      * @param player    the player of the game
      * @param rectangle custom rectangle for the inventory
      */
-    public Inventory(Player player, Rectangle rectangle) {
+    public Inventory(Player player, Rectangle rectangle, LanguageHandler languageHandler) {
         this.player = player;
+        this.languageHandler = languageHandler;
         this.positionX = rectangle.x;
         this.positionY = rectangle.y;
         this.width = rectangle.width;
@@ -111,7 +116,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
         JPanel labelFrame = new JPanel();
         labelFrame.setBackground(Color.BLACK);
         labelFrame.setPreferredSize(new Dimension(this.width, 25));
-        JLabel label = new JLabel("Inventory");
+        JLabel label = new JLabel(this.languageHandler.get("GAME_INVENTORY_TITLE"));
         label.setLocation(0, 0);
         label.setForeground(Color.WHITE);
         labelFrame.add(label);
@@ -122,7 +127,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
     }
 
     private String getTotalWeightText() {
-        return this.player.getTotalWeight() + " of " + this.player.getMaxWeight() + " Kg is used";
+        return this.player.getTotalWeight() + " " + this.languageHandler.get("GAME_INVENTORY_SUB_TITLE_1") + " " + this.player.getMaxWeight() + " " + this.languageHandler.get("GAME_INVENTORY_SUB_TITLE_2") + "";
     }
 
     private void updateTotalWeight() {
@@ -142,7 +147,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
                 this.innerPanel.remove(jButton);
                 this.updateTotalWeight();
                 this.updateUI();
-            }, "Drop", item.isCanDrop());
+            }, this.languageHandler.get("GAME_ACTION_MENU_DROP"), item.isCanDrop());
         });
         this.updateTotalWeight();
         this.innerPanel.add(jButton);

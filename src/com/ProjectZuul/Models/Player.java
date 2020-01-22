@@ -3,6 +3,7 @@ package com.ProjectZuul.Models;
 import com.ProjectZuul.GUI.GameUI;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
+import com.ProjectZuul.Handlers.LanguageHandler;
 
 import javax.print.DocFlavor;
 import java.util.List;
@@ -89,5 +90,9 @@ public class Player {
     private void toggleMap(Item item, boolean b) {
         if (item.getName().equals("Map"))
             this.gameUI.getMapHandler().setMenuVisibility(b);
+    }
+
+    public LanguageHandler getLanguageHandler() {
+        return this.gameUI.getLanguageHandler();
     }
 }

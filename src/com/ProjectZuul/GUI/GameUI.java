@@ -2,12 +2,14 @@ package com.ProjectZuul.GUI;
 
 
 import com.ProjectZuul.Enums.GameMode;
+import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Fade.FadeController;
 import com.ProjectZuul.GUI.Fade.FadePanel;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
+import com.ProjectZuul.Handlers.LanguageHandler;
 import com.ProjectZuul.Handlers.MapHandler;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
@@ -20,8 +22,7 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Stack;
 
-public class GameUI implements SetInactiveListener
-{
+public class GameUI implements SetInactiveListener {
     private Game game;
     private GUI gui;
 
@@ -61,10 +62,16 @@ public class GameUI implements SetInactiveListener
 
     private GameMode gameMode;
 
-    public GameUI(GUI gui, GameMode gameMode)
-    {
+    private LanguageHandler languageHandler;
+
+    private Language language;
+
+    public GameUI(GUI gui, GameMode gameMode, Language language) {
         this.gui = gui;
         this.gameMode = gameMode;
+        this.languageHandler = new LanguageHandler(language);
+
+        this.language = language;
 
         window = gui.getWindow();
 
@@ -97,8 +104,7 @@ public class GameUI implements SetInactiveListener
         startTimer();
     }
 
-    private void setDefaultGameValues()
-    {
+    private void setDefaultGameValues() {
         commandButtonsHolder.setVisible(true);
         setCurrentSelectedCommandHolder(moveButtonHolder);
         setCurrentSelectedCommand(moveCommand);
@@ -112,46 +118,41 @@ public class GameUI implements SetInactiveListener
         commandButtonsHolder.setLayout(new GridLayout(1, 10));
         ((GridLayout) commandButtonsHolder.getLayout()).setHgap(10);
 
-        moveCommand = new MyButton("Move", Color.GRAY, Color.WHITE, positionzero, commandButtonsHolder);
-        investigateCommand = new MyButton("Investigate", Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
-        helpCommand = new MyButton("Help", Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
-        quitCommand = new MyButton("Quit", Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
+        moveCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_MOVE"), Color.GRAY, Color.WHITE, positionzero, commandButtonsHolder);
+        investigateCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_INVESTIGATE"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
+        helpCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_HELP"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
+        quitCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_QUIT"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
 
         setCommandButtonListeners();
     }
 
-    private void createDirectionButtons()
-    {
+    private void createDirectionButtons() {
         moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 400, 200, window);
         moveButtonHolder.setLayout(new GridLayout(5, 5));
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
                 if (y == 0 && x == 2) {
-                    north = new MyButton("North", Color.BLACK, Color.WHITE, positionzero);
+                    north = new MyButton(this.languageHandler.get("GAME_NAVIGATION_NORTH"), Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(north);
                 } else if (y == 1 && x == 1) {
-                    west = new MyButton("West", Color.BLACK, Color.WHITE, positionzero);
+                    west = new MyButton(this.languageHandler.get("GAME_NAVIGATION_WEST"), Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(west);
                 } else if (y == 1 && x == 3) {
-                    east = new MyButton("East", Color.BLACK, Color.WHITE, positionzero);
+                    east = new MyButton(this.languageHandler.get("GAME_NAVIGATION_EAST"), Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(east);
                 } else if (y == 2 && x == 2) {
-                    south = new MyButton("South", Color.BLACK, Color.WHITE, positionzero);
+                    south = new MyButton(this.languageHandler.get("GAME_NAVIGATION_SOUTH"), Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(south);
                 } else if (y == 3 && x == 0) {
-                    back = new MyButton("Back", Color.BLACK, Color.WHITE, positionzero);
+                    back = new MyButton(this.languageHandler.get("GAME_NAVIGATION_BACK"), Color.BLACK, Color.WHITE, positionzero);
                     moveButtonHolder.add(back);
-                }
-                else if (y == 4 && x == 3)
-                {
-                    timeLeftText = new MyLabel("Time Left:", Color.WHITE, new Font("Arial", Font.PLAIN, 13), moveButtonHolder);
+                } else if (y == 4 && x == 3) {
+                    timeLeftText = new MyLabel(this.languageHandler.get("GAME_TIMER_TIME_LEFT") + ":", Color.WHITE, new Font("Arial", Font.PLAIN, 13), moveButtonHolder);
                     timeLeftText.setHorizontalAlignment(SwingConstants.CENTER);
-                }
-                else if (y == 4 && x == 4) {
+                } else if (y == 4 && x == 4) {
                     timeLabel = new MyLabel("...", Color.WHITE, new Font("Arial", Font.PLAIN, 15), moveButtonHolder);
                     timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                }
-                else {
+                } else {
                     moveButtonHolder.add(new EmptyComponent());
                 }
             }
@@ -160,8 +161,7 @@ public class GameUI implements SetInactiveListener
         setDirectionButtonListeners();
     }
 
-    private void startTimer()
-    {
+    private void startTimer() {
         timer = new Timer(10, e -> {
             if (startTime < 0) {
 
@@ -170,15 +170,13 @@ public class GameUI implements SetInactiveListener
 
             long now = System.currentTimeMillis();
             long clockTime = now - startTime;
-            if (clockTime >= duration)
-            {
+            if (clockTime >= duration) {
                 fadeGameFinishedScreen(false);
                 clockTime = duration;
                 timer.stop();
             }
 
-            if (clockTime >= duration - 30000)
-            {
+            if (clockTime >= duration - 30000) {
                 timeLeftText.setForeground(Color.RED);
                 timeLabel.setForeground(Color.RED);
             }
@@ -193,8 +191,7 @@ public class GameUI implements SetInactiveListener
         }
     }
 
-    private void fadeGameFinishedScreen(boolean victory)
-    {
+    private void fadeGameFinishedScreen(boolean victory) {
         FadeController controller = new FadeController(2000);
 
         new java.util.Timer().schedule(
@@ -211,10 +208,10 @@ public class GameUI implements SetInactiveListener
 
                         window.repaint();
                     }
-                },2000);
+                }, 2000);
 
 
-        gameOver = new MyLabel(victory ? "YOU WON" : "GAME OVER", Color.RED, new Font("Arial", Font.PLAIN, 30), gameFinishedPanel);
+        gameOver = new MyLabel(victory ? this.languageHandler.get("GAME_WIN").toUpperCase() : this.languageHandler.get("GAME_LOST").toUpperCase(), Color.RED, new Font("Arial", Font.PLAIN, 30), gameFinishedPanel);
         gameOver.setBounds(0, 0, 1185, 560);
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
         gameOver.setVerticalAlignment(SwingConstants.CENTER);
@@ -268,18 +265,14 @@ public class GameUI implements SetInactiveListener
         });
     }
 
-    private void goRoom(String direction)
-    {
+    private void goRoom(String direction) {
         Room nextRoom = game.getCurrentRoom().getExit(direction);
-        if (nextRoom.getDoorLocked())
-        {
-            if (player.getItemNames().contains(nextRoom.getUnlockItem()))
-            {
+        if (nextRoom.getDoorLocked()) {
+            if (player.getItemNames().contains(nextRoom.getUnlockItem())) {
                 nextRoom.setDoorLocked(false);
-            }
-            else {
-                currentRoomText.setText("\nYou are trying to access the " + nextRoom.getName() + ", but the door seems to be locked!\n\n" +
-                        "Find a key to get inside this room.");
+            } else {
+                currentRoomText.setText("\n" + this.languageHandler.get("GAME_ROOM_DOOR_LOCK_1") + " " + nextRoom.getName() + this.languageHandler.get("GAME_ROOM_DOOR_LOCK_2") + "\n\n" +
+                        this.languageHandler.get("GAME_ROOM_DOOR_LOCK_3"));
                 return;
             }
         }
@@ -311,7 +304,7 @@ public class GameUI implements SetInactiveListener
         investigateNoItemsTextHolder.setLayout(new GridLayout(1, 1));
         investigateNoItemsTextHolder.setVisible(false);
 
-        noItemsText = new MyTextArea("No items found in this location.", Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateNoItemsTextHolder);
+        noItemsText = new MyTextArea(this.languageHandler.get("GAME_INVESTIGATE_NO_ITEMS"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateNoItemsTextHolder);
 
         investigateItemsHolder = new MyPanel(Color.BLACK, 225, 200, 150, 215, window);
         investigateItemsHolder.setLayout(new GridLayout(2, 1));
@@ -337,7 +330,7 @@ public class GameUI implements SetInactiveListener
                         window.repaint();
                     }, this.player, item.getWeight());
                 } else if (item instanceof Vault) {
-                    Item key = player.getItem("Vault keys");
+                    Item key = player.getItem(this.languageHandler.get("GAME_ITEMS_VAULT_KEYS"));
                     Vault vault = (Vault) item;
                     actionHandler.createMenu(e2 -> {
                         if (vault.canOpenVault(key)) {
@@ -358,20 +351,7 @@ public class GameUI implements SetInactiveListener
 
         helpPageText = new MyTextArea("", Color.BLACK, Color.WHITE, 0, 0, 0, 0, helpTextHolder);
 
-        helpPageText.setText("DIT IS EEN HELP PAGINA, DEZE GAME IS GEWELDIG MANFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" +
-                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+        helpPageText.setText(this.languageHandler.get("ABOUT_TEXT"));
     }
 
     private void createQuitButtons() {
@@ -380,8 +360,8 @@ public class GameUI implements SetInactiveListener
         ((GridLayout) quitMenuHolder.getLayout()).setVgap(10);
         quitMenuHolder.setVisible(false);
 
-        quitToMenu = new MyButton("Main Menu", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
-        quitToDesktop = new MyButton("Quit to Desktop", Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
+        quitToMenu = new MyButton(this.languageHandler.get("GAME_MENU_MAIN_MENU"), Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
+        quitToDesktop = new MyButton(this.languageHandler.get("GAME_MENU_QUIT_TO_DESKTOP"), Color.BLACK, Color.WHITE, positionzero, quitMenuHolder);
 
         setQuitButtonListeners();
     }
@@ -425,10 +405,8 @@ public class GameUI implements SetInactiveListener
     }
 
     @Override
-    public void setMenuVisibility(boolean visibility)
-    {
-        if (visibility)
-        {
+    public void setMenuVisibility(boolean visibility) {
+        if (visibility) {
             setDefaultGameValues();
         }
 
@@ -445,8 +423,7 @@ public class GameUI implements SetInactiveListener
         window.repaint();
     }
 
-    private void setCurrentSelectedCommandHolder(Container holder)
-    {
+    private void setCurrentSelectedCommandHolder(Container holder) {
         if (currentSelectedCommandHolder != null) {
             currentSelectedCommandHolder.setVisible(false);
         }
@@ -474,8 +451,8 @@ public class GameUI implements SetInactiveListener
     }
 
     private void createActionMenu() {
-        actionMenu = new ActionMenu();
-        actionHandler = new ActionHandler(actionMenu);
+        actionMenu = new ActionMenu(this.player);
+        actionHandler = new ActionHandler(this.player, actionMenu);
         window.add(actionMenu);
     }
 
@@ -501,5 +478,9 @@ public class GameUI implements SetInactiveListener
 
     public GameMode getGameMode() {
         return gameMode;
+    }
+
+    public LanguageHandler getLanguageHandler() {
+        return languageHandler;
     }
 }
