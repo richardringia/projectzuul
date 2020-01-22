@@ -199,7 +199,13 @@ public class GameUI implements SetInactiveListener
                     @Override
                     public void run() {
                         window.getContentPane().removeAll();
+                        quitMenuHolder.setBackground(Color.RED);
+                        quitMenuHolder.setVisible(true);
+                        quitMenuHolder.setBounds(525, 400, 150, 80);
+                        quitMenuHolder.setBackground(Color.WHITE);
+                        window.add(quitMenuHolder);
                         window.add(gameFinishedPanel);
+
                         window.repaint();
                     }
                 },2000);
@@ -209,7 +215,6 @@ public class GameUI implements SetInactiveListener
         gameOver.setBounds(0, 0, 1185, 560);
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
         gameOver.setVerticalAlignment(SwingConstants.CENTER);
-
         controller.add(gameFinishedPanel);
         controller.start();
     }

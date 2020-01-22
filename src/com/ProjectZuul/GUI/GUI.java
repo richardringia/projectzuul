@@ -9,9 +9,6 @@ import java.awt.*;
 
 public class GUI
 {
-    Game game;
-    GameUI gameUI;
-
     JFrame window;
 
     SetInactiveListener mainMenuListener;
