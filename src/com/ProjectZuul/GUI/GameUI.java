@@ -329,7 +329,7 @@ public class GameUI implements SetInactiveListener
             itemButton.addActionListener(e -> {
                 if (item.isCanPickup()) {
                     actionHandler.createMenu(e2 -> {
-                        inventoryHandler.addItem(item, game.getCurrentRoom());
+                        inventoryHandler.addItem(item);
                         investigateItemsHolder.remove(itemButton);
                         window.repaint();
                     }, this.player, item.getWeight());

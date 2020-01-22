@@ -29,11 +29,11 @@ public class InventoryHandler implements SetInactiveListener {
     }
 
 
-    public void addItem(Item item, Room room) {
+    public void addItem(Item item) {
         if (item.isCanPickup() && !this.player.isInventoryFull(item.getWeight())) {
             if (this.player.addItem(item)) {
                 this.inventory.addItem(item);
-                room.removeItem(item);
+                this.player.getCurrentRoom().removeItem(item);
             }
         }
     }
@@ -41,7 +41,6 @@ public class InventoryHandler implements SetInactiveListener {
     public void dropItem(Item item) {
         if (item.isCanPickup() && item.isCanDrop()) {
             if (this.player.removeItem(item)) {
-
                 this.player.addItemToRoom(item);
             }
         }
