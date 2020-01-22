@@ -13,7 +13,7 @@ public class Vault extends Item {
     }
 
 
-    public boolean openVault(Item item) {
+    public boolean canOpenVault(Item item) {
         return item == key;
     }
  }

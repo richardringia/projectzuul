@@ -28,7 +28,6 @@ public class MyButton extends JButton {
             {
             }
         });
-        ToolTipManager.sharedInstance().setInitialDelay(0);
     }
 
     public MyButton(String text, Color background, Color foreground, Dimension dimension) {
@@ -44,5 +43,13 @@ public class MyButton extends JButton {
     public MyButton(String text, Color background, Color foreground, Rectangle bounds, Container parent) {
         this(text, background, foreground, bounds);
         parent.add(this);
+    }
+
+    public void setEnabled(boolean b, String message) {
+        this.setEnabled(b);
+        if (!this.isEnabled()) {
+            ToolTipManager.sharedInstance().setInitialDelay(0);
+            this.setToolTipText(message);
+        }
     }
 }
