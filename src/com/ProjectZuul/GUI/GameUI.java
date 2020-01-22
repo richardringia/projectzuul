@@ -8,6 +8,7 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.ActionHandler;
 import com.ProjectZuul.Handlers.InventoryHandler;
 import com.ProjectZuul.Handlers.MapHandler;
+import com.ProjectZuul.Main;
 import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
@@ -26,7 +27,7 @@ public class GameUI implements SetInactiveListener
 
     private Timer timer;
     private long startTime = -1;
-    private long duration = 500000;
+    private long duration = 5000;
 
     private Player player;
 
@@ -284,15 +285,15 @@ public class GameUI implements SetInactiveListener
     }
 
     private void createInvestigationView() {
-        investigateNoItemsTextHolder = new MyPanel(Color.BLACK, 200, 100, 200, 20, window);
+        investigateNoItemsTextHolder = new MyPanel(Color.BLACK, 200, 100, 210, 25, window);
         investigateNoItemsTextHolder.setLayout(new GridLayout(1, 1));
-        ((GridLayout) investigateNoItemsTextHolder.getLayout()).setVgap(10);
         investigateNoItemsTextHolder.setVisible(false);
 
-        noItemsText = new MyTextArea("No items found in this location.", Color.BLACK, Color.WHITE, 0, 0, 20, 10, investigateNoItemsTextHolder);
+        noItemsText = new MyTextArea("No items found in this location.", Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateNoItemsTextHolder);
 
-        investigateItemsHolder = new MyPanel(Color.BLACK, 100, 200, 150, 200, window);
-        investigateItemsHolder.setLayout(new GridLayout(1, 1));
+        investigateItemsHolder = new MyPanel(Color.BLACK, 225, 200, 150, 215, window);
+        investigateItemsHolder.setLayout(new GridLayout(2, 1));
+        ((GridLayout) investigateItemsHolder.getLayout()).setVgap(10);
         investigateItemsHolder.setVisible(false);
     }
 
@@ -390,11 +391,17 @@ public class GameUI implements SetInactiveListener
     private void setQuitButtonListeners() {
         quitToMenu.addActionListener(e ->
         {
-            gui.setGameUIVisibility(false);
-            gui.setMainMenuVisibility(true);
+            //gui.setGameUIVisibility(false);
+            //gui.setMainMenuVisibility(true);
+            timer.stop();
+            gui.quitToMainMenu();
         });
 
-        quitToDesktop.addActionListener(e -> gui.quitGame());
+        quitToDesktop.addActionListener(e ->
+        {
+            timer.stop();
+            gui.quitGame();
+        });
     }
 
     @Override

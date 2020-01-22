@@ -5,6 +5,7 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GUI
 {
@@ -33,6 +34,10 @@ public class GUI
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.put("nimbusBase", Color.BLACK);
+            UIManager.put("nimbusBlueGrey", Color.BLACK);
+            //UIManager.getLookAndFeelDefaults().put("Button[Disabled].backgroundPainter", new ButtonPainter(new Color(0, 0, 0, 255), new Color(0, 0, 50, 255)));
+
             SwingUtilities.updateComponentTreeUI(window);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,9 +64,20 @@ public class GUI
         mainMenuListener.setMenuVisibility(visibility);
     }
 
+    void quitToMainMenu()
+    {
+        window.getContentPane().removeAll();
+        mainMenuListener = new MainMenu(this);
+        //new MainMenu(this);
+        gameUIListener = null;
+        window.repaint();
+    }
+
     void quitGame()
     {
+        window.removeAll();
         window.dispose();
+        //System.exit(0);
     }
 
 }

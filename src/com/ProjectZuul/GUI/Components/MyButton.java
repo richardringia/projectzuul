@@ -2,6 +2,8 @@ package com.ProjectZuul.GUI.Components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class MyButton extends JButton {
 
@@ -12,6 +14,19 @@ public class MyButton extends JButton {
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.setFocusPainted(false);
         this.setOpaque(true);
+        addPropertyChangeListener(e -> {
+            try {
+                if ((boolean) e.getNewValue()) {
+                    setForeground(Color.WHITE);
+                } else {
+                    setForeground(Color.GRAY);
+                    System.out.println(getBackground());
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        });
     }
 
     public MyButton(String text, Color background, Color foreground, Dimension dimension) {

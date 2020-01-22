@@ -14,7 +14,6 @@ public class MainMenu implements SetInactiveListener
     GUI gui;
     JFrame window;
 
-    MyPanel titleNamePanel;
     MyLabel titleNameLabel;
 
     MyButton startButton, quitButton, aboutButton;
@@ -23,7 +22,6 @@ public class MainMenu implements SetInactiveListener
     MyTextArea aboutPageText;
 
     boolean aboutPageCreated = false;
-    boolean gameCreated = false;
 
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
@@ -37,11 +35,8 @@ public class MainMenu implements SetInactiveListener
     {
         window = gui.getWindow();
 
-        //titleNamePanel = createJPanel(Color.BLACK, 0, 0, 600, 100, window);
-        titleNamePanel = new MyPanel(Color.BLACK, 300, 0, 600, 100, window);
-
-        //titleNameLabel = createJLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
-        titleNameLabel = new MyLabel("PROJECT ZUUL", Color.WHITE, titleFont, titleNamePanel);
+        titleNameLabel = new MyLabel("PROJECT ZUUL", Color.WHITE, titleFont, window);
+        titleNameLabel.setBounds(485, 0, 500, 100);
 
         startButton = new MyButton("START", Color.BLACK, Color.WHITE,  new Rectangle(550, 150, 100, 35), window);
         aboutButton = new MyButton("ABOUT", Color.BLACK, Color.WHITE, new Rectangle(550, 200, 100, 35), window);
@@ -54,16 +49,16 @@ public class MainMenu implements SetInactiveListener
     {
         startButton.addActionListener(e ->
         {
-            if (!gameCreated)
-            {
+           // if (!gameCreated)
+            //{
                 gui.createGame();
-                gameCreated = true;
-            }
-            else
-            {
-                gui.setMainMenuVisibility(false);
-                gui.setGameUIVisibility(true);
-            }
+               // gameCreated = true;
+            //}
+            //else
+            //{
+            //    gui.setMainMenuVisibility(false);
+            //    gui.setGameUIVisibility(true);
+           // }
         });
 
         aboutButton.addActionListener(e -> createAboutPage());
@@ -74,7 +69,7 @@ public class MainMenu implements SetInactiveListener
     @Override
     public void setMenuVisibility(boolean visibility)
     {
-        titleNamePanel.setVisible(visibility);
+        System.out.println(visibility);
         titleNameLabel.setVisible(visibility);
         startButton.setVisible(visibility);
         aboutButton.setVisible(visibility);
