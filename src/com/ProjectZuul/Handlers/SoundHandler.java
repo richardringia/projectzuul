@@ -97,7 +97,7 @@ public class SoundHandler {
         }
     }
 
-    public void playBeedoSound() {
+    public void playLoseSound() {
         try {
             if (!this.beedoIsPlaying) {
                 Player player = Manager.createPlayer(new MediaLocator(new File("Sound/beebo.mp3").toURI().toURL()));

@@ -1,0 +1,70 @@
+MENU_START:start
+MENU_ABOUT:about
+MENU_QUIT:quit
+ABOUT_BACK:back
+ABOUT_TEXT:Leuk spel
+GAME_CANCEL:Cancel
+GAME_NAVIGATION_MOVE:Move
+GAME_NAVIGATION_INVESTIGATE:Investigate
+GAME_NAVIGATION_HELP:Help
+GAME_NAVIGATION_QUIT:Quit
+GAME_NAVIGATION_NORTH:North
+GAME_NAVIGATION_WEST:West
+GAME_NAVIGATION_EAST:East
+GAME_NAVIGATION_SOUTH:South
+GAME_NAVIGATION_BACK:Back
+GAME_TIMER_TIME_LEFT:Time left
+GAME_WIN:you won
+GAME_LOST:game over
+GAME_NO_ROOM:There is no door in that direction.
+GAME_ROOM_DOOR_LOCK_1:You are trying to access the
+GAME_ROOM_DOOR_LOCK_2:, but the door seems to be locked!
+GAME_ROOM_DOOR_LOCK_3:Find a key to get inside this room.
+GAME_ROOM_DOOR_LOCK:The door in that direction appears to be locked.
+GAME_ROOM_DARK:It's too dark to see anything!\nFind a flashlight to help you. \n\nFlashlight is the only visible item in investigate until you have obtained one.\
+GAME_ROOM_LONG_DESC:What would you like to do?
+GAME_ROOM_EXIT:To which direction would you like to move?
+GAME_ROOMS_SQUARE:Square
+GAME_ROOMS_SQUARE_DESC:You are outside of an abandoned school building, inside are some documents which are very important. Retrieve the documents and get a big reward. Don't get killed on the way, good luck!
+GAME_ROOMS_HALLWAY:Hallway
+GAME_ROOMS_HALLWAY_DESC_1:You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.
+GAME_ROOMS_HALLWAY_DESC_2:You find yourself in another hallway.
+GAME_ROOMS_HALLWAY_DESC_3:You find yourself in the third hallway, seems like there are some important rooms nearby.
+GAME_ROOMS_LIBRARY:Library
+GAME_ROOMS_LIBRARY_DESC:You are in the library, of course this means there are books around, maybe there is something important in there?
+GAME_ROOMS_CLASS_ROOM_666:ClassRoom666
+GAME_ROOMS_CLASS_ROOM_666_DESC:You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?
+GAME_ROOMS_CANTEEN:Canteen
+GAME_ROOMS_CANTEEN_DESC:You are in a canteen, ghosts don't need food so they probably aren'there, or are they?
+GAME_ROOMS_TEACHERS_ROOM:TeachersRoom
+GAME_ROOMS_TEACHERS_ROOM_DESC:Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.
+GAME_ROOMS_PRINCIPALS_OFFICE:Principal's Office
+GAME_ROOMS_PRINCIPALS_OFFICE_DESC:The principal's office always holds something important, try looking around to see what you can find.
+GAME_ROOMS_TOILETS:Toilets
+GAME_ROOMS_TOILETS_DESC:You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned...
+GAME_ROOMS_VAULT_ROOM:VaultRoom
+GAME_ROOMS_VAULT_ROOM_DESC:The vault room, could this be where you need to be, maybe investigate to see if can find something.
+GAME_INVESTIGATE_NO_ITEMS:No items found in this location.
+GAME_ITEMS_VAULT:Vault
+GAME_ITEMS_VAULT_DOCUMENT:Document
+GAME_ITEMS_VAULT_KEYS:Vault keys
+GAME_ITEMS_FLASHLIGHT:Flashlight
+GAME_ITEMS_MAP:Map
+GAME_ITEMS_PRINCIPALS_KEYS:Principals keys
+GAME_ITEMS_SPIRIT_VACUUM_CLEANER:Spirit vacuum cleaner
+GAME_ITEMS_BOOKCASE:Bookcase
+GAME_MENU_MAIN_MENU:Main Menu
+GAME_MENU_QUIT_TO_DESKTOP:Quit to Desktop
+GAME_ACTION_MENU_TITLE:Action menu
+GAME_ACTION_MENU_OPEN:Open
+GAME_ACTION_MENU_OPEN_ERROR:The vault can not be opened. Please find the 'Vault keys'!
+GAME_ACTION_MENU_PICK_UP:Pick up
+GAME_ACTION_MENU_PICK_UP_ERROR:The inventory is full. Please drop some items!
+GAME_ACTION_MENU_DROP:Drop
+GAME_ACTION_MENU_DROP_ERROR:Item can not be dropped!
+GAME_INVENTORY_TITLE:Inventory
+GAME_INVENTORY_SUB_TITLE_1:of
+GAME_INVENTORY_SUB_TITLE_2:Kg is used
+GUIDE_URL:http://zuul-quick-start-guide.richardringia.com/index.html
+GUIDE_URL_MEDIUM:http://zuul-quick-start-guide.richardringia.com/index-medium.html
+GUIDE_URL_HARD:http://zuul-quick-start-guide.richardringia.com/index-hard.html

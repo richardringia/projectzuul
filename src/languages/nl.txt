@@ -1,0 +1,70 @@
+MENU_START:begin
+MENU_ABOUT:over
+MENU_QUIT:verlaten
+ABOUT_BACK:terug
+ABOUT_TEXT:Leuk spel
+GAME_CANCEL:Annuleren
+GAME_NAVIGATION_MOVE:Bewegen
+GAME_NAVIGATION_INVESTIGATE:Onderzoeken
+GAME_NAVIGATION_HELP:Help
+GAME_NAVIGATION_QUIT:Verlaten
+GAME_NAVIGATION_NORTH:Noord
+GAME_NAVIGATION_WEST:West
+GAME_NAVIGATION_EAST:Oost
+GAME_NAVIGATION_SOUTH:Zuid
+GAME_NAVIGATION_BACK:Terug
+GAME_TIMER_TIME_LEFT:Tijd over
+GAME_WIN:game gewonnen
+GAME_LOST:game verloren
+GAME_NO_ROOM:Er is geen deur die kant op.
+GAME_ROOM_DOOR_LOCK_1:Je probeert de
+GAME_ROOM_DOOR_LOCK_2:binnen te komen, maar het lijkt erop dat deze op slot zit!
+GAME_ROOM_DOOR_LOCK_3:Vind de sleutel en ga de kamer naar binnen
+GAME_ROOM_DOOR_LOCK:deze deur kijkt op slot te zitten
+GAME_ROOM_DARK:Het is te donker om iets te zien!\nVind de zaplamp. \n\nDe zaklamp is het enige voorwerp wat zichtbaar om op te pakken. Alleen als de zaklamp niet is opgeraapd\n
+GAME_ROOM_LONG_DESC:Wat wil je gaan doen?
+GAME_ROOM_EXIT:Welke kant wil je op?
+GAME_ROOMS_SQUARE:Schoolplein
+GAME_ROOMS_SQUARE_DESC:Je bent op het schoolplein van een verlaten school, binnen is een document die heel belangrijk is. Vind deze en krijg een leuke beloning. Ga niet dood onderweg, Succes!
+GAME_ROOMS_HALLWAY:Gang
+GAME_ROOMS_HALLWAY_DESC_1:Je bent in de gang, vanaf hier kan je naar verschillende ruimtes.
+GAME_ROOMS_HALLWAY_DESC_2:Je bent verderop in de gang.
+GAME_ROOMS_HALLWAY_DESC_3:Je bent aan het einde van de gang.
+GAME_ROOMS_LIBRARY:Bibliotheek
+GAME_ROOMS_LIBRARY_DESC:Je bent in de bibliotheek, er zijn natuurlijk allemaal boeken hier, maar zou er ook iets anders liggen?
+GAME_ROOMS_CLASS_ROOM_666:Lokaal666
+GAME_ROOMS_CLASS_ROOM_666_DESC:Je bent in lokaal666, het lijkt erop dat het hier spookt, wat is dat geluid?
+GAME_ROOMS_CANTEEN:Kantine
+GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geeng eten dus zijn hier waarschijnlijk ook niet. Of wel?
+GAME_ROOMS_TEACHERS_ROOM:Leraren kamer
+GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een sppok. Dan is die waarschijnlijk hier.
+GAME_ROOMS_PRINCIPALS_OFFICE:Directeur kantoor
+GAME_ROOMS_PRINCIPALS_OFFICE_DESC:Het directeur kantoor is altijd belangrijk, misschien is hier iets?
+GAME_ROOMS_TOILETS:Wc's
+GAME_ROOMS_TOILETS_DESC:Je bent bij de wc's, hier zijn meestal spoken, omdat mensen hier altijd alleen zijn. Maar het gebouwd is ook vertalen...
+GAME_ROOMS_VAULT_ROOM:Kluis kamer
+GAME_ROOMS_VAULT_ROOM_DESC:De kluis kamer, moet je hier zijn, misschien even de kamer onderzoeken?
+GAME_INVESTIGATE_NO_ITEMS:Geen voorwerpen gevonden
+GAME_ITEMS_VAULT:Kluis
+GAME_ITEMS_VAULT_DOCUMENT:Document
+GAME_ITEMS_VAULT_KEYS:Kluis sleutels
+GAME_ITEMS_FLASHLIGHT:Zaklamp
+GAME_ITEMS_MAP:Kaart
+GAME_ITEMS_PRINCIPALS_KEYS:Directeur kantoor sleutels
+GAME_ITEMS_SPIRIT_VACUUM_CLEANER:Geesten stofzuiger
+GAME_ITEMS_BOOKCASE:Boekenkast
+GAME_MENU_MAIN_MENU:Hoofd menu
+GAME_MENU_QUIT_TO_DESKTOP:Spel afsluiten
+GAME_ACTION_MENU_TITLE:Actie menu
+GAME_ACTION_MENU_OPEN:Openen
+GAME_ACTION_MENU_OPEN_ERROR:De kluis kan niet geopend worden, vind eerst de 'Kluis sleutels'!
+GAME_ACTION_MENU_PICK_UP:Oppakken
+GAME_ACTION_MENU_PICK_UP_ERROR:De inventaris zit vol. Laat wat voorwerpen vallen!
+GAME_ACTION_MENU_DROP:Laten vallen
+GAME_ACTION_MENU_DROP_ERROR:Voorwerp kan niet worden laten vallen!
+GAME_INVENTORY_TITLE:Inventaris
+GAME_INVENTORY_SUB_TITLE_1:van
+GAME_INVENTORY_SUB_TITLE_2:Kg is gebruikt
+GUIDE_URL:http://zuul-quick-start-guide.richardringia.com/index-nl.html
+GUIDE_URL_MEDIUM:http://zuul-quick-start-guide.richardringia.com/index-nl-medium.html
+GUIDE_URL_HARD:http://zuul-quick-start-guide.richardringia.com/index-nl-hard.html

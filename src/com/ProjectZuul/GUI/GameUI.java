@@ -356,7 +356,7 @@ public class GameUI implements SetInactiveListener {
             case EASY:
                 inventoryHandler.createFlashLight();
                 inventoryHandler.createMap();
-                duration = 500000;
+                duration = 5000;
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
@@ -447,11 +447,11 @@ public class GameUI implements SetInactiveListener {
             if (clockTime >= duration - 30000) {
                 timeLeftText.setForeground(Color.RED);
                 timeLabel.setForeground(Color.RED);
-                soundHandler.playScreamingGoatSound();
+                //soundHandler.playScreamingGoatSound();
             }
 
-            if (clockTime >= duration - 300000 && gameMode == GameMode.EASY) {
-                soundHandler.playBeedoSound();
+            if (clockTime >= duration  && gameMode == GameMode.EASY) {
+                soundHandler.playLoseSound();
             }
 
             SimpleDateFormat df = new SimpleDateFormat("mm:ss");
@@ -484,7 +484,7 @@ public class GameUI implements SetInactiveListener {
                         quitMenuHolder.setBackground(Color.WHITE);
                         window.add(quitMenuHolder);
                         window.add(gameFinishedPanel);
-
+                        activateOnQuitListeners();
                         window.repaint();
                     }
                 }, 2000);
@@ -728,23 +728,30 @@ public class GameUI implements SetInactiveListener {
         {
             //gui.setGameUIVisibility(false);
             //gui.setMainMenuVisibility(true);
-            for (OnQuitListener onQuitListener : onQuitListeners)
-            {
-                onQuitListener.quit();
-            }
+            activateOnQuitListeners();
+
             timer.stop();
             gui.quitToMainMenu();
         });
 
         quitToDesktop.addActionListener(e ->
         {
-            for (OnQuitListener onQuitListener : onQuitListeners)
-            {
-                onQuitListener.quit();
-            }
+            activateOnQuitListeners();
+
             timer.stop();
             gui.quitGame();
         });
+    }
+
+    /**
+     * Call all OnQuitListeners in the list.
+     */
+    public void activateOnQuitListeners()
+    {
+        for (OnQuitListener onQuitListener : onQuitListeners)
+        {
+            onQuitListener.quit();
+        }
     }
 
     /**
