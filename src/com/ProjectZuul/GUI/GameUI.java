@@ -1,6 +1,5 @@
 package com.ProjectZuul.GUI;
 
-
 import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
@@ -37,7 +36,7 @@ public class GameUI implements SetInactiveListener {
     private GameHandler gameHandler;
 
     /**
-     * Instance of the GUI.
+     * Instance of the com.ProjectZuul.GUI.GUI.
      */
     private GUI gui;
 
@@ -254,7 +253,7 @@ public class GameUI implements SetInactiveListener {
     private Language language;
 
     /**
-     * Instance of SoundHandler so we can play start playing background music.
+     * Instance of com.ProjectZuul.Handlers.SoundHandler so we can play start playing background music.
      */
     private SoundHandler soundHandler;
 
@@ -448,7 +447,6 @@ public class GameUI implements SetInactiveListener {
             if (clockTime >= duration - 30000) {
                 timeLeftText.setForeground(Color.RED);
                 timeLabel.setForeground(Color.RED);
-                soundHandler.playScreamingGoatSound();
             }
 
             if (clockTime >= duration - 300000 && gameMode == GameMode.EASY) {
@@ -632,7 +630,6 @@ public class GameUI implements SetInactiveListener {
 
             if (!hasFlashlight && !item.getName().equals(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")))
             {
-                System.out.println("PEPEPE");
                 continue;
             }
             if (item.getName().equals(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")))
@@ -750,7 +747,7 @@ public class GameUI implements SetInactiveListener {
     }
 
     /**
-     * Sets GameUI visibility.
+     * Sets com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI visibility.
      *
      * @param visibility Whether the menu should be set visible or invisible.
      */

@@ -28,7 +28,7 @@ public class Player {
     private List<Item> itemList;
 
     /**
-     * Instance of the current GameUI.
+     * Instance of the current com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI.
      */
     private GameUI gameUI;
 
@@ -41,7 +41,7 @@ public class Player {
     /**
      * create the Player, set the gameUI value and initialize the itemList.
      *
-     * @param gameUI Current instance of GameUI, value is saved in gameUI variable.
+     * @param gameUI Current instance of com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI, value is saved in gameUI variable.
      */
     public Player(GameUI gameUI) {
         this.gameUI = gameUI;
@@ -148,7 +148,7 @@ public class Player {
     }
 
     /**
-     * Gets ActionHandler from GameUI.
+     * Gets ActionHandler from com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI.
      *
      * @return Instance of ActionHandler.
      */
@@ -157,7 +157,7 @@ public class Player {
     }
 
     /**
-     * Gets the IventoryHandler from GameUI.
+     * Gets the IventoryHandler from com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI.
      *
      * @return Instance of InventoryHandler.
      */
