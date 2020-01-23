@@ -356,17 +356,17 @@ public class GameUI implements SetInactiveListener {
             case EASY:
                 inventoryHandler.createFlashLight();
                 inventoryHandler.createMap();
-                duration = 500000;
+                duration = 300000;
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
                 ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
-                duration = 250000;
+                duration = 240000;
                 break;
             case PRO:
                 ItemHandler.setFlashlightRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"));
                 ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
-                duration = 50000;
+                duration = 150000;
         }
     }
 
@@ -450,7 +450,7 @@ public class GameUI implements SetInactiveListener {
                 soundHandler.playScreamingGoatSound();
             }
 
-            if (clockTime >= duration - 300000 && gameMode == GameMode.EASY) {
+            if (clockTime >= duration - 60000 && gameMode == GameMode.EASY) {
                 soundHandler.playBeedoSound();
             }
 
