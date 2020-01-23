@@ -25,11 +25,11 @@ public class ItemHandler {
      * @return A list of all items.
      */
     public static List<Item> createItems(List<Room> rooms, Room vaultRoom, Room mapRoom, Room keysRoom, Player player) {
-        Item vaultKeys, spiritVacuumCleaner, bookcase, vault, principlesKeys;
+        Item vaultKeys, spiritVacuumCleaner, bookcase, vault, principalsKeys;
         LanguageHandler languageHandler = player.getLanguageHandler();
 
         vaultKeys = new Item(languageHandler.get("GAME_ITEMS_VAULT_KEYS"), 2);
-        principlesKeys = new Item(languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), 2);
+        principalsKeys = new Item(languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), 2);
         spiritVacuumCleaner = new Item(languageHandler.get("GAME_ITEMS_SPIRIT_VACUUM_CLEANER"), 8);
         bookcase = new Item(languageHandler.get("GAME_ITEMS_BOOKCASE"));
         vault = new Vault(vaultKeys, vaultRoom, player);
@@ -37,7 +37,7 @@ public class ItemHandler {
 //        map.setItemToRoom(mapRoom);
         ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
 
-        principlesKeys.setItemToRandomRoom(rooms, unavailableRooms);
+        principalsKeys.setItemToRandomRoom(rooms, unavailableRooms);
         vaultKeys.setItemToRoom(keysRoom);
         spiritVacuumCleaner.setItemToRandomRoom(rooms);
         bookcase.setItemToRoom(mapRoom);

@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Deze class voorzorgt het maken van het spel.
- * Dus alle kamers en items worden hier gegenereerd.
+ * All rooms and items are generated here.
+ * They are also added to a list so we can access them later.
+ *
+ * @author Anne Pier Merkus
  */
 public class GameHandler {
 
@@ -25,6 +27,11 @@ public class GameHandler {
     private List<Item> itemList;
 
 
+    /**
+     * Instantiates a new Game handler.
+     *
+     * @param player the player
+     */
     public GameHandler(Player player) {
         RoomHandler roomHandler = new RoomHandler(player);
         roomList = roomHandler.getRoomList();
@@ -32,21 +39,41 @@ public class GameHandler {
         currentRoom = roomList.get(0);
     }
 
+    /**
+     * Gets room list.
+     *
+     * @return the room list
+     */
     public List<Room> getRoomList()
     {
         return this.roomList;
     }
 
+    /**
+     * Gets item list.
+     *
+     * @return the item list
+     */
     public List<Item> getItemList()
     {
         return this.itemList;
     }
 
+    /**
+     * Gets current room.
+     *
+     * @return the current room
+     */
     public Room getCurrentRoom()
     {
         return currentRoom;
     }
 
+    /**
+     * Sets current room.
+     *
+     * @param currentRoom the current room
+     */
     public void setCurrentRoom(Room currentRoom)
     {
         this.currentRoom = currentRoom;

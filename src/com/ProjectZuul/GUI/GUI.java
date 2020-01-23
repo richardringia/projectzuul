@@ -16,7 +16,7 @@ public class GUI
     /**
      * The Window.
      */
-    JFrame window;
+    MyFrame window;
 
     /**
      * The Main menu listener.
@@ -73,7 +73,7 @@ public class GUI
      *
      * @return the window
      */
-    public JFrame getWindow()
+    public MyFrame getWindow()
     {
         return window;
     }

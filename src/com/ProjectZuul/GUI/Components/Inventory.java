@@ -52,7 +52,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
     private int gridCols = 5;
 
     /**
-     * The player of the game
+     * Instance of the player will be asved here.
      */
     private Player player;
 
@@ -66,7 +66,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
     /**
      * Instantiates a new Inventory.
      *
-     * @param player the player of the game
+     * @param player Instance of the player, value will be saved in player variable.
      */
     public Inventory(Player player) {
         this.player = player;

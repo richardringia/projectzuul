@@ -101,7 +101,7 @@ public class RoomHandler {
      * @return Returns a list of all rooms.
      */
     private List<Room> createRooms() {
-        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
+        Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principalsOffice, toilets, vaultRoom;
 
         // create the rooms
         square = new Room(this.languageHandler.get("GAME_ROOMS_SQUARE"), this.languageHandler.get("GAME_ROOMS_SQUARE"), this.player);
@@ -112,7 +112,7 @@ public class RoomHandler {
         classRoom666 = new Room(this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666"), this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666_DESC"), this.player);
         canteen = new Room(this.languageHandler.get("GAME_ROOMS_CANTEEN"), this.languageHandler.get("GAME_ROOMS_CANTEEN_DESC"), this.player);
         teachersRoom = new Room(this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM"), this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM_DESC"), this.player);
-        principlesOffice = new Room(this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE"), this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE_DESC"), true, this.languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), this.player);
+        principalsOffice = new Room(this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE"), this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE_DESC"), true, this.languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), this.player);
         toilets = new Room(this.languageHandler.get("GAME_ROOMS_TOILETS"), this.languageHandler.get("GAME_ROOMS_TOILETS_DESC"), this.player);
         vaultRoom = new Room(this.languageHandler.get("GAME_ROOMS_VAULT_ROOM"), this.languageHandler.get("GAME_ROOMS_VAULT_ROOM_DESC"), this.player);
 
@@ -121,7 +121,7 @@ public class RoomHandler {
         randomList.add(classRoom666);
         randomList.add(canteen);
         randomList.add(teachersRoom);
-        randomList.add(principlesOffice);
+        randomList.add(principalsOffice);
         randomList.add(toilets);
         randomList.add(vaultRoom);
 
@@ -157,8 +157,8 @@ public class RoomHandler {
 
         this.vaultRoom = vaultRoom;
         this.mapRoom = library;
-        this.keysRoom = principlesOffice;
+        this.keysRoom = principalsOffice;
 
-        return new ArrayList<>(Arrays.asList(square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom));
+        return new ArrayList<>(Arrays.asList(square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principalsOffice, toilets, vaultRoom));
     }
 }

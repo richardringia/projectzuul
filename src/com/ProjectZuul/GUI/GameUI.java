@@ -32,7 +32,7 @@ public class GameUI implements SetInactiveListener {
 
     private Player player;
 
-    private JFrame window;
+    private MyFrame window;
     private Rectangle positionzero;
 
     ActionMenu actionMenu;

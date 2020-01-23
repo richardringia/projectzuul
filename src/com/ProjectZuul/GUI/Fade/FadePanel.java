@@ -5,11 +5,26 @@ import java.awt.*;
 
 /**
  * An extension of JPanel, used to paint manually so we can make the panel slowly appear or disappear by using transparency.
+ *
+ * @author Anne Pier Merkus
  */
 public class FadePanel extends JPanel
 {
+    /**
+     * The alpha (transparency) of the panel, changes in update when called.
+     *
+     * @see FadeController
+     */
     private float alpha;
+
+    /**
+     * Start value of alpha, can be 0 or 1.
+     */
     private float from;
+
+    /**
+     * The value alpha must end on, can be 0 or 1.
+     */
     private float to;
 
     /**
