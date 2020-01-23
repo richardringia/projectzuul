@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
  * The type Action handler.
  */
 public class ActionHandler {
-
     /**
      * This ActionMenu component is used for adding buttons or remove buttons on certain events/
      */

@@ -28,65 +28,89 @@ public class MainMenu implements SetInactiveListener
     private JFrame window;
 
     /**
-     *
+     * Panel in which the language selection buttons are located.
      */
     private MyPanel languageButtonHolder;
 
     /**
-     *
+     * Panel in which the difficulty selection buttons are located.
      */
     private MyPanel difficultyButtonHolder;
 
-
-    private MyButton dutchLanguageButton, englishLanguageButton, easyDifficultyButton, mediumDifficultyButton, hardDifficultybutton;
+    /**
+     * Language button for Dutch.
+     */
+    private MyButton dutchLanguageButton;
 
     /**
-     * The Title name label.
+     * Language button for Dutch.
+     */
+    private MyButton englishLanguageButton;
+
+    /**
+     * Difficulty button for easy difficulty.
+     */
+    private MyButton easyDifficultyButton;
+
+    /**
+     * Difficulty medium for easy difficulty.
+     */
+    private MyButton mediumDifficultyButton;
+
+    /**
+     * Difficulty hard for easy difficulty.
+     */
+    private MyButton hardDifficultyButton;
+
+    /**
+     * A label for the title of the game.
      */
     private MyLabel titleNameLabel;
 
     /**
-     *
+     * Button to start the game.
      */
     private MyButton startButton;
 
     /**
-     * The Quit button
+     * Button to quit the game.
      */
     private MyButton quitButton;
 
     /**
-     *
+     * Button to show the about page.
      */
     private MyButton aboutButton;
 
     /**
-     *
+     * Back button on the about page.
      */
     private MyButton aboutPageBack;
 
     /**
-     *
+     * Back button on the start page.
      */
     private MyButton startPageBack;
 
     /**
-     *
+     * Start page button to start the game after selecting settings.
      */
     private MyButton startPageStartButton;
+
     /**
-     * The About page text.
+     * Text area on the about page.
      */
     private MyTextArea aboutPageText;
 
     /**
      *
      */
-    private MyTextArea startPageDifficultyText;
-    /**
-     *
-     */
     private MyTextArea startPageLanguageText;
+
+    /**
+     * Text Area above difficulty buttons.
+     */
+    private MyTextArea startPageDifficultyText;
 
     /**
      * The About page created.
@@ -199,7 +223,7 @@ public class MainMenu implements SetInactiveListener
 
         easyDifficultyButton = new MyButton(this.languageHandler.get("Easy"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
         mediumDifficultyButton = new MyButton(this.languageHandler.get("Medium"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
-        hardDifficultybutton = new MyButton(this.languageHandler.get("Hard"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
+        hardDifficultyButton = new MyButton(this.languageHandler.get("Hard"), Color.BLACK, Color.WHITE, new Rectangle(), difficultyButtonHolder);
 
         easyDifficultyButton.setBackground(Color.GRAY);
         gui.setGameMode(GameMode.EASY);
@@ -230,7 +254,7 @@ public class MainMenu implements SetInactiveListener
         {
             gui.setGameMode(GameMode.EASY);
             easyDifficultyButton.setBackground(Color.GRAY);
-            hardDifficultybutton.setBackground(Color.BLACK);
+            hardDifficultyButton.setBackground(Color.BLACK);
             mediumDifficultyButton.setBackground(Color.BLACK);
         });
 
@@ -238,13 +262,13 @@ public class MainMenu implements SetInactiveListener
         {
             gui.setGameMode(GameMode.MEDIUM);
             mediumDifficultyButton.setBackground(Color.GRAY);
-            hardDifficultybutton.setBackground(Color.BLACK);
+            hardDifficultyButton.setBackground(Color.BLACK);
             easyDifficultyButton.setBackground(Color.BLACK);
         });
-        hardDifficultybutton.addActionListener(e ->
+        hardDifficultyButton.addActionListener(e ->
         {
             gui.setGameMode(GameMode.PRO);
-            hardDifficultybutton.setBackground(Color.GRAY);
+            hardDifficultyButton.setBackground(Color.GRAY);
             easyDifficultyButton.setBackground(Color.BLACK);
             mediumDifficultyButton.setBackground(Color.BLACK);
         });

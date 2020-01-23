@@ -9,44 +9,43 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The type Gui.
+ * The entry point after Main, creates the window, Main Menu and the GameUI when called.
+ *
+ * @see com.ProjectZuul.Main#main(String[])
+ * @author Anne Pier Merkus
  */
 public class GUI
 {
     /**
-     * The Window.
+     * The window of the application.
      */
     MyFrame window;
 
     /**
-     * The Main menu listener.
+     * Listener to set the main menu inactive.
      */
     SetInactiveListener mainMenuListener;
     /**
-     * The Game ui listener.
+     * Listener to set the gameUI inactive.
      */
     SetInactiveListener gameUIListener;
 
     /**
-     * The Game mode.
+     * The difficulty of the game.
+     *
+     * @see GameMode
      */
     GameMode gameMode;
+
     /**
-     * The Language.
+     * The language the game will be played in.
+     *
+     * @see Language
      */
     Language language;
 
     /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        new GUI();
-    }
-
-    /**
-     * Instantiates a new Gui.
+     * Creates a frame in which the game will be played and creates the MainMenu.
      */
     public GUI()
     {
@@ -55,6 +54,12 @@ public class GUI
         window.setVisible(true);
     }
 
+    /**
+     * Creates MyFrame which creates the window for this application.
+     * Sets the UIManager to make the buttons look better.
+     *
+     * @see MyFrame#MyFrame()
+     */
     private void createWindow()
     {
         window = new MyFrame();
@@ -65,13 +70,12 @@ public class GUI
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
-     * Gets window.
+     * Gets the window of the application.
      *
-     * @return the window
+     * @return The window of the application.
      */
     public MyFrame getWindow()
     {
@@ -79,7 +83,7 @@ public class GUI
     }
 
     /**
-     * Create game.
+     * Creates a new GameUI and sets gameUIListener so we can call it later if needed.
      */
     void createGame()
     {
@@ -87,9 +91,9 @@ public class GUI
     }
 
     /**
-     * Sets game ui visibility.
+     * Sets GameUI visibility.
      *
-     * @param visibility the visibility
+     * @param visibility Whether the menu should be set visible or invisible.
      */
     void setGameUIVisibility(boolean visibility)
     {
@@ -97,9 +101,9 @@ public class GUI
     }
 
     /**
-     * Sets main menu visibility.
+     * Sets Main Menu visibility.
      *
-     * @param visibility the visibility
+     * @param visibility Whether the menu should be set visible or invisible.
      */
     void setMainMenuVisibility(boolean visibility)
     {
@@ -107,19 +111,18 @@ public class GUI
     }
 
     /**
-     * Quit to main menu.
+     * Quits the game and calls Main Menu again.
      */
     void quitToMainMenu()
     {
         window.getContentPane().removeAll();
         mainMenuListener = new MainMenu(this, Language.EN);
-        //new MainMenu(this);
         gameUIListener = null;
         window.repaint();
     }
 
     /**
-     * Quit game.
+     * Quit the game entirely by closing the window.
      */
     void quitGame()
     {
@@ -129,9 +132,9 @@ public class GUI
     }
 
     /**
-     * Sets game mode.
+     * Set the game mode to the given difficulty.
      *
-     * @param gameMode the game mode
+     * @param gameMode The selected difficulty by the player in the Main Menu.
      */
     public void setGameMode(GameMode gameMode)
     {
@@ -139,9 +142,9 @@ public class GUI
     }
 
     /**
-     * Sets language.
+     * Set the language to the given language.
      *
-     * @param language the language
+     * @param language The selected language by the player in the Main Menu.
      */
     public void setLanguage(Language language)
     {

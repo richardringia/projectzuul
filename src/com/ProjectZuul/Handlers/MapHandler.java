@@ -9,42 +9,69 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.*;
 
 /**
+ * Handler to create the map used in this application.
  *
+ * @see RoomPanel
+ * @author Richard Ringia
  */
 public class MapHandler implements SetInactiveListener
 {
-    private static final int FPS = 60;
-
+    /**
+     * A list of all rooms in the game.
+     */
     private List<Room> roomList;
+
+    /**
+     * The Component that will hold our map.
+     */
     private JPanel frame;
+
+    /**
+     * The amount of columns in the GridLayout.
+     */
     private int gridLength = 3;
+
+    /**
+     * The amount of rows in the GridLayout.
+     */
     private int gridHeight = 5;
-    private Room currentRoom;
+
+    /**
+     * The height of the map.
+     */
     private int height = 300;
+
+    /**
+     * The width of the map.
+     */
     private int width = 300;
 
 
     /**
-     * Instantiates a new Map handler.
+     * Sets roomList variable to the given value, calls draw to create the map and sets the map to invisible.
      *
-     * @param roomList the room list
+     * @param roomList A list of all rooms in the game.
      */
     public MapHandler(List<Room> roomList) {
         this.roomList = roomList;
-        currentRoom = roomList.get(0);
         this.draw();
         this.setMenuVisibility(false);
     }
 
     /**
-     * Gets map.
+     * Gets the Component that holds our map.
      *
-     * @return the map
+     * @return the Component that holds our map.
      */
     public JPanel getMap() {
         return this.frame;
     }
 
+    /**
+     * Creates the map by adding a RoomPanel instance in each position of the grid.
+     *
+     * @see RoomPanel
+     */
     private void draw() {
         this.frame = new JPanel();
         frame.setBackground(Color.BLACK);
@@ -64,6 +91,13 @@ public class MapHandler implements SetInactiveListener
         frame.setVisible(true);
     }
 
+    /**
+     * Creates a room if there is a room in the given location of the grid, if not, return null.
+     *
+     * @param x The x location of the grid.
+     * @param y The Y location of the grid.
+     * @return The room that is positioned in the current x and y position of the grid.
+     */
     private Room findRoom(int x, int y) {
         int startX = 1;
         int startY = 4;
@@ -94,17 +128,17 @@ public class MapHandler implements SetInactiveListener
                 a--;
         }
 
+        System.out.println(currentRoom);
         return currentRoom;
-
     }
 
     /**
-     * Update room.
+     * Update the current room on the map by giving it a color.
+     * This way the player knows where he is by looking at the map.
      *
-     * @param _room the room
+     * @param _room The room to which the player moved.
      */
     public void updateRoom(Room _room) {
-        this.currentRoom = _room;
         Component[] components = frame.getComponents();
         for (Component component : components) {
             if (component instanceof JPanel) {
@@ -126,6 +160,11 @@ public class MapHandler implements SetInactiveListener
         }
     }
 
+    /**
+     *  Sets map visibility.
+     *
+     * @param visibility Whether the menu should be set visible or invisible.
+     */
     @Override
     public void setMenuVisibility(boolean visibility) {
         frame.setVisible(visibility);
