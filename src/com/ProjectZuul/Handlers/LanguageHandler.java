@@ -29,7 +29,6 @@ public class LanguageHandler {
      * @param language the selected language by the player.
      */
     public LanguageHandler(Language language) {
-        System.out.println(language);
         this.translations = new HashMap<>();
         StringBuilder path = new StringBuilder();
         path.append("languages/").append(this.getLanguage(language)).append(".txt");
