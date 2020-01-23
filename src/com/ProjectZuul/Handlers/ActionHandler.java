@@ -34,7 +34,7 @@ public class ActionHandler {
 
     public void createMenu(ActionListener actionListener, String customButtonText, boolean canDrop) {
         this.before();
-        this.actionMenu.add(this.createButton(customButtonText, actionListener, !canDrop, "Item can not be dropped!"));
+        this.actionMenu.add(this.createButton(customButtonText, actionListener, !canDrop, this.languageHandler.get("GAME_ACTION_MENU_DROP_ERROR")));
         this.after();
     }
 
@@ -71,11 +71,11 @@ public class ActionHandler {
     }
 
     private MyButton createOpenButton(ActionListener action, boolean disabled) {
-        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_OPEN"), action, disabled, "The vault can not be opened. Please find the 'Vault keys'!");
+        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_OPEN"), action, disabled, this.languageHandler.get("GAME_ACTION_MENU_OPEN_ERROR"));
     }
 
     private MyButton createPickupButton(ActionListener action, boolean disabled) {
-        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_PICK_UP"), action, disabled, "The inventory is full. Please drop some items!");
+        return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_PICK_UP"), action, disabled, this.languageHandler.get("GAME_ACTION_MENU_PICK_UP_ERROR"));
     }
 
     private MyButton createCancelButton() {

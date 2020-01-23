@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.*; // TODO: CHANGE
 
+import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.Models.*;
 
 /**
@@ -34,11 +35,12 @@ public class RoomHandler {
      * List of all the rooms that were created.
      */
     private List<Room> roomList;
+    private LanguageHandler languageHandler;
+    private Player player;
 
-    /**
-     * Creates a new RoomHandler and calls createRooms() to create the map.
-     */
-    public RoomHandler() {
+    public RoomHandler(Player player) {
+        this.languageHandler = player.getLanguageHandler();
+        this.player = player;
         this.roomList = this.createRooms();
     }
 
@@ -88,19 +90,17 @@ public class RoomHandler {
         Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
 
         // create the rooms
-        square = new Room("Square", "You are outside of an abandoned school building, inside are some documents which are very important. Retrieve the documents and get a big reward. " +
-                "Don't get killed on the way, good luck!");
-
-        hallway = new Room("Hallway","You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.");
-        hallway2 = new Room("Hallway","You find yourself in another hallway.");
-        hallway3 = new Room("Hallway","You find yourself in the third hallway, seems like there are some important rooms nearby.");
-        library = new Room("Library","You are in the library, of course this means there are books around, maybe there is something important in there?");
-        classRoom666 = new Room("ClassRoom666","You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?");
-        canteen = new Room("Canteen","You are in a canteen, ghosts don't need food so they probably aren'there, or are they?");
-        teachersRoom = new Room("TeachersRoom","Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.");
-        principlesOffice = new Room("Principles Office","The principles office always holds something important, try looking around to see what you can find.", true, "Principles keys");
-        toilets = new Room("Toilets","You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned... ");
-        vaultRoom = new Room("VaultRoom","The vault room, could this be where you need to be, maybe investigate to see if can find something.");
+        square = new Room(this.languageHandler.get("GAME_ROOMS_SQUARE"), this.languageHandler.get("GAME_ROOMS_SQUARE"), this.player);
+        hallway = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_1"), this.player);
+        hallway2 = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_2"), this.player);
+        hallway3 = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_3"), this.player);
+        library = new Room(this.languageHandler.get("GAME_ROOMS_LIBRARY"), this.languageHandler.get("GAME_ROOMS_LIBRARY_DESC"), this.player);
+        classRoom666 = new Room(this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666"), this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666_DESC"), this.player);
+        canteen = new Room(this.languageHandler.get("GAME_ROOMS_CANTEEN"), this.languageHandler.get("GAME_ROOMS_CANTEEN_DESC"), this.player);
+        teachersRoom = new Room(this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM"), this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM_DESC"), this.player);
+        principlesOffice = new Room(this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE"), this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE_DESC"), true, this.languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), this.player);
+        toilets = new Room(this.languageHandler.get("GAME_ROOMS_TOILETS"), this.languageHandler.get("GAME_ROOMS_TOILETS_DESC"), this.player);
+        vaultRoom = new Room(this.languageHandler.get("GAME_ROOMS_VAULT_ROOM"), this.languageHandler.get("GAME_ROOMS_VAULT_ROOM_DESC"), this.player);
 
         List<Room> randomList = new ArrayList<>();
         randomList.add(library);

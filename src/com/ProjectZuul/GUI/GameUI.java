@@ -144,12 +144,12 @@ public class GameUI implements SetInactiveListener {
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
-                ItemHandler.setMapRoom(gameHandler.getRoomList());
+                ItemHandler.setMapRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_MAP"));
                 duration = 250000;
                 break;
             case PRO:
-                ItemHandler.setFlashlightRoom(gameHandler.getRoomList());
-                ItemHandler.setMapRoom(gameHandler.getRoomList());
+                ItemHandler.setFlashlightRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"));
+                ItemHandler.setMapRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_MAP"));
                 duration = 50000;
         }
     }
@@ -275,10 +275,10 @@ public class GameUI implements SetInactiveListener {
     }*/
 
     private void setDirectionButtonEnabled() {
-        north.setEnabled(gameHandler.getCurrentRoom().getExit("north") != null, "There is no door in that direction.");
-        east.setEnabled(gameHandler.getCurrentRoom().getExit("east") != null, "There is no door in that direction.");
-        south.setEnabled(gameHandler.getCurrentRoom().getExit("south") != null, "There is no door in that direction.");
-        west.setEnabled(gameHandler.getCurrentRoom().getExit("west") != null, "There is no door in that direction.");
+        north.setEnabled(game.getCurrentRoom().getExit("north") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        east.setEnabled(game.getCurrentRoom().getExit("east") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        south.setEnabled(game.getCurrentRoom().getExit("south") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        west.setEnabled(game.getCurrentRoom().getExit("west") != null, this.languageHandler.get("GAME_NO_ROOM"));
 
         back.setEnabled(previousRoom.size() != 0);
     }
@@ -311,7 +311,7 @@ public class GameUI implements SetInactiveListener {
 
         if (nextRoom.getDoorLocked()) {
             lockedRoomDirection = direction.equals("north") ? north : direction.equals("west") ? west : east;
-            lockedRoomDirection.setEnabled(false, "The door in that direction appears to be locked.");
+            lockedRoomDirection.setEnabled(false, this.languageHandler.get("GAME_ROOM_DOOR_LOCK"));
 
             if (player.getItemNames().contains(nextRoom.getUnlockItem())) {
                 nextRoom.setDoorLocked(false);
@@ -354,7 +354,7 @@ public class GameUI implements SetInactiveListener {
         investigateTooDarkTextholder = new MyPanel(Color.BLACK, 100, 100, 400, 100, window);
         investigateTooDarkTextholder.setLayout(new GridLayout(1, 1));
         investigateTooDarkTextholder.setVisible(false);
-        tooDarkText = new MyTextArea("It's too dark to see anything!\nFind a flashlight to help you. \n\nFlashlight is the only visible item in investigate until you have obtained one. ", Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateTooDarkTextholder);
+        tooDarkText = new MyTextArea(this.languageHandler.get("GAME_ROOM_DARK"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateTooDarkTextholder);
 
         investigateItemsHolder = new MyPanel(Color.BLACK, 225, 200, 150, 215, window);
         investigateItemsHolder.setLayout(new GridLayout(2, 1));
@@ -366,7 +366,7 @@ public class GameUI implements SetInactiveListener {
         investigateItemsHolder.removeAll();
 
         boolean hasFlashlight;
-        if (player.getItem("Flashlight") == null)
+        if (player.getItem(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")) == null)
         {
             flashlightFound = false;
             hasFlashlight = false;
@@ -385,12 +385,12 @@ public class GameUI implements SetInactiveListener {
 
         for (Item item : gameHandler.getCurrentRoom().getItems()) {
 
-            if (!hasFlashlight && !item.getName().equals("Flashlight"))
+            if (!hasFlashlight && !item.getName().equals(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")))
             {
                 System.out.println("PEPEPE");
                 continue;
             }
-            if (item.getName().equals("Flashlight"))
+            if (item.getName().equals(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")))
             {
                 flashlightFound = true;
             }
@@ -401,7 +401,7 @@ public class GameUI implements SetInactiveListener {
                     actionHandler.createMenu(e2 -> {
                         inventoryHandler.addItem(item);
                         investigateItemsHolder.remove(itemButton);
-                        if (item.getName().equals("Flashlight"))
+                        if (item.getName().equals(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT")))
                         {
                             setInvestigationItems();
                         }
