@@ -451,7 +451,7 @@ public class GameUI implements SetInactiveListener {
                 soundHandler.playScreamingGoatSound();
             }
 
-            if (clockTime >= duration - 450000) {
+            if (clockTime >= duration - 300000 && gameMode == GameMode.EASY) {
                 soundHandler.playBeedoSound();
             }
 
