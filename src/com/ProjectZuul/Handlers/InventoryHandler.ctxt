@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=InventoryHandler
+comment0.text=\n\ Creates\ a\ new\ inventory\ view\ and\ handles\ pickup/drops.\n\n\ @author\ Richard\ Ringia\ and\ Anne\ Pier\ Merkus\n
+comment1.params=window\ player
+comment1.target=InventoryHandler(com.ProjectZuul.GUI.Components.MyFrame,\ com.ProjectZuul.Models.Player)
+comment1.text=\n\ Creates\ an\ InventoryHandler\ and\ sets\ variables\ with\ given\ values.\n\n\ @param\ window\ the\ window\n\ @param\ player\ the\ player\n
+comment2.params=
+comment2.target=void\ init()
+comment2.text=\n\ Creates\ inventory\ view\ and\ adds\ it\ to\ the\ window.\n
+comment3.params=
+comment3.target=void\ createFlashLight()
+comment3.text=\n\ Create\ a\ Flashlight\ item\ and\ add\ it\ to\ the\ players\ inventory.\n\ Called\ when\ the\ difficulty\ is\ set\ to\ Medium\ or\ Easy\n
+comment4.params=
+comment4.target=void\ createMap()
+comment4.text=\n\ Create\ a\ Map\ item\ and\ add\ it\ to\ the\ players\ inventory.\n\ Called\ when\ the\ difficulty\ is\ set\ to\ easy.\n
+comment5.params=item
+comment5.target=void\ addItem(com.ProjectZuul.Models.Item)
+comment5.text=\n\ Checks\ if\ the\ given\ item\ can\ be\ picked\ up\ and\ whether\ the\ player\ has\ a\ full\ inventory.\n\ If\ the\ inventory\ isn't\ full,\ check\ if\ it\ will\ be\ able\ to\ add\ the\ item\ to\ the\ inventory\ without\ it\ becoming\ too\ heavy.\n\ Adds\ item\ to\ inventory\ and\ removes\ it\ from\ the\ room\ so\ it\ can\ only\ be\ picked\ up\ once.\n\n\ @param\ item\ The\ item\ selected\ to\ be\ picked\ up.\n
+comment6.params=item
+comment6.target=void\ dropItem(com.ProjectZuul.Models.Item)
+comment6.text=\n\ Check\ if\ the\ item\ can\ be\ dropped\ or\ if\ it's\ a\ must-keep\ item\ (fool\ proof\ on\ certain\ difficulties).\n\ Removes\ the\ item\ from\ the\ player\ and\ adds\ it\ to\ the\ room\ so\ the\ player\ can\ pick\ it\ up\ again\ if\ they\ wish.\n\n\ @param\ item\ The\ item\ selected\ to\ be\ dropped.\n
+comment7.params=visibility
+comment7.target=void\ setMenuVisibility(boolean)
+comment7.text=\n\ Enable\ or\ Disable\ the\ inventory\ view.\n\n\ @param\ visibility\ Whether\ the\ menu\ should\ be\ set\ visible\ or\ invisible.\n
+numComments=8

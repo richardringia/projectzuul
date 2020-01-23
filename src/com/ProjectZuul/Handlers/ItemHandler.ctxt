@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=ItemHandler
+comment0.text=\n\ Creates\ all\ items\ and\ sets\ them\ to\ a\ room.\n\n\ @author\ Richard\ Ringia\ and\ Anne\ Pier\ Merkus\n
+comment1.params=rooms\ vaultRoom\ mapRoom\ keysRoom\ player
+comment1.target=java.util.List\ createItems(java.util.List,\ com.ProjectZuul.Models.Room,\ com.ProjectZuul.Models.Room,\ com.ProjectZuul.Models.Room,\ com.ProjectZuul.Models.Player)
+comment1.text=\n\ Creates\ items\ and\ put\ them\ in\ a\ room,\ either\ random\ or\ a\ predetermined\ room.\ Item\ names\ correspond\ to\ the\ selected\ language.\n\n\ @param\ rooms\ \ \ \ \ All\ rooms\ to\ which\ an\ item\ can\ be\ set.\n\ @param\ vaultRoom\ The\ room\ where\ the\ vault\ is\ located.\n\ @param\ mapRoom\ \ \ The\ room\ where\ the\ map\ is\ located.\n\ @param\ keysRoom\ \ the\ room\ where\ the\ vault\ keys\ are\ located.\n\ @param\ player\ \ \ \ Instance\ of\ the\ current\ player\n\ @return\ A\ list\ of\ all\ items.\n
+comment2.params=rooms
+comment2.target=java.util.ArrayList\ getLockedRooms(java.util.List)
+comment2.text=\n\ Takes\ all\ rooms\ in\ the\ game\ and\ checks\ whether\ they\ are\ locked\ and\ deletes\ them\ from\ the\ list\ if\ they\ are\ unlocked.\n\ @param\ rooms\ A\ list\ of\ all\ rooms\ in\ the\ game.\n\ @return\ A\ list\ of\ all\ rooms\ that\ are\ locked\ and\ still\ require\ a\ key\ to\ be\ opened.\n
+comment3.params=rooms\ name
+comment3.target=void\ setFlashlightRoom(java.util.List,\ java.lang.String)
+comment3.text=\n\ If\ the\ difficulty\ is\ set\ to\ hard,\ the\ Flashlight\ will\ be\ put\ into\ a\ random\ (available)\ room.\n\n\ @param\ rooms\ A\ list\ of\ all\ rooms\ in\ the\ game.\n\ @param\ name\ \ The\ name\ of\ the\ item.\n
+comment4.params=rooms\ name
+comment4.target=void\ setMapRoom(java.util.List,\ java.lang.String)
+comment4.text=\n\ If\ the\ difficulty\ is\ set\ to\ Medium\ or\ Hard,\ the\ Map\ will\ be\ put\ into\ a\ random\ (available)\ room.\n\n\ @param\ rooms\ A\ list\ of\ all\ rooms\ in\ the\ game.\n\ @param\ name\ \ The\ name\ of\ the\ item.\n
+numComments=5

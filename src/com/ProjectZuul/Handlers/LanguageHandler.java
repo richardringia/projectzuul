@@ -29,6 +29,7 @@ public class LanguageHandler {
      * @param language the selected language by the player.
      */
     public LanguageHandler(Language language) {
+        System.out.println(language);
         this.translations = new HashMap<>();
         StringBuilder path = new StringBuilder();
         path.append("languages/").append(this.getLanguage(language)).append(".txt");
@@ -63,11 +64,9 @@ public class LanguageHandler {
      * @return a String of the selected language so we can use it in the pathname to languages folder, depending on the language it should select a different .txt file.
      */
     private String getLanguage(Language language) {
-        switch (language){
-            case EN:
-                return "en";
-            default:
-                return "nl";
+        if (language == Language.EN) {
+            return "en";
         }
+        return "nl";
     }
 }
