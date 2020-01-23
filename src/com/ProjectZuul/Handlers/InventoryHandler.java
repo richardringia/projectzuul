@@ -38,7 +38,7 @@ public class InventoryHandler implements SetInactiveListener {
     private SetInactiveListener inventoryListener;
 
     /**
-     * Contains the current selected language.
+     * Handles all the text in the application with the right language
      */
     private LanguageHandler languageHandler;
 

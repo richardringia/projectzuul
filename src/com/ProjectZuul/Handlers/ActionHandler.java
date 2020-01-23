@@ -7,12 +7,21 @@ import com.ProjectZuul.Models.Player;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Action handler.
+ */
 public class ActionHandler {
 
     private ActionMenu actionMenu;
 
     private LanguageHandler languageHandler;
 
+    /**
+     * Instantiates a new Action handler.
+     *
+     * @param player     the player 
+     * @param actionMenu the action menu
+     */
     public ActionHandler(Player player, ActionMenu actionMenu) {
         this.languageHandler = player.getLanguageHandler();
         this.actionMenu = actionMenu;
@@ -27,23 +36,46 @@ public class ActionHandler {
         this.actionMenu.updateUI();
     }
 
+    /**
+     * Create menu.
+     */
     public void createMenu() {
         this.before();
         this.after();
     }
 
+    /**
+     * Create menu.
+     *
+     * @param actionListener   the action listener
+     * @param customButtonText the custom button text
+     * @param canDrop          the can drop
+     */
     public void createMenu(ActionListener actionListener, String customButtonText, boolean canDrop) {
         this.before();
         this.actionMenu.add(this.createButton(customButtonText, actionListener, !canDrop, this.languageHandler.get("GAME_ACTION_MENU_DROP_ERROR")));
         this.after();
     }
 
+    /**
+     * Create menu.
+     *
+     * @param actionListener the action listener
+     * @param canOpenVault   the can open vault
+     */
     public void createMenu(ActionListener actionListener, boolean canOpenVault) {
         this.before();
         this.actionMenu.add(this.createOpenButton(actionListener, !canOpenVault));
         this.after();
     }
 
+    /**
+     * Create menu.
+     *
+     * @param actionListener the action listener
+     * @param player         the player
+     * @param itemWeight     the item weight
+     */
     public void createMenu(ActionListener actionListener, Player player, int itemWeight) {
         this.before();
         this.actionMenu.add(this.createPickupButton(actionListener, player.isInventoryFull(itemWeight)));

@@ -61,6 +61,9 @@ public class Inventory extends JPanel implements SetInactiveListener {
      */
     private JLabel jLabelTotalWeight;
 
+    /**
+     * Handles all the text in the application with the right language
+     */
     private LanguageHandler languageHandler;
 
     /**
@@ -79,12 +82,12 @@ public class Inventory extends JPanel implements SetInactiveListener {
      * Instantiates a new Inventory.
      * With this function, a custom Rectangle will be added
      *
-     * @param player    the player of the game
+     * @param player Instance of the player, value will be saved in player variable.
      * @param rectangle custom rectangle for the inventory
      */
-    public Inventory(Player player, Rectangle rectangle, LanguageHandler languageHandler) {
+    public Inventory(Player player, Rectangle rectangle) {
         this.player = player;
-        this.languageHandler = languageHandler;
+        this.languageHandler = player.getLanguageHandler();
         this.positionX = rectangle.x;
         this.positionY = rectangle.y;
         this.width = rectangle.width;
@@ -110,7 +113,8 @@ public class Inventory extends JPanel implements SetInactiveListener {
     }
 
     /**
-     *
+     * This function will create the label the inventory.
+     * It's wraps it around a panel and this panel is added to the main component
      */
     private void createInfoLabel() {
         JPanel labelFrame = new JPanel();
@@ -126,18 +130,25 @@ public class Inventory extends JPanel implements SetInactiveListener {
         this.add(labelFrame);
     }
 
+    /**
+     * @return a string for with te weight used and how much available
+     */
     private String getTotalWeightText() {
         return this.player.getTotalWeight() + " " + this.languageHandler.get("GAME_INVENTORY_SUB_TITLE_1") + " " + this.player.getMaxWeight() + " " + this.languageHandler.get("GAME_INVENTORY_SUB_TITLE_2") + "";
     }
 
+    /**
+     * Update te text of the total weight
+     */
     private void updateTotalWeight() {
         this.jLabelTotalWeight.setText(this.getTotalWeightText());
     }
 
     /**
-     * Add item.
-     *
-     * @param item the item
+     * Add an item to the inner panel.
+     * The function will create a new button from the given item.
+     * After adding the button to the inner panel. Then the ui of this will be updated
+     * @param item the item that is added to the inventory
      */
     public void addItem(Item item) {
         MyButton jButton = new MyButton(item.getName(), Color.BLACK, Color.WHITE, new Dimension(140, 30));
