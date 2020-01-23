@@ -356,17 +356,17 @@ public class GameUI implements SetInactiveListener {
             case EASY:
                 inventoryHandler.createFlashLight();
                 inventoryHandler.createMap();
-                duration = 5000;
+                duration = 300000;
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
                 ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
-                duration = 250000;
+                duration = 240000;
                 break;
             case PRO:
                 ItemHandler.setFlashlightRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"));
                 ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
-                duration = 50000;
+                duration = 150000;
         }
     }
 
