@@ -3,11 +3,9 @@ package com.ProjectZuul.Handlers;
 import com.ProjectZuul.GUI.GameUI;
 
 import java.io.File;
-import javax.media.Format;
-import javax.media.Manager;
-import javax.media.MediaLocator;
-import javax.media.Player;
-import javax.media.PlugInManager;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import javax.media.*;
 import javax.media.format.AudioFormat;
 
 /**
@@ -20,6 +18,11 @@ public class SoundHandler
      * Instance of the game used to add an OnQuitListener.
      */
     GameUI gameUI;
+
+    /**
+     * The background can be stored here.
+     */
+    Player backgroundPlayer;
 
     /**
      * Create new SoundHandler and register the PlugIn.
@@ -60,14 +63,28 @@ public class SoundHandler
     {
         try
         {
-            Player player = Manager.createPlayer(new MediaLocator(new File("Sound/BackgroundMusicScary.mp3").toURI().toURL()));
-            player.start();
+            backgroundPlayer = Manager.createPlayer(new MediaLocator(new File("Sound/BackgroundMusicScary.mp3").toURI().toURL()));
+            backgroundPlayer.start();
             gameUI.addOnQuitListener(() -> {
-                player.stop();
-                player.close();
+                backgroundPlayer.stop();
+                backgroundPlayer.close();
             });
         }
         catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void playScreamingGoatSound()
+    {
+        try {
+            Player player = Manager.createPlayer(new MediaLocator(new File("Sound/goat.mp3").toURI().toURL()));
+            if (backgroundPlayer != null) {
+                player.start();
+            }
+
+        }  catch(Exception e)
         {
             e.printStackTrace();
         }
