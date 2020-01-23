@@ -4,7 +4,6 @@ import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
-import com.ProjectZuul.Zuul.Game;
 
 import javax.swing.*;
 import java.awt.*;

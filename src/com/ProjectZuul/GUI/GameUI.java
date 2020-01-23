@@ -6,6 +6,7 @@ import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
 import com.ProjectZuul.GUI.Fade.FadeController;
 import com.ProjectZuul.GUI.Fade.FadePanel;
+import com.ProjectZuul.GUI.Listeners.OnQuitListener;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Handlers.*;
 import com.ProjectZuul.Models.Item;
@@ -14,10 +15,12 @@ import com.ProjectZuul.Models.Room;
 import com.ProjectZuul.Models.Vault;
 import com.ProjectZuul.Zuul.Game;
 
+import javax.sound.sampled.AudioSystem;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class GameUI implements SetInactiveListener {
@@ -65,7 +68,11 @@ public class GameUI implements SetInactiveListener {
 
     private Language language;
 
+    private SoundHandler soundHandler;
+
     private boolean flashlightFound = false;
+
+    private ArrayList<OnQuitListener> onQuitListeners;
 
     public GameUI(GUI gui, GameMode gameMode, Language language) {
         this.gui = gui;
@@ -73,6 +80,11 @@ public class GameUI implements SetInactiveListener {
         this.languageHandler = new LanguageHandler(language);
 
         this.language = language;
+
+        onQuitListeners = new ArrayList<>();
+
+        soundHandler = new SoundHandler(this);
+        soundHandler.playBackgroundSound();
 
         window = gui.getWindow();
 
@@ -84,6 +96,11 @@ public class GameUI implements SetInactiveListener {
         player = new Player(this);
 
         createGame();
+    }
+
+    public void addOnQuitListener(OnQuitListener onQuitListener)
+    {
+        onQuitListeners.add(onQuitListener);
     }
 
     public void createGame() {
@@ -293,8 +310,6 @@ public class GameUI implements SetInactiveListener {
     private void goRoom(String direction) {
         Room nextRoom = game.getCurrentRoom().getExit(direction);
 
-
-
         if (nextRoom.getDoorLocked()) {
             lockedRoomDirection = direction.equals("north") ? north : direction.equals("west") ? west : east;
             lockedRoomDirection.setEnabled(false, "The door in that direction appears to be locked.");
@@ -463,12 +478,20 @@ public class GameUI implements SetInactiveListener {
         {
             //gui.setGameUIVisibility(false);
             //gui.setMainMenuVisibility(true);
+            for (OnQuitListener onQuitListener : onQuitListeners)
+            {
+                onQuitListener.quit();
+            }
             timer.stop();
             gui.quitToMainMenu();
         });
 
         quitToDesktop.addActionListener(e ->
         {
+            for (OnQuitListener onQuitListener : onQuitListeners)
+            {
+                onQuitListener.quit();
+            }
             timer.stop();
             gui.quitGame();
         });
