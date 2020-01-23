@@ -181,7 +181,7 @@ public class Player {
      * @param b Whether to set the map active or inactive.
      */
     private void toggleMap(Item item, boolean b) {
-        if (item.getName().equals("Map"))
+        if (item.getName().equals(this.getLanguageHandler().get("GAME_ITEMS_MAP")))
             this.gameUI.getMapHandler().setMenuVisibility(b);
     }
 

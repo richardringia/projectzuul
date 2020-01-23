@@ -65,3 +65,6 @@ GAME_ACTION_MENU_DROP_ERROR:Item can not be dropped!
 GAME_INVENTORY_TITLE:Inventory
 GAME_INVENTORY_SUB_TITLE_1:of
 GAME_INVENTORY_SUB_TITLE_2:Kg is used
+GUIDE_URL:http://zuul-quick-start-guide.richardringia.com/index.html
+GUIDE_URL_MEDIUM:http://zuul-quick-start-guide.richardringia.com/index-medium.html
+GUIDE_URL_HARD:http://zuul-quick-start-guide.richardringia.com/index-hard.html

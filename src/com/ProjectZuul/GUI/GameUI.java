@@ -18,6 +18,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -52,7 +55,6 @@ public class GameUI implements SetInactiveListener {
     private MyButton quitToMenu, quitToDesktop;
     private MyButton lockedRoomDirection;
 
-    private MyTextArea helpPageText;
     private MyTextArea currentRoomText;
     private MyTextArea noItemsText, tooDarkText;
 
@@ -111,7 +113,6 @@ public class GameUI implements SetInactiveListener {
         createCommandButtons();
         createDirectionButtons();
         createInvestigationView();
-        createHelpPage();
         createQuitButtons();
         createMap();
         createInventory();
@@ -161,7 +162,9 @@ public class GameUI implements SetInactiveListener {
 
         moveCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_MOVE"), Color.GRAY, Color.WHITE, positionzero, commandButtonsHolder);
         investigateCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_INVESTIGATE"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
-        helpCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_HELP"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            helpCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_HELP"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
+        }
         quitCommand = new MyButton(this.languageHandler.get("GAME_NAVIGATION_QUIT"), Color.BLACK, Color.WHITE, positionzero, commandButtonsHolder);
 
         setCommandButtonListeners();
@@ -259,20 +262,6 @@ public class GameUI implements SetInactiveListener {
         controller.add(gameFinishedPanel);
         controller.start();
     }
-
-    /*private void setDirectionButtonsVisibility(MyButton direction, String directionString)
-    {
-        System.out.println(directionString);
-        if (game.getCurrentRoom().getExit(directionString) == null)
-        {
-            moveButtonHolder.remove(direction);
-        }
-        else if (direction.getParent() == null)
-        {
-            moveButtonHolder.add(direction);
-        }
-        window.repaint();
-    }*/
 
     private void setDirectionButtonEnabled() {
         north.setEnabled(gameHandler.getCurrentRoom().getExit("north") != null, this.languageHandler.get("GAME_NO_ROOM"));
@@ -422,15 +411,6 @@ public class GameUI implements SetInactiveListener {
         }
     }
 
-    private void createHelpPage() {
-        helpTextHolder = new MyPanel(Color.BLACK, 100, 100, 400, 250, window);
-        helpTextHolder.setLayout(new GridLayout(1, 1));
-        helpTextHolder.setVisible(false);
-
-        helpPageText = new MyTextArea("", Color.BLACK, Color.WHITE, 0, 0, 0, 0, helpTextHolder);
-
-        helpPageText.setText(this.languageHandler.get("ABOUT_TEXT"));
-    }
 
     private void createQuitButtons() {
         quitMenuHolder = new MyPanel(Color.BLACK, 225, 200, 150, 80, window);
@@ -463,7 +443,14 @@ public class GameUI implements SetInactiveListener {
 
         helpCommand.addActionListener(e ->
         {
-            commands(helpTextHolder, helpCommand, false);
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    Desktop.getDesktop().browse(new URI(this.gameMode == GameMode.EASY ? this.languageHandler.get("GUIDE_URL") : this.gameMode == GameMode.MEDIUM ? this.languageHandler.get("GUIDE_URL_MEDIUM") : this.languageHandler.get("GUIDE_URL_HARD")));
+                } catch (IOException | URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
+            }
+//            commands(helpTextHolder, helpCommand, false);
         });
 
         quitCommand.addActionListener(e ->

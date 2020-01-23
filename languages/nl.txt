@@ -7,7 +7,7 @@ GAME_CANCEL:Annuleren
 GAME_NAVIGATION_MOVE:Bewegen
 GAME_NAVIGATION_INVESTIGATE:Onderzoeken
 GAME_NAVIGATION_HELP:Help
-GAME_NAVIGATION_QUIT:Veralten
+GAME_NAVIGATION_QUIT:Verlaten
 GAME_NAVIGATION_NORTH:Noord
 GAME_NAVIGATION_WEST:West
 GAME_NAVIGATION_EAST:Oost
@@ -44,7 +44,7 @@ GAME_ROOMS_TOILETS:Wc's
 GAME_ROOMS_TOILETS_DESC:Je bent bij de wc's, hier zijn meestal spoken, omdat mensen hier altijd alleen zijn. Maar het gebouwd is ook vertalen...
 GAME_ROOMS_VAULT_ROOM:Kluis kamer
 GAME_ROOMS_VAULT_ROOM_DESC:De kluis kamer, moet je hier zijn, misschien even de kamer onderzoeken?
-GAME_INVESTIGATE_NO_ITEMS:Er zijn geen voorwerpen gevonden in deze kamer.
+GAME_INVESTIGATE_NO_ITEMS:Geen voorwerpen gevonden
 GAME_ITEMS_VAULT:Kluis
 GAME_ITEMS_VAULT_DOCUMENT:Document
 GAME_ITEMS_VAULT_KEYS:Kluis sleutels
@@ -64,4 +64,7 @@ GAME_ACTION_MENU_DROP:Laten vallen
 GAME_ACTION_MENU_DROP_ERROR:Voorwerp kan niet worden laten vallen!
 GAME_INVENTORY_TITLE:Inventaris
 GAME_INVENTORY_SUB_TITLE_1:van
-GAME_INVENTORY_SUB_TITLE_2:Kg iis gebruikt
+GAME_INVENTORY_SUB_TITLE_2:Kg is gebruikt
+GUIDE_URL:http://zuul-quick-start-guide.richardringia.com/index-nl.html
+GUIDE_URL_MEDIUM:http://zuul-quick-start-guide.richardringia.com/index-nl-medium.html
+GUIDE_URL_HARD:http://zuul-quick-start-guide.richardringia.com/index-nl-hard.html
