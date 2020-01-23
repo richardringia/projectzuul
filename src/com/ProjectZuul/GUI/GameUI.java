@@ -817,7 +817,7 @@ public class GameUI implements SetInactiveListener {
     }
 
     /**
-     * Create the action menu to add buttons to when the player wants to pick something up or drop something. 
+     * Create the action menu to add buttons to when the player wants to pick something up or drop something.
      */
     private void createActionMenu() {
         actionMenu = new ActionMenu(this.player);
