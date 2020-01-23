@@ -447,6 +447,7 @@ public class GameUI implements SetInactiveListener {
             if (clockTime >= duration - 30000) {
                 timeLeftText.setForeground(Color.RED);
                 timeLabel.setForeground(Color.RED);
+                soundHandler.playScreamingGoatSound();
             }
 
             if (clockTime >= duration - 300000 && gameMode == GameMode.EASY) {
