@@ -62,12 +62,8 @@ public class LanguageHandler {
      */
     private String getLanguage(Language language) {
         switch (language){
-            case DE:
-                return "de";
             case EN:
                 return "en";
-            case FR:
-                return "fr";
             default:
                 return "nl";
         }
