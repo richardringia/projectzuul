@@ -8,34 +8,82 @@ import java.util.*; // TODO: CHANGE
 import com.ProjectZuul.Models.*;
 
 /**
+ * Creates all Rooms used for the game.
+ * Access to a list of all rooms and instances of important rooms
+ * Such as the Vault Room.
  *
+ * @author Anne Pier Merkus
  */
 public class RoomHandler {
+    /**
+     * Instance of the room where the vault is located.
+     */
     private Room vaultRoom;
+
+    /**
+     * Instance of the room where the map is located.
+     */
     private Room mapRoom;
+
+    /**
+     * Instance of the room where the vault keys are located.
+     */
     private Room keysRoom;
+
+    /**
+     * List of all the rooms that were created.
+     */
     private List<Room> roomList;
 
+    /**
+     * Creates a new RoomHandler and calls createRooms() to create the map.
+     */
     public RoomHandler() {
         this.roomList = this.createRooms();
     }
 
+    /**
+     * Getter for the vault room variable.
+     *
+     * @return the vault Room which is where the vault will be placed.
+     */
     public Room getVaultRoom() {
         return this.vaultRoom;
     }
 
+    /**
+     * Getter for the map room variable.
+     *
+     * @return the map room which is where the map will be located.
+     */
     public Room getMapRoom() {
         return this.mapRoom;
     }
 
+    /**
+     * Getter for the room to hold important keys.
+     *
+     * @return the room where the keys to the vault are located.
+     */
     public Room getKeysRoom() {
         return this.keysRoom;
     }
 
+    /**
+     * Gets room list.
+     *
+     * @return a list of all rooms that were created.
+     */
     public List<Room> getRoomList() {
         return this.roomList;
     }
 
+    /**
+     * Create all the Rooms with a name and description. Can also set the door to be locked and the required item to open it.
+     * The square and hallways have a predetermined location, the rooms around it are set in a random order.
+     *
+     * @return Returns a list of all rooms.
+     */
     private List<Room> createRooms() {
         Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principlesOffice, toilets, vaultRoom;
 

@@ -13,7 +13,6 @@ import com.ProjectZuul.Models.Item;
 import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
 import com.ProjectZuul.Models.Vault;
-import com.ProjectZuul.Zuul.Game;
 
 import javax.sound.sampled.AudioSystem;
 import javax.swing.*;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class GameUI implements SetInactiveListener {
-    private Game game;
+    private GameHandler gameHandler;
     private GUI gui;
 
     private Timer timer;
@@ -106,8 +105,8 @@ public class GameUI implements SetInactiveListener {
     public void createGame() {
         gui.setMainMenuVisibility(false);
 
-        game = new Game();
-        currentRoomText = new MyTextArea(game.getCurrentRoom().getLongDescription(), Color.BLACK, Color.WHITE, 100, 100, 400, 200, window);
+        gameHandler = new GameHandler();
+        currentRoomText = new MyTextArea(gameHandler.getCurrentRoom().getLongDescription(), Color.BLACK, Color.WHITE, 100, 100, 400, 200, window);
 
         createCommandButtons();
         createDirectionButtons();
@@ -145,12 +144,12 @@ public class GameUI implements SetInactiveListener {
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
-                ItemHandler.setMapRoom(game.getRoomsList());
+                ItemHandler.setMapRoom(gameHandler.getRoomList());
                 duration = 250000;
                 break;
             case PRO:
-                ItemHandler.setFlashlightRoom(game.getRoomsList());
-                ItemHandler.setMapRoom(game.getRoomsList());
+                ItemHandler.setFlashlightRoom(gameHandler.getRoomList());
+                ItemHandler.setMapRoom(gameHandler.getRoomList());
                 duration = 50000;
         }
     }
@@ -276,10 +275,10 @@ public class GameUI implements SetInactiveListener {
     }*/
 
     private void setDirectionButtonEnabled() {
-        north.setEnabled(game.getCurrentRoom().getExit("north") != null, "There is no door in that direction.");
-        east.setEnabled(game.getCurrentRoom().getExit("east") != null, "There is no door in that direction.");
-        south.setEnabled(game.getCurrentRoom().getExit("south") != null, "There is no door in that direction.");
-        west.setEnabled(game.getCurrentRoom().getExit("west") != null, "There is no door in that direction.");
+        north.setEnabled(gameHandler.getCurrentRoom().getExit("north") != null, "There is no door in that direction.");
+        east.setEnabled(gameHandler.getCurrentRoom().getExit("east") != null, "There is no door in that direction.");
+        south.setEnabled(gameHandler.getCurrentRoom().getExit("south") != null, "There is no door in that direction.");
+        west.setEnabled(gameHandler.getCurrentRoom().getExit("west") != null, "There is no door in that direction.");
 
         back.setEnabled(previousRoom.size() != 0);
     }
@@ -308,7 +307,7 @@ public class GameUI implements SetInactiveListener {
     }
 
     private void goRoom(String direction) {
-        Room nextRoom = game.getCurrentRoom().getExit(direction);
+        Room nextRoom = gameHandler.getCurrentRoom().getExit(direction);
 
         if (nextRoom.getDoorLocked()) {
             lockedRoomDirection = direction.equals("north") ? north : direction.equals("west") ? west : east;
@@ -322,13 +321,13 @@ public class GameUI implements SetInactiveListener {
                 return;
             }
         }
-        if (previousRoom.size() != 0 && game.getCurrentRoom().getExit(direction) == previousRoom.lastElement()) {
+        if (previousRoom.size() != 0 && gameHandler.getCurrentRoom().getExit(direction) == previousRoom.lastElement()) {
             goBackRoom();
             return;
         }
 
-        previousRoom.push(game.getCurrentRoom());
-        game.setCurrentRoom(nextRoom);
+        previousRoom.push(gameHandler.getCurrentRoom());
+        gameHandler.setCurrentRoom(nextRoom);
         currentRoomText.setText(nextRoom.getLongDescription());
         mapHandler.updateRoom(nextRoom);
 
@@ -337,9 +336,9 @@ public class GameUI implements SetInactiveListener {
     }
 
     private void goBackRoom() {
-        game.setCurrentRoom(previousRoom.pop());
-        currentRoomText.setText(game.getCurrentRoom().getLongDescription());
-        mapHandler.updateRoom(game.getCurrentRoom());
+        gameHandler.setCurrentRoom(previousRoom.pop());
+        currentRoomText.setText(gameHandler.getCurrentRoom().getLongDescription());
+        mapHandler.updateRoom(gameHandler.getCurrentRoom());
 
         setDirectionButtonEnabled();
         setInvestigationItems();
@@ -378,13 +377,13 @@ public class GameUI implements SetInactiveListener {
             flashlightFound = true;
         }
 
-        if (game.getCurrentRoom().getItems().size() == 0) {
+        if (gameHandler.getCurrentRoom().getItems().size() == 0) {
             return;
         }
         investigateItemsHolder.setLayout(new GridLayout(5, 1));
         ((GridLayout) investigateItemsHolder.getLayout()).setVgap(10);
 
-        for (Item item : game.getCurrentRoom().getItems()) {
+        for (Item item : gameHandler.getCurrentRoom().getItems()) {
 
             if (!hasFlashlight && !item.getName().equals("Flashlight"))
             {
@@ -458,7 +457,7 @@ public class GameUI implements SetInactiveListener {
                 commands(investigateTooDarkTextholder, investigateCommand, false);
             }
             else {
-                commands(game.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
+                commands(gameHandler.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
             }
         });
 
@@ -533,9 +532,9 @@ public class GameUI implements SetInactiveListener {
     }
 
     private void createMap() {
-        mapHandler = new MapHandler(game.getRoomsList());
+        mapHandler = new MapHandler(gameHandler.getRoomList());
         map = mapHandler.getMap();
-        mapHandler.updateRoom(game.getCurrentRoom());
+        mapHandler.updateRoom(gameHandler.getCurrentRoom());
         window.add(map);
     }
 
@@ -549,8 +548,8 @@ public class GameUI implements SetInactiveListener {
         window.add(actionMenu);
     }
 
-    public Game getGame() {
-        return this.game;
+    public GameHandler getGameHandler() {
+        return this.gameHandler;
     }
 
     public ActionHandler getActionHandler() {

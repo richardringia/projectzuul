@@ -8,9 +8,11 @@ import com.ProjectZuul.GUI.Components.RoomPanel;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.*;
 
+/**
+ * T
+ */
 public class MapHandler implements SetInactiveListener
 {
-
     private static final int FPS = 60;
 
     private List<Room> roomList;
@@ -22,6 +24,11 @@ public class MapHandler implements SetInactiveListener
     private int width = 300;
 
 
+    /**
+     * Instantiates a new Map handler.
+     *
+     * @param roomList the room list
+     */
     public MapHandler(List<Room> roomList) {
         this.roomList = roomList;
         currentRoom = roomList.get(0);
@@ -29,6 +36,11 @@ public class MapHandler implements SetInactiveListener
         this.setMenuVisibility(false);
     }
 
+    /**
+     * Gets map.
+     *
+     * @return the map
+     */
     public JPanel getMap() {
         return this.frame;
     }
@@ -86,6 +98,11 @@ public class MapHandler implements SetInactiveListener
 
     }
 
+    /**
+     * Update room.
+     *
+     * @param _room the room
+     */
     public void updateRoom(Room _room) {
         this.currentRoom = _room;
         Component[] components = frame.getComponents();

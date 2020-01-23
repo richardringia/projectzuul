@@ -1,6 +1,6 @@
 package com.ProjectZuul.Handlers;
+
 import com.ProjectZuul.GUI.GameUI;
-import com.ProjectZuul.GUI.Listeners.OnQuitListener;
 
 import java.io.File;
 import javax.media.Format;
@@ -10,9 +10,22 @@ import javax.media.Player;
 import javax.media.PlugInManager;
 import javax.media.format.AudioFormat;
 
+/**
+ * Handler to process .mp3 files. Used to create sound effects and scary background music.
+ * @author Anne Pier Merkus
+ */
 public class SoundHandler
 {
+    /**
+     * Instance of the game used to add an OnQuitListener.
+     */
     GameUI gameUI;
+
+    /**
+     * Create new SoundHandler and register the PlugIn.
+     *
+     * @param gameUI instance of the current game.
+     */
     public SoundHandler(GameUI gameUI) {
         this.gameUI = gameUI;
         Format input1 = new AudioFormat(AudioFormat.MPEGLAYER3);
@@ -26,6 +39,9 @@ public class SoundHandler
         );
     }
 
+    /**
+     * Create a new player to play a sound effect.
+     */
     public void playSound()
     {
         try {
@@ -36,6 +52,10 @@ public class SoundHandler
         }
     }
 
+    /**
+     * Play scary background music for 5 minutes.
+     * OnQuitListener added so we can stop and close the player after quit is invoked, otherwise the music keeps playing.
+     */
     public void playBackgroundSound()
     {
         try

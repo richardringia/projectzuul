@@ -71,7 +71,7 @@ public class Player {
     }
 
     public Room getCurrentRoom() {
-        return this.gameUI.getGame().getCurrentRoom();
+        return this.gameUI.getGameHandler().getCurrentRoom();
     }
 
     public ActionHandler getActionHandler() {
