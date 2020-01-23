@@ -3,11 +3,20 @@ package com.ProjectZuul.GUI.Components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class
+ */
 public class ButtonPainter implements Painter {
 
     private Color light, dark;
     private GradientPaint gradPaint;
 
+    /**
+     * Instantiates a new Button painter.
+     *
+     * @param light the light
+     * @param dark  the dark
+     */
     public ButtonPainter(Color light, Color dark) {
         this.light = light;
         this.dark = dark;

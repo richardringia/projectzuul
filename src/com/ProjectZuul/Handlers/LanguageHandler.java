@@ -9,11 +9,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles the selected language by selecting the .txt file corresponding to the language value.
+ *
+ * @author Richard Ringia
+ */
 public class LanguageHandler {
 
-    private String CurrentLanguage = "nl";
+    /**
+     * Keys and values of all, keys are always the same, their values depend on the selected language.
+     */
     private Map<String, String> translations;
 
+    /**
+     * Created a language handler and gives translations its values depending on the given language.
+     *
+     * @param language the selected language by the player.
+     */
     public LanguageHandler(Language language) {
         this.translations = new HashMap<>();
         StringBuilder path = new StringBuilder();
@@ -32,11 +44,22 @@ public class LanguageHandler {
         }
     }
 
+    /**
+     * Get string.
+     *
+     * @param key The key of the hashmap which obtains a value depending on the language. Keys can be found in languages folder alongside their value.
+     * @return The string of the given key in the current language.
+     */
     public String get(String key) {
         String value = this.translations.get(key);
         return value != null ? value : key;
     }
 
+    /**
+     *
+     * @param language the selected language by the player.
+     * @return a String of the selected language so we can use it in the pathname to languages folder, depending on the language it should select a different .txt file.
+     */
     private String getLanguage(Language language) {
         switch (language){
             case DE:

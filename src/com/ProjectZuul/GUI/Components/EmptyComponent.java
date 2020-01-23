@@ -4,11 +4,13 @@ import java.awt.*;
 
 
 /**
- * The type Empty component.
+ * Empty component used in GridLayout to fill the gaps and allow buttons to be placed in the correct spot.
+ *
+ * @author Richard Ringia
  */
 public class EmptyComponent extends Component {
     /**
-     * Instantiates a new Empty component.
+     * Create a new EmptyComponent which is there to fill empty spaces.
      */
     public EmptyComponent() { }
 }
