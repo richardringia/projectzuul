@@ -13,7 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The type Main menu.
+ * The Main Menu for this application, everything in the Main Menu is handled here.
+ *
+ * @author Anne Pier Merkus
  */
 public class MainMenu implements SetInactiveListener
 {
@@ -103,7 +105,7 @@ public class MainMenu implements SetInactiveListener
     private MyTextArea aboutPageText;
 
     /**
-     *
+     * Text Area above the language buttons.
      */
     private MyTextArea startPageLanguageText;
 
@@ -113,26 +115,29 @@ public class MainMenu implements SetInactiveListener
     private MyTextArea startPageDifficultyText;
 
     /**
-     * The About page created.
+     * Whether the about page was created before.
      */
     boolean aboutPageCreated = false;
     /**
-     *
+     * Whether the start page was created before.
      */
     boolean startPageCreated = false;
 
     /**
-     * The Title font.
+     * Font used in the Main Menu.
      */
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
+    /**
+     * Language to be used in the Main Menu.
+     */
     private LanguageHandler languageHandler;
 
     /**
-     * Instantiates a new Main menu.
+     * Sets gui variable and the language before calling a function to create the Main Menu.
      *
-     * @param gui      the gui
-     * @param language the language
+     * @param gui      Instance of the GUI.
+     * @param language The default language.
      */
     public MainMenu(GUI gui, Language language)
     {
@@ -141,6 +146,9 @@ public class MainMenu implements SetInactiveListener
         createMainMenu();
     }
 
+    /**
+     * Create the first view of the Main Menu along with the buttons inside it.
+     */
     private void createMainMenu()
     {
         window = gui.getWindow();
@@ -155,6 +163,9 @@ public class MainMenu implements SetInactiveListener
         setMainMenuListeners();
     }
 
+    /**
+     * Set listeners to the buttons in the Main Menu.
+     */
     private void setMainMenuListeners()
     {
         startButton.addActionListener(e ->
@@ -168,6 +179,11 @@ public class MainMenu implements SetInactiveListener
         quitButton.addActionListener(e -> gui.quitGame());
     }
 
+    /**
+     * Sets Main Menu visibility.
+     *
+     * @param visibility Whether the menu should be set visible or invisible.
+     */
     @Override
     public void setMenuVisibility(boolean visibility)
     {
@@ -177,6 +193,9 @@ public class MainMenu implements SetInactiveListener
         quitButton.setVisible(visibility);
     }
 
+    /**
+     * Create the start page with the back and start buttons, call functions to create language/difficulty buttons.
+     */
     private void createStartPage()
     {
         gui.setMainMenuVisibility(false);
@@ -197,6 +216,9 @@ public class MainMenu implements SetInactiveListener
         setStartPageListeners();
     }
 
+    /**
+     * Create the buttons the player can select languages with.
+     */
     private void createLanguageButtons()
     {
         languageButtonHolder = new MyPanel(Color.BLACK, 525, 175, 150, 80, window);
@@ -214,6 +236,9 @@ public class MainMenu implements SetInactiveListener
         setLanguageButtonsListeners();
     }
 
+    /**
+     * Create the buttons the player can select difficulty with.
+     */
     private void createDifficultyButtons() {
         difficultyButtonHolder = new MyPanel(Color.BLACK, 525, 375, 150, 120, window);
         difficultyButtonHolder.setLayout(new GridLayout(3, 1));
@@ -231,6 +256,9 @@ public class MainMenu implements SetInactiveListener
         setDifficultyButtonsListeners();
     }
 
+    /**
+     * Set listeners to the language buttons.
+     */
     private void setLanguageButtonsListeners()
     {
         dutchLanguageButton.addActionListener(e ->
@@ -248,6 +276,9 @@ public class MainMenu implements SetInactiveListener
         });
     }
 
+    /**
+     * Set listeners to the difficulty buttons.
+     */
     private void setDifficultyButtonsListeners()
     {
         easyDifficultyButton.addActionListener(e ->
@@ -274,6 +305,9 @@ public class MainMenu implements SetInactiveListener
         });
     }
 
+    /**
+     * Set listeners to the back and start button on the start page.
+     */
     private void setStartPageListeners()
     {
         startPageBack.addActionListener(e ->
@@ -289,6 +323,11 @@ public class MainMenu implements SetInactiveListener
         });
     }
 
+    /**
+     * If the start page was created before, don't create a new one but make the previous one visible again.
+     *
+     * @param active Whether the page should become visible or not.
+     */
     private void setStartPageActive(boolean active)
     {
         startPageBack.setVisible(active);
@@ -299,6 +338,9 @@ public class MainMenu implements SetInactiveListener
         startPageLanguageText.setVisible(active);
     }
 
+    /**
+     * Create the about page with text and a back button.
+     */
     private void createAboutPage()
     {
         gui.setMainMenuVisibility(false);
@@ -316,6 +358,9 @@ public class MainMenu implements SetInactiveListener
         }
     }
 
+    /**
+     * Set listener for the back button on the about page.
+     */
     private void setAboutPageListeners()
     {
         aboutPageBack.addActionListener(e ->
@@ -325,6 +370,11 @@ public class MainMenu implements SetInactiveListener
         });
     }
 
+    /**
+     * If the about page was created before, don't create a new one but make the previous one visible again.
+     *
+     * @param active Whether the page should become visible or not.
+     */
     private void setAboutPageActive(boolean active)
     {
         aboutPageBack.setVisible(active);
