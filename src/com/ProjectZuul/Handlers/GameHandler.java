@@ -28,7 +28,7 @@ public class GameHandler {
     public GameHandler(Player player) {
         RoomHandler roomHandler = new RoomHandler(player);
         roomList = roomHandler.getRoomList();
-        itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
+        itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom(), player);
         currentRoom = roomList.get(0);
     }
 

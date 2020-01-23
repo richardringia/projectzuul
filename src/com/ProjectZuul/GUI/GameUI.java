@@ -105,7 +105,7 @@ public class GameUI implements SetInactiveListener {
     public void createGame() {
         gui.setMainMenuVisibility(false);
 
-        gameHandler = new GameHandler();
+        gameHandler = new GameHandler(player);
         currentRoomText = new MyTextArea(gameHandler.getCurrentRoom().getLongDescription(), Color.BLACK, Color.WHITE, 100, 100, 400, 200, window);
 
         createCommandButtons();
@@ -144,12 +144,12 @@ public class GameUI implements SetInactiveListener {
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
-                ItemHandler.setMapRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_MAP"));
+                ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
                 duration = 250000;
                 break;
             case PRO:
-                ItemHandler.setFlashlightRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"));
-                ItemHandler.setMapRoom(game.getRoomsList(), this.languageHandler.get("GAME_ITEMS_MAP"));
+                ItemHandler.setFlashlightRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"));
+                ItemHandler.setMapRoom(gameHandler.getRoomList(), this.languageHandler.get("GAME_ITEMS_MAP"));
                 duration = 50000;
         }
     }
@@ -275,10 +275,10 @@ public class GameUI implements SetInactiveListener {
     }*/
 
     private void setDirectionButtonEnabled() {
-        north.setEnabled(game.getCurrentRoom().getExit("north") != null, this.languageHandler.get("GAME_NO_ROOM"));
-        east.setEnabled(game.getCurrentRoom().getExit("east") != null, this.languageHandler.get("GAME_NO_ROOM"));
-        south.setEnabled(game.getCurrentRoom().getExit("south") != null, this.languageHandler.get("GAME_NO_ROOM"));
-        west.setEnabled(game.getCurrentRoom().getExit("west") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        north.setEnabled(gameHandler.getCurrentRoom().getExit("north") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        east.setEnabled(gameHandler.getCurrentRoom().getExit("east") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        south.setEnabled(gameHandler.getCurrentRoom().getExit("south") != null, this.languageHandler.get("GAME_NO_ROOM"));
+        west.setEnabled(gameHandler.getCurrentRoom().getExit("west") != null, this.languageHandler.get("GAME_NO_ROOM"));
 
         back.setEnabled(previousRoom.size() != 0);
     }
