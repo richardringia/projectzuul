@@ -52,7 +52,7 @@ public class Inventory extends JPanel implements SetInactiveListener {
     private int gridCols = 5;
 
     /**
-     * Instance of the player will be asved here.
+     * Instance of the player will be saved here.
      */
     private Player player;
 
