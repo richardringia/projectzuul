@@ -112,7 +112,7 @@ public class RoomHandler {
         classRoom666 = new Room(this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666"), this.languageHandler.get("GAME_ROOMS_CLASS_ROOM_666_DESC"), this.player);
         canteen = new Room(this.languageHandler.get("GAME_ROOMS_CANTEEN"), this.languageHandler.get("GAME_ROOMS_CANTEEN_DESC"), this.player);
         teachersRoom = new Room(this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM"), this.languageHandler.get("GAME_ROOMS_TEACHERS_ROOM_DESC"), this.player);
-        principalsOffice = new Room(this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE"), this.languageHandler.get("GAME_ROOMS_PRINCIPLES_OFFICE_DESC"), true, this.languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), this.player);
+        principalsOffice = new Room(this.languageHandler.get("GAME_ROOMS_PRINCIPALS_OFFICE"), this.languageHandler.get("GAME_ROOMS_PRINCIPALS_OFFICE_DESC"), true, this.languageHandler.get("GAME_ITEMS_PRINCIPALS_KEYS"), this.player);
         toilets = new Room(this.languageHandler.get("GAME_ROOMS_TOILETS"), this.languageHandler.get("GAME_ROOMS_TOILETS_DESC"), this.player);
         vaultRoom = new Room(this.languageHandler.get("GAME_ROOMS_VAULT_ROOM"), this.languageHandler.get("GAME_ROOMS_VAULT_ROOM_DESC"), this.player);
 

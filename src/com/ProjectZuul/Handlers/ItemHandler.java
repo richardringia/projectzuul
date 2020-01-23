@@ -29,7 +29,7 @@ public class ItemHandler {
         LanguageHandler languageHandler = player.getLanguageHandler();
 
         vaultKeys = new Item(languageHandler.get("GAME_ITEMS_VAULT_KEYS"), 2);
-        principalsKeys = new Item(languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), 2);
+        principalsKeys = new Item(languageHandler.get("GAME_ITEMS_PRINCIPALS_KEYS"), 2);
         spiritVacuumCleaner = new Item(languageHandler.get("GAME_ITEMS_SPIRIT_VACUUM_CLEANER"), 8);
         bookcase = new Item(languageHandler.get("GAME_ITEMS_BOOKCASE"));
         vault = new Vault(vaultKeys, vaultRoom, player);

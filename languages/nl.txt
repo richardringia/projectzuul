@@ -38,8 +38,8 @@ GAME_ROOMS_CANTEEN:Kantine
 GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geeng eten dus zijn hier waarschijnlijk ook niet. Of wel?
 GAME_ROOMS_TEACHERS_ROOM:Leraren kamer
 GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een geest. Dan is die waarschijnlijk hier.
-GAME_ROOMS_PRINCIPLES_OFFICE:Directeur kantoor
-GAME_ROOMS_PRINCIPLES_OFFICE_DESC:Het directeur kantoor is altijd belangrijk, misschien is hier iets
+GAME_ROOMS_PRINCIPALS_OFFICE:Directeur kantoor
+GAME_ROOMS_PRINCIPALS_OFFICE_DESC:Het directeur kantoor is altijd belangrijk, misschien is hier iets
 GAME_ROOMS_TOILETS:Wc's
 GAME_ROOMS_TOILETS_DESC:You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned...
 GAME_ROOMS_VAULT_ROOM:VaultRoom
@@ -50,7 +50,7 @@ GAME_ITEMS_VAULT_DOCUMENT:Document
 GAME_ITEMS_VAULT_KEYS:Vault keys
 GAME_ITEMS_FLASHLIGHT:Flashlight
 GAME_ITEMS_MAP:Map
-GAME_ITEMS_PRINCIPLES_KEYS:Principles keys
+GAME_ITEMS_PRINCIPALS_KEYS:Principals keys
 GAME_ITEMS_SPIRIT_VACUUM_CLEANER:Spirit vacuum cleaner
 GAME_ITEMS_BOOKCASE:Bookcase
 GAME_MENU_MAIN_MENU:Main Menu
