@@ -25,56 +25,256 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The type Game ui.
+ *
+ * @author Anne Pier Merkus and Richard Ringia
+ */
 public class GameUI implements SetInactiveListener {
+    /**
+     * Instance of GameHandler which contains all rooms, items and the current location of the player.
+     */
     private GameHandler gameHandler;
+
+    /**
+     * Instance of the GUI.
+     */
     private GUI gui;
 
+    /**
+     * Timer to keep track of how long the game has been running for and when time is up and the player has lost.
+     */
     private Timer timer;
+
+    /**
+     * startTime takes the current time difference between the current time and midnight January 1, 1970 UTC.
+     * Comparison between the startTime and current time is used to keep track of the timer.
+     */
     private long startTime = -1;
+
+    /**
+     * Duration of the game before the player dies.
+     */
     private long duration = 500000;
 
+    /**
+     * Instance of the current Player.
+     */
     private Player player;
 
+    /**
+     * The window of the application.
+     */
     private MyFrame window;
+
+    /**
+     * Rectangle on 0, 0, 0, 0 to easily pass values on incase they should be 0.
+     */
     private Rectangle positionzero;
 
-    ActionMenu actionMenu;
-    private Container currentSelectedCommandHolder, CurrentSelectedCommand;
+    /**
+     * Instance of the ActionMenu.
+     */
+    private ActionMenu actionMenu;
 
-    private MyPanel commandButtonsHolder, moveButtonHolder, helpTextHolder, quitMenuHolder;
-    private MyPanel investigateItemsHolder, investigateNoItemsTextHolder, investigateTooDarkTextholder;
+    /**
+     * Container which gets the current opened command panel inside so we can deactivate it once another one is selected.
+     */
+    private Container currentSelectedCommandHolder;
 
-    private MyLabel timeLabel, timeLeftText, gameOver;
+    /**
+     * Container which holds the current selected command button, so we can change the background color once another one is selected.
+     */
+    private Container CurrentSelectedCommand;
+
+    /**
+     * Panel which holds all command buttons at the top of the screen.
+     */
+    private MyPanel commandButtonsHolder;
+
+    /**
+     * Holder for the buttons with which the player can move, also holds the timer.
+     */
+    private MyPanel moveButtonHolder;
+
+    /**
+     * Holder for the quit buttons.
+     */
+    private MyPanel quitMenuHolder;
+
+    /**
+     * Holder for the items in the room when investigating.
+     */
+    private MyPanel investigateItemsHolder;
+
+    /**
+     * Holder for the text when no items are found in the room.
+     */
+    private MyPanel investigateNoItemsTextHolder;
+
+    /**
+     * Holder for the text when the player does not have a flashlight and tries to investigate a room.
+     */
+    private MyPanel investigateTooDarkTextHolder;
+
+    /**
+     * Label for the Time Left text to the left of the timer.
+     */
+    private MyLabel timeLabel;
+
+    /**
+     * Text that shows the time left.
+     */
+    private MyLabel timeLeftText;
+
+    /**
+     * Text which shows at the end of the game, can be set to victory too.
+     */
+    private MyLabel gameOver;
+
+    /**
+     * The panel that holds the map.
+     */
     private JPanel map;
 
+    /**
+     * The Game finished panel.
+     */
     FadePanel gameFinishedPanel;
 
+    /**
+     * The Action handler.
+     */
     ActionHandler actionHandler;
-    private MyButton moveCommand, investigateCommand, helpCommand, quitCommand;
-    private MyButton north, south, east, west, back;
-    private MyButton quitToMenu, quitToDesktop;
+
+    /**
+     * Button to show move buttons and text of the current room..
+     */
+    private MyButton moveCommand;
+
+    /**
+     * Button to show all items in the current room.
+     */
+    private MyButton investigateCommand;
+
+    /**
+     * When pressed, opens a webpage so the player can go through the Quick-Start-Guide.
+     */
+    private MyButton helpCommand;
+
+    /**
+     * Button to show the quit buttons so the player can go back to the Main Menu or close the game entirely.
+     */
+    private MyButton quitCommand;
+
+    /**
+     * Move towards the room to the north when pressed, the button is disabled when there is no room in that direction.
+     */
+    private MyButton north;
+
+    /**
+     * Move towards the room to the south when pressed, the button is disabled when there is no room in that direction.
+     */
+    private MyButton south;
+
+    /**
+     * Move towards the room to the east when pressed, the button is disabled when there is no room in that direction.
+     */
+    private MyButton east;
+
+    /**
+     * Move towards the room to the west when pressed, the button is disabled when there is no room in that direction.
+     */
+    private MyButton west;
+
+    /**
+     * Go back to the room you came from, the button is disabled if this is the first room.
+     */
+    private MyButton back;
+
+    /**
+     * Quits the game and goes back to the main menu.
+     */
+    private MyButton quitToMenu;
+
+    /**
+     * Quits the game and closes the window.
+     */
+    private MyButton quitToDesktop;
+
+    /**
+     * When a door is locked, the button going to that direction will be saved in this variable.
+     */
     private MyButton lockedRoomDirection;
 
+    /**
+     * Text for the room the player is currently in, updated every time the player changes to another room.
+     */
     private MyTextArea currentRoomText;
-    private MyTextArea noItemsText, tooDarkText;
 
+    /**
+     * Text shown when there are no items in the room.
+     */
+    private MyTextArea noItemsText;
+
+    /**
+     * Text shown when the player has no flashlight and is trying to investigate.
+     */
+    private MyTextArea tooDarkText;
+
+    /**
+     * Instance of the MapHandler.
+     */
     private MapHandler mapHandler;
+
+    /**
+     * Instance of the InventoryHandler.
+     */
     private InventoryHandler inventoryHandler;
 
+    /**
+     * Stack with rooms previously visited so we can click the back button and go back to the previous rooms.
+     * Manually going back to a previous room also pops the stack.
+     */
     private Stack<Room> previousRoom;
 
+    /**
+     * The difficulty selected by the player.
+     */
     private GameMode gameMode;
 
+    /**
+     * Instance of LanguageHandler with the selected language so we can get the values in the correct language.
+     */
     private LanguageHandler languageHandler;
 
+    /**
+     * The language selected by the player.
+     */
     private Language language;
 
+    /**
+     * Instance of SoundHandler so we can play start playing background music.
+     */
     private SoundHandler soundHandler;
 
+    /**
+     * Whether the player has found the flashlight, can be in his inventory or on the floor.
+     */
     private boolean flashlightFound = false;
 
+    /**
+     * Listeners for code that needs to be executed when quit is invoked.
+     */
     private ArrayList<OnQuitListener> onQuitListeners;
 
+    /**
+     * Instantiates a new Game ui.
+     *
+     * @param gui      the gui
+     * @param gameMode the game mode
+     * @param language the language
+     */
     public GameUI(GUI gui, GameMode gameMode, Language language) {
         this.gui = gui;
         this.gameMode = gameMode;
@@ -99,11 +299,19 @@ public class GameUI implements SetInactiveListener {
         createGame();
     }
 
+    /**
+     * Add on quit listeners for processes to be ended when the game is finished.
+     *
+     * @param onQuitListener Code given to be executed when the player quits the game.
+     */
     public void addOnQuitListener(OnQuitListener onQuitListener)
     {
         onQuitListeners.add(onQuitListener);
     }
 
+    /**
+     * Create the game by calling GameHandler and setting all values by calling other methods.
+     */
     public void createGame() {
         gui.setMainMenuVisibility(false);
 
@@ -124,6 +332,9 @@ public class GameUI implements SetInactiveListener {
         startTimer();
     }
 
+    /**
+     * Default values of the game, the selected command buttons and text of the current room.
+     */
     private void setDefaultGameValues() {
         commandButtonsHolder.setVisible(true);
         setCurrentSelectedCommandHolder(moveButtonHolder);
@@ -134,6 +345,11 @@ public class GameUI implements SetInactiveListener {
         window.repaint();
     }
 
+    /**
+     * Set players items and put items in rooms depending on the difficulty chosen.
+     *
+     * @param gameMode Difficulty selected by the player
+     */
     private void setDifficultyValues(GameMode gameMode)
     {
         switch (gameMode)
@@ -155,6 +371,9 @@ public class GameUI implements SetInactiveListener {
         }
     }
 
+    /**
+     * Create the command buttons at the top of the screen.
+     */
     private void createCommandButtons() {
         commandButtonsHolder = new MyPanel(Color.BLACK, 20, 20, 500, 40, window);
         commandButtonsHolder.setLayout(new GridLayout(1, 10));
@@ -170,6 +389,9 @@ public class GameUI implements SetInactiveListener {
         setCommandButtonListeners();
     }
 
+    /**
+     * Create buttons for the player to move around with.
+     */
     private void createDirectionButtons() {
         moveButtonHolder = new MyPanel(Color.BLACK, 75, 300, 400, 200, window);
         moveButtonHolder.setLayout(new GridLayout(5, 5));
@@ -205,6 +427,9 @@ public class GameUI implements SetInactiveListener {
         setDirectionButtonListeners();
     }
 
+    /**
+     * Start the timer in which the player has to complete the game before they lose.
+     */
     private void startTimer() {
         timer = new Timer(10, e -> {
             if (startTime < 0) {
@@ -236,6 +461,12 @@ public class GameUI implements SetInactiveListener {
         }
     }
 
+    /**
+     * Called when the game is either won or lost, end screen becomes visible and the player can go back to the Main Menu or quit the game.
+     *
+     * @see FadeController#start()
+     * @param victory Whether the player won the game or lost the game.
+     */
     private void fadeGameFinishedScreen(boolean victory) {
         FadeController controller = new FadeController(2000);
 
@@ -264,6 +495,9 @@ public class GameUI implements SetInactiveListener {
         controller.start();
     }
 
+    /**
+     * Disable direction buttons if there is no room in the direction of that button.
+     */
     private void setDirectionButtonEnabled() {
         north.setEnabled(gameHandler.getCurrentRoom().getExit("north") != null, this.languageHandler.get("GAME_NO_ROOM"));
         east.setEnabled(gameHandler.getCurrentRoom().getExit("east") != null, this.languageHandler.get("GAME_NO_ROOM"));
@@ -273,6 +507,9 @@ public class GameUI implements SetInactiveListener {
         back.setEnabled(previousRoom.size() != 0);
     }
 
+    /**
+     * Listeners for all direction buttons.
+     */
     private void setDirectionButtonListeners() {
         north.addActionListener(e ->
         {
@@ -296,6 +533,11 @@ public class GameUI implements SetInactiveListener {
         });
     }
 
+    /**
+     * Move player to the next room, check if the door is not locked, if it is, tell them to find a key to get in.
+     *
+     * @param direction Direction to move to.
+     */
     private void goRoom(String direction) {
         Room nextRoom = gameHandler.getCurrentRoom().getExit(direction);
 
@@ -325,6 +567,9 @@ public class GameUI implements SetInactiveListener {
         setInvestigationItems();
     }
 
+    /**
+     * Back button to go back to the previous room.
+     */
     private void goBackRoom() {
         gameHandler.setCurrentRoom(previousRoom.pop());
         currentRoomText.setText(gameHandler.getCurrentRoom().getLongDescription());
@@ -334,6 +579,9 @@ public class GameUI implements SetInactiveListener {
         setInvestigationItems();
     }
 
+    /**
+     * Create the view so the player can investigate the room for items.
+     */
     private void createInvestigationView() {
         investigateNoItemsTextHolder = new MyPanel(Color.BLACK, 200, 100, 210, 25, window);
         investigateNoItemsTextHolder.setLayout(new GridLayout(1, 1));
@@ -341,10 +589,10 @@ public class GameUI implements SetInactiveListener {
 
         noItemsText = new MyTextArea(this.languageHandler.get("GAME_INVESTIGATE_NO_ITEMS"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateNoItemsTextHolder);
 
-        investigateTooDarkTextholder = new MyPanel(Color.BLACK, 100, 100, 400, 100, window);
-        investigateTooDarkTextholder.setLayout(new GridLayout(1, 1));
-        investigateTooDarkTextholder.setVisible(false);
-        tooDarkText = new MyTextArea(this.languageHandler.get("GAME_ROOM_DARK"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateTooDarkTextholder);
+        investigateTooDarkTextHolder = new MyPanel(Color.BLACK, 100, 100, 400, 100, window);
+        investigateTooDarkTextHolder.setLayout(new GridLayout(1, 1));
+        investigateTooDarkTextHolder.setVisible(false);
+        tooDarkText = new MyTextArea(this.languageHandler.get("GAME_ROOM_DARK"), Color.BLACK, Color.WHITE, 0, 0, 0, 0, investigateTooDarkTextHolder);
 
         investigateItemsHolder = new MyPanel(Color.BLACK, 225, 200, 150, 215, window);
         investigateItemsHolder.setLayout(new GridLayout(2, 1));
@@ -352,6 +600,9 @@ public class GameUI implements SetInactiveListener {
         investigateItemsHolder.setVisible(false);
     }
 
+    /**
+     * Add items to the investigation view so the player can see what items are in the room and can pick them up.
+     */
     public void setInvestigationItems() {
         investigateItemsHolder.removeAll();
 
@@ -413,6 +664,9 @@ public class GameUI implements SetInactiveListener {
     }
 
 
+    /**
+     * Create buttons to quit the game to either the Main Menu or to Desktop.
+     */
     private void createQuitButtons() {
         quitMenuHolder = new MyPanel(Color.BLACK, 225, 200, 150, 80, window);
         quitMenuHolder.setLayout(new GridLayout(2, 1));
@@ -425,6 +679,9 @@ public class GameUI implements SetInactiveListener {
         setQuitButtonListeners();
     }
 
+    /**
+     * Set listeners for all command buttons.
+     */
     private void setCommandButtonListeners() {
         moveCommand.addActionListener(e ->
         {
@@ -435,7 +692,7 @@ public class GameUI implements SetInactiveListener {
         {
             if (!flashlightFound)
             {
-                commands(investigateTooDarkTextholder, investigateCommand, false);
+                commands(investigateTooDarkTextHolder, investigateCommand, false);
             }
             else {
                 commands(gameHandler.getCurrentRoom().getItems().size() == 0 ? investigateNoItemsTextHolder : investigateItemsHolder, investigateCommand, false);
@@ -460,6 +717,9 @@ public class GameUI implements SetInactiveListener {
         });
     }
 
+    /**
+     * Set listeners for quit buttons.
+     */
     private void setQuitButtonListeners() {
         quitToMenu.addActionListener(e ->
         {
@@ -484,6 +744,11 @@ public class GameUI implements SetInactiveListener {
         });
     }
 
+    /**
+     * Sets GameUI visibility.
+     *
+     * @param visibility Whether the menu should be set visible or invisible.
+     */
     @Override
     public void setMenuVisibility(boolean visibility) {
         if (visibility) {
@@ -495,6 +760,12 @@ public class GameUI implements SetInactiveListener {
         inventoryHandler.setMenuVisibility(visibility);
     }
 
+    /**
+     *
+     * @param holder Holder corresponding to the command button currently selected.
+     * @param command Command button currently selected.
+     * @param selectedMove Whether the play is in the move screen or not.
+     */
     private void commands(Container holder, MyButton command, boolean selectedMove) {
         setCurrentSelectedCommandHolder(holder);
         setCurrentSelectedCommand(command);
@@ -503,6 +774,11 @@ public class GameUI implements SetInactiveListener {
         window.repaint();
     }
 
+    /**
+     * Set previous selected command holder inactive.
+     *
+     * @param holder Current selected holder.
+     */
     private void setCurrentSelectedCommandHolder(Container holder) {
         if (currentSelectedCommandHolder != null) {
             currentSelectedCommandHolder.setVisible(false);
@@ -511,6 +787,11 @@ public class GameUI implements SetInactiveListener {
         currentSelectedCommandHolder.setVisible(true);
     }
 
+    /**
+     * Set previous selected command color back to black and change this one to gray to indicate which button is selected.
+     *
+     * @param command Current selected command
+     */
     private void setCurrentSelectedCommand(MyButton command) {
 //        command.setBackground();
         if (CurrentSelectedCommand != null)
@@ -519,6 +800,9 @@ public class GameUI implements SetInactiveListener {
         CurrentSelectedCommand.setBackground(Color.GRAY);
     }
 
+    /**
+     * Create the map with the current location of the player highlighted.
+     */
     private void createMap() {
         mapHandler = new MapHandler(gameHandler.getRoomList());
         map = mapHandler.getMap();
@@ -526,40 +810,72 @@ public class GameUI implements SetInactiveListener {
         window.add(map);
     }
 
+    /**
+     * Create the inventory with the items the player currently possesses.
+     */
     private void createInventory() {
         inventoryHandler = new InventoryHandler(this.window, this.player);
     }
 
+    /**
+     * Create the action menu to add buttons to when the player wants to pick something up or drop something. 
+     */
     private void createActionMenu() {
         actionMenu = new ActionMenu(this.player);
         actionHandler = new ActionHandler(this.player, actionMenu);
         window.add(actionMenu);
     }
 
+    /**
+     * Gets instance of GameHandler.
+     *
+     * @return Instance of GameHandler.
+     */
     public GameHandler getGameHandler() {
         return this.gameHandler;
     }
 
+    /**
+     * Gets instance of ActionHandler
+     *
+     * @return Instance of ActionHandler.
+     */
     public ActionHandler getActionHandler() {
         return this.actionHandler;
     }
 
+    /**
+     * Gets instance of InventoryHandler.
+     *
+     * @return Instance of InventoryHandler
+     */
     public InventoryHandler getInventoryHandler() {
         return this.inventoryHandler;
     }
 
-    public MyPanel getInvestigateItemsHolder() {
-        return this.investigateItemsHolder;
-    }
-
+    /**
+     * Gets instance of MapHandler.
+     *
+     * @return Instance of MapHandler.
+     */
     public MapHandler getMapHandler() {
         return mapHandler;
     }
 
+    /**
+     * Gets instance of GameMode.
+     *
+     * @return Instance of GameMode.
+     */
     public GameMode getGameMode() {
         return gameMode;
     }
 
+    /**
+     * Gets instance of LanguageHandler.
+     *
+     * @return Instance of LanguageHandler.
+     */
     public LanguageHandler getLanguageHandler() {
         return languageHandler;
     }
