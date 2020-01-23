@@ -2,7 +2,9 @@ MENU_START:start
 MENU_ABOUT:about
 MENU_QUIT:quit
 ABOUT_BACK:back
-ABOUT_TEXT:Leuk spel
+ABOUT_TEXT_1:Welcome to the Zuul, The Abandoned School. The objective of this game is to find a document in a school, sounds easy, however there is a catch... The building is haunted, but you're not scared are you?
+ABOUT_TEXT_2:Go inside and retrieve the documents, but be careful, you only have a few minutes before the ghosts possess you, and you will die shortly after... Go inside and be quick, or you will face certain death.
+ABOUT_TEXT_3:Good luck!
 GAME_CANCEL:Cancel
 GAME_NAVIGATION_MOVE:Move
 GAME_NAVIGATION_INVESTIGATE:Investigate

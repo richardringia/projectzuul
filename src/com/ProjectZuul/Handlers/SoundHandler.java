@@ -23,14 +23,19 @@ public class SoundHandler {
     private boolean screamingGoatIsPlaying = false;
 
     /**
-     * Check for if the beedo sounds is playing
+     * Check for if the last minute sounds is playing
      */
-    private boolean beedoIsPlaying = false;
+    private boolean lastMinuteIsPlaying = false;
 
     /**
      * Check for if the you won sounds is playing
      */
     private boolean youWonIsPlaying = false;
+
+    /**
+     * Check for if the you lost sounds is playing
+     */
+    private boolean loseIsPlaying = false;
 
 
 
@@ -97,19 +102,31 @@ public class SoundHandler {
         }
     }
 
-    public void playLoseSound() {
+    public void playLastMinuteSound() {
         try {
-            if (!this.beedoIsPlaying) {
-                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/beebo.mp3").toURI().toURL()));
+            if (!this.lastMinuteIsPlaying) {
+                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/last_minute.mp3").toURI().toURL()));
                 player.start();
-                this.beedoIsPlaying = true;
+                this.lastMinuteIsPlaying = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void playYouWon() {
+    public void playLoseSound()
+    {
+        try {
+            if (!this.loseIsPlaying) {
+                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/lose_sound.mp3").toURI().toURL()));
+                player.start();
+                this.loseIsPlaying = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void playYouWonSound() {
         try {
             if (!this.youWonIsPlaying) {
                 Player player = Manager.createPlayer(new MediaLocator(new File("Sound/youwon.mp3").toURI().toURL()));

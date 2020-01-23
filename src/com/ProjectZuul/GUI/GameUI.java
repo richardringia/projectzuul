@@ -440,6 +440,7 @@ public class GameUI implements SetInactiveListener {
             long clockTime = now - startTime;
             if (clockTime >= duration) {
                 fadeGameFinishedScreen(false);
+                this.soundHandler.playLoseSound();
                 clockTime = duration;
                 timer.stop();
             }
@@ -450,8 +451,8 @@ public class GameUI implements SetInactiveListener {
                 soundHandler.playScreamingGoatSound();
             }
 
-            if (clockTime >= duration  && gameMode == GameMode.EASY) {
-                soundHandler.playLoseSound();
+            if (clockTime >= duration - 60000  && gameMode == GameMode.EASY) {
+                soundHandler.playLastMinuteSound();
             }
 
             SimpleDateFormat df = new SimpleDateFormat("mm:ss");
@@ -656,7 +657,7 @@ public class GameUI implements SetInactiveListener {
                     actionHandler.createMenu(e2 -> {
                         if (vault.canOpenVault(key)) {
                             this.fadeGameFinishedScreen(true);
-                            this.soundHandler.playYouWon();
+                            this.soundHandler.playYouWonSound();
                         }
                     }, vault.canOpenVault(key));
                 } else {

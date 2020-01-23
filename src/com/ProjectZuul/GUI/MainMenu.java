@@ -347,7 +347,7 @@ public class MainMenu implements SetInactiveListener
         if (!aboutPageCreated) {
             aboutPageBack = new MyButton("< " + languageHandler.get("ABOUT_BACK").toUpperCase(), Color.BLACK, Color.WHITE, new Rectangle(15, 15, 100, 35), window);
             aboutPageText = new MyTextArea("",  Color.BLACK, Color.WHITE,  400, 100, 400, 250, window);
-            aboutPageText.setText(languageHandler.get("ABOUT_TEXT"));
+            aboutPageText.setText(languageHandler.get("ABOUT_TEXT_1") + "\n\n" + languageHandler.get("ABOUT_TEXT_2")  + "\n\n" + languageHandler.get("ABOUT_TEXT_3"));
 
             setAboutPageListeners();
             aboutPageCreated = true;
