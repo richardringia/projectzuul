@@ -1,5 +1,8 @@
 package com.ProjectZuul.Models;
 
+import com.ProjectZuul.Enums.Language;
+import com.ProjectZuul.Handlers.LanguageHandler;
+
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,6 +31,7 @@ public class Room
     private String unlockItem;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private List<Item> itemList; // stores all the items in the room
+    private LanguageHandler languageHandler;
 
     /**
      * Create a room described "description". Initially, it has
@@ -35,20 +39,22 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String name, String description)
+    public Room(String name, String description, Player player)
     {
         this.name = name;
         this.description = description;
+        this.languageHandler = player.getLanguageHandler();
         exits = new HashMap<>();
         itemList = new ArrayList<>();
     }
 
-    public Room(String name, String description, boolean doorLocked, String unlockItem)
+    public Room(String name, String description, boolean doorLocked, String unlockItem, Player player)
     {
         this.name = name;
         this.description = description;
         this.unlockItem = unlockItem;
         this.doorLocked = doorLocked;
+        this.languageHandler = player.getLanguageHandler();
         exits = new HashMap<>();
         itemList = new ArrayList<>();
     }
@@ -95,7 +101,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "\n" + description + ".\n\n\n" + "What would you like to do?";
+        return "\n" + description + ".\n\n\n" + this.languageHandler.get("GAME_ROOM_LONG_DESC");
     }
 
     /**
@@ -105,7 +111,7 @@ public class Room
      */
     private String getExitString()
     {
-        StringBuilder returnString = new StringBuilder("To which direction would you like to move? \n");
+        StringBuilder returnString = new StringBuilder(this.languageHandler.get("GAME_ROOM_EXIT")).append("\n");
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
             returnString.append(" \n").append(exit);

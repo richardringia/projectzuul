@@ -9,14 +9,15 @@ import com.ProjectZuul.Models.*;
 
 public class ItemHandler {
 
-    public static List<Item> createItems(List<Room> rooms, Room vaultRoom, Room mapRoom, Room keysRoom) {
+    public static List<Item> createItems(List<Room> rooms, Room vaultRoom, Room mapRoom, Room keysRoom, Player player) {
         Item vaultKeys, spiritVacuumCleaner, bookcase, vault, principlesKeys;
+        LanguageHandler languageHandler = player.getLanguageHandler();
 
-        vaultKeys = new Item("Vault keys", 2);
-        principlesKeys = new Item("Principles keys", 2);
-        spiritVacuumCleaner = new Item("Spirit vacuum cleaner", 8);
-        bookcase = new Item("Bookcase");
-        vault = new Vault(vaultKeys, vaultRoom);
+        vaultKeys = new Item(languageHandler.get("GAME_ITEMS_VAULT_KEYS"), 2);
+        principlesKeys = new Item(languageHandler.get("GAME_ITEMS_PRINCIPLES_KEYS"), 2);
+        spiritVacuumCleaner = new Item(languageHandler.get("GAME_ITEMS_SPIRIT_VACUUM_CLEANER"), 8);
+        bookcase = new Item(languageHandler.get("GAME_ITEMS_BOOKCASE"));
+        vault = new Vault(vaultKeys, vaultRoom, player);
 
 //        map.setItemToRoom(mapRoom);
         ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
@@ -36,19 +37,19 @@ public class ItemHandler {
         return lockedRooms;
     }
 
-    public static void setFlashlightRoom(List<Room> rooms)
+    public static void setFlashlightRoom(List<Room> rooms, String name)
     {
         ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
         Item flashlight;
-        flashlight = new Item("Flashlight", 4);
+        flashlight = new Item(name, 4);
         flashlight.setItemToRandomRoom(rooms, unavailableRooms);
     }
 
-    public static void setMapRoom(List<Room> rooms)
+    public static void setMapRoom(List<Room> rooms, String name)
     {
         ArrayList<Room> unavailableRooms = getLockedRooms(rooms);
         Item map;
-        map = new Item("Map", 4);
+        map = new Item(name, 4);
         map.setItemToRandomRoom(rooms, unavailableRooms);
     }
 }

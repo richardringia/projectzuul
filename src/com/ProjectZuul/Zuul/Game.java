@@ -38,15 +38,15 @@ public class Game
     /**
      * Create the game and initialise its internal map.
      */
-    public Game()
+    public Game(Player player)
     {
-        main = new GameHandler();
+        this.player = player;
+        main = new GameHandler(player);
         main.setGameInstance(this);
         roomsList = main.getRoomList();
-        currentRoom = roomsList.get(0); 
+        currentRoom = roomsList.get(0);
 
         itemsList = new ArrayList<>();
-        player = new Player(null);
         itemsList = main.getItemList();
         parser = new Parser();
     }

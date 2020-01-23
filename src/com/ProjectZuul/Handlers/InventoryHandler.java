@@ -14,11 +14,13 @@ public class InventoryHandler implements SetInactiveListener {
     private JFrame window;
     private Inventory inventory;
     private Player player;
-    SetInactiveListener inventoryListener;
+    private SetInactiveListener inventoryListener;
+    private LanguageHandler languageHandler;
 
     public InventoryHandler(JFrame window, Player player) {
         this.window = window;
         this.player = player;
+        this.languageHandler = player.getLanguageHandler();
         this.init();
     }
 
@@ -29,7 +31,7 @@ public class InventoryHandler implements SetInactiveListener {
     }
 
     public void createFlashLight() {
-        Item item = new Item("Flashlight", 4, false);
+        Item item = new Item(this.languageHandler.get("GAME_ITEMS_FLASHLIGHT"), 4, false);
         if (this.player.addItem(item)) {
             this.inventory.addItem(item);
         }
@@ -37,7 +39,7 @@ public class InventoryHandler implements SetInactiveListener {
 
     public void createMap()
     {
-        Item item = new Item("Map", 4, false);
+        Item item = new Item(this.languageHandler.get("GAME_ITEMS_MAP"), 4, false);
         if (this.player.addItem(item)) {
             this.inventory.addItem(item);
         }

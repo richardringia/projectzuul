@@ -4,6 +4,7 @@ package com.ProjectZuul.Handlers;
 
 
 import com.ProjectZuul.Models.Item;
+import com.ProjectZuul.Models.Player;
 import com.ProjectZuul.Models.Room;
 import com.ProjectZuul.Zuul.Game;
 
@@ -24,11 +25,10 @@ public class GameHandler {
     private List<Item> itemList;
 
 
-    public GameHandler() {
-        RoomHandler roomHandler = new RoomHandler();
+    public GameHandler(Player player) {
+        RoomHandler roomHandler = new RoomHandler(player);
         roomList = roomHandler.getRoomList();
-        RoomHandler room = new RoomHandler();
-        itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom());
+        itemList = ItemHandler.createItems(roomList, roomHandler.getVaultRoom(), roomHandler.getMapRoom(), roomHandler.getKeysRoom(), player);
     }
     
     public void startTimer() {
