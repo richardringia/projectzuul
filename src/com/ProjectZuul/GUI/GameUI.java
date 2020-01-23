@@ -140,7 +140,7 @@ public class GameUI implements SetInactiveListener {
             case EASY:
                 inventoryHandler.createFlashLight();
                 inventoryHandler.createMap();
-                duration = 500000;
+                duration = 5000;
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();

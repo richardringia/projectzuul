@@ -8,20 +8,46 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Gui.
+ */
 public class GUI
 {
+    /**
+     * The Window.
+     */
     JFrame window;
 
+    /**
+     * The Main menu listener.
+     */
     SetInactiveListener mainMenuListener;
+    /**
+     * The Game ui listener.
+     */
     SetInactiveListener gameUIListener;
 
+    /**
+     * The Game mode.
+     */
     GameMode gameMode;
+    /**
+     * The Language.
+     */
     Language language;
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new GUI();
     }
 
+    /**
+     * Instantiates a new Gui.
+     */
     public GUI()
     {
         createWindow();
@@ -42,26 +68,47 @@ public class GUI
 
     }
 
+    /**
+     * Gets window.
+     *
+     * @return the window
+     */
     public JFrame getWindow()
     {
         return window;
     }
 
+    /**
+     * Create game.
+     */
     void createGame()
     {
         gameUIListener = new GameUI(this, gameMode, language);
     }
 
+    /**
+     * Sets game ui visibility.
+     *
+     * @param visibility the visibility
+     */
     void setGameUIVisibility(boolean visibility)
     {
         gameUIListener.setMenuVisibility(visibility);
     }
 
+    /**
+     * Sets main menu visibility.
+     *
+     * @param visibility the visibility
+     */
     void setMainMenuVisibility(boolean visibility)
     {
         mainMenuListener.setMenuVisibility(visibility);
     }
 
+    /**
+     * Quit to main menu.
+     */
     void quitToMainMenu()
     {
         window.getContentPane().removeAll();
@@ -71,6 +118,9 @@ public class GUI
         window.repaint();
     }
 
+    /**
+     * Quit game.
+     */
     void quitGame()
     {
         window.removeAll();
@@ -78,11 +128,21 @@ public class GUI
         //System.exit(0);
     }
 
+    /**
+     * Sets game mode.
+     *
+     * @param gameMode the game mode
+     */
     public void setGameMode(GameMode gameMode)
     {
         this.gameMode = gameMode;
     }
 
+    /**
+     * Sets language.
+     *
+     * @param language the language
+     */
     public void setLanguage(Language language)
     {
         this.language = language;

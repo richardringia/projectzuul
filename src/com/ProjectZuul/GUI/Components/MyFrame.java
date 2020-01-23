@@ -10,8 +10,16 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * MyFrame extension of JFrame, creates the window of this application.
+ *
+ * @author Anne Pier Merkus and Richard Ringia.
+ */
 public class MyFrame extends JFrame
 {
+    /**
+     * Creates the window used for this application. Sets the title and image of the window.
+     */
     public MyFrame()
     {
         this.setResizable(false);

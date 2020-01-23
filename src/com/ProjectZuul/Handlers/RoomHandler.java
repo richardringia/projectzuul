@@ -35,9 +35,23 @@ public class RoomHandler {
      * List of all the rooms that were created.
      */
     private List<Room> roomList;
+
+    /**
+     * LanguageHandler with the current selected language.
+     */
     private LanguageHandler languageHandler;
+
+    /**
+     * Instance of the current player to get LanguageHandler from.
+     * @see #languageHandler
+     */
     private Player player;
 
+    /**
+     * Obtain the current selected language from the player and create all rooms.
+     *
+     * @param player instance of the current player.
+     */
     public RoomHandler(Player player) {
         this.languageHandler = player.getLanguageHandler();
         this.player = player;
