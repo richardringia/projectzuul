@@ -20,9 +20,9 @@ public class SoundHandler
     GameUI gameUI;
 
     /**
-     * The background can be stored here.
+     * Check for if the goat sounds is playing
      */
-    Player backgroundPlayer;
+    private boolean screamingGoatIsPlaying = false;
 
     /**
      * Create new SoundHandler and register the PlugIn.
@@ -63,11 +63,11 @@ public class SoundHandler
     {
         try
         {
-            backgroundPlayer = Manager.createPlayer(new MediaLocator(new File("Sound/BackgroundMusicScary.mp3").toURI().toURL()));
-            backgroundPlayer.start();
+            Player player = Manager.createPlayer(new MediaLocator(new File("Sound/BackgroundMusicScary.mp3").toURI().toURL()));
+            player.start();
             gameUI.addOnQuitListener(() -> {
-                backgroundPlayer.stop();
-                backgroundPlayer.close();
+                player.stop();
+                player.close();
             });
         }
         catch(Exception e)
@@ -80,10 +80,10 @@ public class SoundHandler
     {
         try {
             Player player = Manager.createPlayer(new MediaLocator(new File("Sound/goat.mp3").toURI().toURL()));
-            if (backgroundPlayer != null) {
+            if (!this.screamingGoatIsPlaying) {
                 player.start();
+                this.screamingGoatIsPlaying = true;
             }
-
         }  catch(Exception e)
         {
             e.printStackTrace();
