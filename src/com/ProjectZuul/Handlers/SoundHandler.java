@@ -10,10 +10,10 @@ import javax.media.format.AudioFormat;
 
 /**
  * Handler to process .mp3 files. Used to create sound effects and scary background music.
+ *
  * @author Anne Pier Merkus
  */
-public class SoundHandler
-{
+public class SoundHandler {
     /**
      * Instance of the game used to add an OnQuitListener.
      */
@@ -23,6 +23,18 @@ public class SoundHandler
      * Check for if the goat sounds is playing
      */
     private boolean screamingGoatIsPlaying = false;
+
+    /**
+     * Check for if the beedo sounds is playing
+     */
+    private boolean beedoIsPlaying = false;
+
+    /**
+     * Check for if the you won sounds is playing
+     */
+    private boolean youWonIsPlaying = false;
+
+
 
     /**
      * Create new SoundHandler and register the PlugIn.
@@ -45,8 +57,7 @@ public class SoundHandler
     /**
      * Create a new player to play a sound effect.
      */
-    public void playSound()
-    {
+    public void playSound() {
         try {
             Player player = Manager.createPlayer(new MediaLocator(new File("Sound/Opendoor.mp3").toURI().toURL()));
             player.start();
@@ -59,33 +70,51 @@ public class SoundHandler
      * Play scary background music for 5 minutes.
      * OnQuitListener added so we can stop and close the player after quit is invoked, otherwise the music keeps playing.
      */
-    public void playBackgroundSound()
-    {
-        try
-        {
+    public void playBackgroundSound() {
+        try {
             Player player = Manager.createPlayer(new MediaLocator(new File("Sound/BackgroundMusicScary.mp3").toURI().toURL()));
             player.start();
             gameUI.addOnQuitListener(() -> {
                 player.stop();
                 player.close();
             });
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void playScreamingGoatSound()
-    {
+    public void playScreamingGoatSound() {
         try {
-            Player player = Manager.createPlayer(new MediaLocator(new File("Sound/goat.mp3").toURI().toURL()));
             if (!this.screamingGoatIsPlaying) {
+                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/goat.mp3").toURI().toURL()));
                 player.start();
                 this.screamingGoatIsPlaying = true;
             }
-        }  catch(Exception e)
-        {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playBeedoSound() {
+        try {
+            if (!this.beedoIsPlaying) {
+                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/beebo.mp3").toURI().toURL()));
+                player.start();
+                this.beedoIsPlaying = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playYouWon() {
+        try {
+            if (!this.youWonIsPlaying) {
+                Player player = Manager.createPlayer(new MediaLocator(new File("Sound/youwon.mp3").toURI().toURL()));
+                player.start();
+                this.youWonIsPlaying = true;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

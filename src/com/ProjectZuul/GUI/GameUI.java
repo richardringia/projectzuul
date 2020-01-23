@@ -451,6 +451,10 @@ public class GameUI implements SetInactiveListener {
                 soundHandler.playScreamingGoatSound();
             }
 
+            if (clockTime >= duration - 450000) {
+                soundHandler.playBeedoSound();
+            }
+
             SimpleDateFormat df = new SimpleDateFormat("mm:ss");
             timeLabel.setText(df.format(duration - clockTime));
         });
@@ -654,6 +658,7 @@ public class GameUI implements SetInactiveListener {
                     actionHandler.createMenu(e2 -> {
                         if (vault.canOpenVault(key)) {
                             this.fadeGameFinishedScreen(true);
+                            this.soundHandler.playYouWon();
                         }
                     }, vault.canOpenVault(key));
                 } else {
