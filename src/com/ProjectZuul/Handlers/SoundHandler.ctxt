@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=SoundHandler
+comment0.text=\n\ Handler\ to\ process\ .mp3\ files.\ Used\ to\ create\ sound\ effects\ and\ scary\ background\ music.\n\n\ @author\ Anne\ Pier\ Merkus\ and\ Richard\ Ringia\n
+comment1.params=gameUI
+comment1.target=SoundHandler(com.ProjectZuul.GUI.GameUI)
+comment1.text=\n\ Create\ new\ SoundHandler\ and\ register\ the\ PlugIn.\n\n\ @param\ gameUI\ instance\ of\ the\ current\ game.\n
+comment2.params=
+comment2.target=void\ playSound()
+comment2.text=\n\ Create\ a\ new\ player\ to\ play\ a\ sound\ effect.\n
+comment3.params=
+comment3.target=void\ playBackgroundSound()
+comment3.text=\n\ Play\ scary\ background\ music\ for\ 5\ minutes.\n\ OnQuitListener\ added\ so\ we\ can\ stop\ and\ close\ the\ player\ after\ quit\ is\ invoked,\ otherwise\ the\ music\ keeps\ playing.\n
+comment4.params=
+comment4.target=void\ playScreamingGoatSound()
+comment5.params=
+comment5.target=void\ playBeedoSound()
+comment6.params=
+comment6.target=void\ playYouWon()
+numComments=7

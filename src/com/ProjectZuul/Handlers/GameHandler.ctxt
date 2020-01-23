@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=GameHandler
+comment0.text=\n\ All\ rooms\ and\ items\ are\ generated\ here.\n\ They\ are\ also\ added\ to\ a\ list\ so\ we\ can\ access\ them\ later.\n\n\ @author\ Anne\ Pier\ Merkus\n
+comment1.params=player
+comment1.target=GameHandler(com.ProjectZuul.Models.Player)
+comment1.text=\n\ Creates\ a\ new\ GameHandler\ and\ initalizes\ everything\ in\ the\ game.\n\n\ @param\ player\ Instance\ of\ the\ player\ to\ get\ the\ language\ from.\n
+comment2.params=
+comment2.target=java.util.List\ getRoomList()
+comment2.text=\n\ Gets\ all\ rooms\ in\ the\ game.\n\n\ @return\ A\ list\ of\ all\ rooms.\n
+comment3.params=
+comment3.target=java.util.List\ getItemList()
+comment3.text=\n\ Gets\ all\ items\ in\ the\ game.\n\n\ @return\ A\ list\ of\ all\ items.\n
+comment4.params=
+comment4.target=com.ProjectZuul.Models.Room\ getCurrentRoom()
+comment4.text=\n\ Gets\ the\ room\ the\ player\ is\ currently\ in\n\n\ @return\ The\ room\ the\ player\ is\ currently\ in.\n
+comment5.params=currentRoom
+comment5.target=void\ setCurrentRoom(com.ProjectZuul.Models.Room)
+comment5.text=\n\ Change\ the\ current\ room\ to\ the\ room\ the\ player\ moves\ to.\n\n\ @param\ currentRoom\ The\ room\ the\ player\ wants\ to\ move\ to.\n
+numComments=6

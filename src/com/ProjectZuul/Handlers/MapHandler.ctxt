@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=MapHandler
+comment0.text=\n\ Handler\ to\ create\ the\ map\ used\ in\ this\ application.\n\n\ @see\ RoomPanel\n\ @author\ Richard\ Ringia\n
+comment1.params=roomList
+comment1.target=MapHandler(java.util.List)
+comment1.text=\n\ Sets\ roomList\ variable\ to\ the\ given\ value,\ calls\ draw\ to\ create\ the\ map\ and\ sets\ the\ map\ to\ invisible.\n\n\ @param\ roomList\ A\ list\ of\ all\ rooms\ in\ the\ game.\n
+comment2.params=
+comment2.target=javax.swing.JPanel\ getMap()
+comment2.text=\n\ Gets\ the\ Component\ that\ holds\ our\ map.\n\n\ @return\ the\ Component\ that\ holds\ our\ map.\n
+comment3.params=
+comment3.target=void\ draw()
+comment3.text=\n\ Creates\ the\ map\ by\ adding\ a\ RoomPanel\ instance\ in\ each\ position\ of\ the\ grid.\n\n\ @see\ RoomPanel\n
+comment4.params=x\ y
+comment4.target=com.ProjectZuul.Models.Room\ findRoom(int,\ int)
+comment4.text=\n\ Creates\ a\ room\ if\ there\ is\ a\ room\ in\ the\ given\ location\ of\ the\ grid,\ if\ not,\ return\ null.\n\n\ @param\ x\ The\ x\ location\ of\ the\ grid.\n\ @param\ y\ The\ Y\ location\ of\ the\ grid.\n\ @return\ The\ room\ that\ is\ positioned\ in\ the\ current\ x\ and\ y\ position\ of\ the\ grid.\n
+comment5.params=_room
+comment5.target=void\ updateRoom(com.ProjectZuul.Models.Room)
+comment5.text=\n\ Update\ the\ current\ room\ on\ the\ map\ by\ giving\ it\ a\ color.\n\ This\ way\ the\ player\ knows\ where\ he\ is\ by\ looking\ at\ the\ map.\n\n\ @param\ _room\ The\ room\ to\ which\ the\ player\ moved.\n
+comment6.params=visibility
+comment6.target=void\ setMenuVisibility(boolean)
+comment6.text=\n\ \ Sets\ map\ visibility.\n\n\ @param\ visibility\ Whether\ the\ menu\ should\ be\ set\ visible\ or\ invisible.\n
+numComments=7

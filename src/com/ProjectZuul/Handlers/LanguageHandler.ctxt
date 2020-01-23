@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=LanguageHandler
+comment0.text=\n\ Handles\ the\ selected\ language\ by\ selecting\ the\ .txt\ file\ corresponding\ to\ the\ language\ value.\n\n\ @author\ Richard\ Ringia\n
+comment1.params=language
+comment1.target=LanguageHandler(com.ProjectZuul.Enums.Language)
+comment1.text=\n\ Created\ a\ language\ handler\ and\ gives\ translations\ its\ values\ depending\ on\ the\ given\ language.\n\n\ @see\ Language\n\ @see\ \#getLanguage(Language)\n\ @param\ language\ the\ selected\ language\ by\ the\ player.\n
+comment2.params=key
+comment2.target=java.lang.String\ get(java.lang.String)
+comment2.text=\n\ Get\ string.\n\n\ @param\ key\ The\ key\ of\ the\ hashmap\ which\ obtains\ a\ value\ depending\ on\ the\ language.\ Keys\ can\ be\ found\ in\ languages\ folder\ alongside\ their\ value.\n\ @return\ The\ string\ of\ the\ given\ key\ in\ the\ current\ language.\n
+comment3.params=language
+comment3.target=java.lang.String\ getLanguage(com.ProjectZuul.Enums.Language)
+comment3.text=\n\n\ @param\ language\ the\ selected\ language\ by\ the\ player.\n\ @return\ a\ String\ of\ the\ selected\ language\ so\ we\ can\ use\ it\ in\ the\ pathname\ to\ languages\ folder,\ depending\ on\ the\ language\ it\ should\ select\ a\ different\ .txt\ file.\n
+numComments=4
