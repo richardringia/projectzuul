@@ -1,0 +1,67 @@
+MENU_START:begin
+MENU_ABOUT:over
+MENU_QUIT:verlaten
+ABOUT_BACK:terug
+ABOUT_TEXT:Leuk spel
+GAME_CANCEL:Annuleren
+GAME_NAVIGATION_MOVE:Bewegen
+GAME_NAVIGATION_INVESTIGATE:Onderzoeken
+GAME_NAVIGATION_HELP:Help
+GAME_NAVIGATION_QUIT:Veralten
+GAME_NAVIGATION_NORTH:Noord
+GAME_NAVIGATION_WEST:West
+GAME_NAVIGATION_EAST:Oost
+GAME_NAVIGATION_SOUTH:Zuid
+GAME_NAVIGATION_BACK:Terug
+GAME_TIMER_TIME_LEFT:Tijd over
+GAME_WIN:game gewonnen
+GAME_LOST:game verloren
+GAME_NO_ROOM:Er is geen deur die kant op.
+GAME_ROOM_DOOR_LOCK_1:Je probeert de
+GAME_ROOM_DOOR_LOCK_2:binnen te komen, maar het lijkt erop dat deze op slot zit!
+GAME_ROOM_DOOR_LOCK_3:Vind de sleutel en ga de kamer naar binnen
+GAME_ROOM_DOOR_LOCK:deze deur kijkt op slot te zitten
+GAME_ROOM_DARK:Het is te donker om iets te zien!\nVind de zaplamp. \n\nFlashlight is the only visible item in investigate until you have obtained one.De zaklamp is het enige item wat zichtbaar om op te pakken. Alleen als de zaklamp niet is opgeraapd\n
+GAME_ROOM_LONG_DESC:Wat wil je gaan doen?
+GAME_ROOM_EXIT:Welke kant wil je op?
+GAME_ROOMS_SQUARE:Schoolplein
+GAME_ROOMS_SQUARE_DESC:Je bent op het schoolplein van een verlaten school, binnen is een document die heel belangrijk is. Vind deze en krijg een leuke beloning. Ga niet dood onderweg, Succes!
+GAME_ROOMS_HALLWAY:Gang
+GAME_ROOMS_HALLWAY_DESC_1:Je bent in de gang, vanaf hier kan je naar verschillende ruimtes.
+GAME_ROOMS_HALLWAY_DESC_2:Je bent verderop in de gang.
+GAME_ROOMS_HALLWAY_DESC_3:Je bent aan het einde van de gang.
+GAME_ROOMS_LIBRARY:Bibliotheek
+GAME_ROOMS_LIBRARY_DESC:Je bent in de bibliotheek, er zijn natuurlijk allemaal boeken hier, maar zou er ook iets anders liggen?
+GAME_ROOMS_CLASS_ROOM_666:Lokaal666
+GAME_ROOMS_CLASS_ROOM_666_DESC:Je bent in lokaal666, het lijkt erop dat het hier spookt, wat is dat geluid?
+GAME_ROOMS_CANTEEN:Kantine
+GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geeng eten dus zijn hier waarschijnlijk ook niet. Of wel?
+GAME_ROOMS_TEACHERS_ROOM:Leraren kamer
+GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een geest. Dan is die waarschijnlijk hier.
+GAME_ROOMS_PRINCIPLES_OFFICE:Directeur kantoor
+GAME_ROOMS_PRINCIPLES_OFFICE_DESC:Het directeur kantoor is altijd belangrijk, misschien is hier iets
+GAME_ROOMS_TOILETS:Wc's
+GAME_ROOMS_TOILETS_DESC:You are at the toilets, ghosts often haunt a toilet because people are alone in here, then again this entire building is abandoned...
+GAME_ROOMS_VAULT_ROOM:VaultRoom
+GAME_ROOMS_VAULT_ROOM_DESC:The vault room, could this be where you need to be, maybe investigate to see if can find something.
+GAME_INVESTIGATE_NO_ITEMS:No items found in this location.
+GAME_ITEMS_VAULT:Vault
+GAME_ITEMS_VAULT_DOCUMENT:Document
+GAME_ITEMS_VAULT_KEYS:Vault keys
+GAME_ITEMS_FLASHLIGHT:Flashlight
+GAME_ITEMS_MAP:Map
+GAME_ITEMS_PRINCIPLES_KEYS:Principles keys
+GAME_ITEMS_SPIRIT_VACUUM_CLEANER:Spirit vacuum cleaner
+GAME_ITEMS_BOOKCASE:Bookcase
+GAME_MENU_MAIN_MENU:Main Menu
+GAME_MENU_QUIT_TO_DESKTOP:Quit to Desktop
+GAME_ACTION_MENU_TITLE:Action menu
+GAME_ACTION_MENU_OPEN:Open
+GAME_ACTION_MENU_OPEN_ERROR:The vault can not be opened. Please find the 'Vault keys'!
+GAME_ACTION_MENU_PICK_UP:Pick up
+GAME_ACTION_MENU_PICK_UP_ERROR:The inventory is full. Please drop some items!
+GAME_ACTION_MENU_DROP:Drop
+GAME_ACTION_MENU_DROP_ERROR:Item can not be dropped!
+GAME_INVENTORY_TITLE:Inventory
+GAME_INVENTORY_SUB_TITLE_1:van
+GAME_INVENTORY_SUB_TITLE_2:Kg is used
