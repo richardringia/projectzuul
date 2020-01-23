@@ -6,6 +6,7 @@ import com.ProjectZuul.Handlers.LanguageHandler;
  * Vault is the item where the player needs to go to win the game.
  * Vault is an item with a few different aspects to it so Item is extended.
  *
+ * @see Item
  * @author Richard Ringia
  */
 public class Vault extends Item {
@@ -26,7 +27,6 @@ public class Vault extends Item {
         this.key = key;
         this.setItemToRoom(room);
     }
-
 
     /**
      * Checks if the player has the key to the vault.

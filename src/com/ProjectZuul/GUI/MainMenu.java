@@ -12,27 +12,104 @@ import com.ProjectZuul.Handlers.LanguageHandler;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Main menu.
+ */
 public class MainMenu implements SetInactiveListener
 {
-    GUI gui;
-    JFrame window;
+    /**
+     * Instance of the GUI.
+     */
+    private GUI gui;
 
-    private MyPanel languageButtonHolder, difficultyButtonHolder;
+    /**
+     * The window of the application.
+     */
+    private JFrame window;
+
+    /**
+     *
+     */
+    private MyPanel languageButtonHolder;
+
+    /**
+     *
+     */
+    private MyPanel difficultyButtonHolder;
+
+
     private MyButton dutchLanguageButton, englishLanguageButton, easyDifficultyButton, mediumDifficultyButton, hardDifficultybutton;
 
-    MyLabel titleNameLabel;
+    /**
+     * The Title name label.
+     */
+    private MyLabel titleNameLabel;
 
-    MyButton startButton, quitButton, aboutButton;
+    /**
+     *
+     */
+    private MyButton startButton;
 
-    MyButton aboutPageBack, startPageBack, startPageStartButton;
-    MyTextArea aboutPageText, startPageDifficultyText, startPageLanguageText;
+    /**
+     * The Quit button
+     */
+    private MyButton quitButton;
 
-    boolean aboutPageCreated = false, startPageCreated = false;
+    /**
+     *
+     */
+    private MyButton aboutButton;
 
+    /**
+     *
+     */
+    private MyButton aboutPageBack;
+
+    /**
+     *
+     */
+    private MyButton startPageBack;
+
+    /**
+     *
+     */
+    private MyButton startPageStartButton;
+    /**
+     * The About page text.
+     */
+    private MyTextArea aboutPageText;
+
+    /**
+     *
+     */
+    private MyTextArea startPageDifficultyText;
+    /**
+     *
+     */
+    private MyTextArea startPageLanguageText;
+
+    /**
+     * The About page created.
+     */
+    boolean aboutPageCreated = false;
+    /**
+     *
+     */
+    boolean startPageCreated = false;
+
+    /**
+     * The Title font.
+     */
     Font titleFont = new Font("Arial", Font.PLAIN, 30);
 
     private LanguageHandler languageHandler;
 
+    /**
+     * Instantiates a new Main menu.
+     *
+     * @param gui      the gui
+     * @param language the language
+     */
     public MainMenu(GUI gui, Language language)
     {
         this.gui = gui;

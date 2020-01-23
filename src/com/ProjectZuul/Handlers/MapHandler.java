@@ -9,7 +9,7 @@ import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 import com.ProjectZuul.Models.*;
 
 /**
- * T
+ *
  */
 public class MapHandler implements SetInactiveListener
 {

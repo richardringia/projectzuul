@@ -10,6 +10,7 @@ public class Main {
     /**
      * Starting point of the application.
      *
+     * @see GUI
      * @param args the input arguments
      */
     public static void main(String[] args) {

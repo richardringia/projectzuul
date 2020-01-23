@@ -12,8 +12,14 @@ import java.awt.event.ActionListener;
  */
 public class ActionHandler {
 
+    /**
+     *
+     */
     private ActionMenu actionMenu;
 
+    /**
+     *
+     */
     private LanguageHandler languageHandler;
 
     /**
@@ -27,10 +33,16 @@ public class ActionHandler {
         this.actionMenu = actionMenu;
     }
 
+    /**
+     *
+     */
     private void before() {
         this.actionMenu.reset();
     }
 
+    /**
+     *
+     */
     private void after() {
         this.actionMenu.add(this.createCancelButton());
         this.actionMenu.updateUI();
@@ -82,6 +94,11 @@ public class ActionHandler {
         this.after();
     }
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     private MyButton createButton(String text) {
         MyButton myButton = new MyButton(text, Color.BLACK, Color.WHITE, new Dimension(140, 30));
         myButton.addActionListener(e -> {
@@ -90,26 +107,56 @@ public class ActionHandler {
         return myButton;
     }
 
+    /**
+     *
+     * @param text
+     * @param actionListener
+     * @return
+     */
     private MyButton createButton(String text, ActionListener actionListener) {
         MyButton myButton = this.createButton(text);
         myButton.addActionListener(actionListener);
         return myButton;
     }
 
+    /**
+     *
+     * @param text
+     * @param actionListener
+     * @param disabled
+     * @param message
+     * @return
+     */
     private MyButton createButton(String text, ActionListener actionListener, boolean disabled, String message) {
         MyButton myButton = this.createButton(text, actionListener);
         myButton.setEnabled(!disabled, message);
         return myButton;
     }
 
+    /**
+     *
+     * @param action
+     * @param disabled
+     * @return
+     */
     private MyButton createOpenButton(ActionListener action, boolean disabled) {
         return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_OPEN"), action, disabled, this.languageHandler.get("GAME_ACTION_MENU_OPEN_ERROR"));
     }
 
+    /**
+     *
+     * @param action
+     * @param disabled
+     * @return
+     */
     private MyButton createPickupButton(ActionListener action, boolean disabled) {
         return this.createButton(this.languageHandler.get("GAME_ACTION_MENU_PICK_UP"), action, disabled, this.languageHandler.get("GAME_ACTION_MENU_PICK_UP_ERROR"));
     }
 
+    /**
+     *
+     * @return
+     */
     private MyButton createCancelButton() {
         return this.createButton(this.languageHandler.get("GAME_CANCEL"));
     }

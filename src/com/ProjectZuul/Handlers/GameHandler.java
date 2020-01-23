@@ -18,19 +18,26 @@ import java.util.ArrayList;
  */
 public class GameHandler {
 
+    /**
+     * The room the player is currently in.
+     */
     private Room currentRoom;
 
-    // In deze list worden alle kamers gestored
+    /**
+     * A list with all rooms in the game.
+     */
     private List<Room> roomList;
 
-    // In deze list worden alle items gestored
+    /**
+     * A list of all items in the game.
+     */
     private List<Item> itemList;
 
 
     /**
-     * Instantiates a new Game handler.
+     * Creates a new GameHandler and initalizes everything in the game.
      *
-     * @param player the player
+     * @param player Instance of the player to get the language from.
      */
     public GameHandler(Player player) {
         RoomHandler roomHandler = new RoomHandler(player);
@@ -40,9 +47,9 @@ public class GameHandler {
     }
 
     /**
-     * Gets room list.
+     * Gets all rooms in the game.
      *
-     * @return the room list
+     * @return A list of all rooms.
      */
     public List<Room> getRoomList()
     {
@@ -50,9 +57,9 @@ public class GameHandler {
     }
 
     /**
-     * Gets item list.
+     * Gets all items in the game.
      *
-     * @return the item list
+     * @return A list of all items.
      */
     public List<Item> getItemList()
     {
@@ -60,9 +67,9 @@ public class GameHandler {
     }
 
     /**
-     * Gets current room.
+     * Gets the room the player is currently in
      *
-     * @return the current room
+     * @return The room the player is currently in.
      */
     public Room getCurrentRoom()
     {
@@ -70,9 +77,9 @@ public class GameHandler {
     }
 
     /**
-     * Sets current room.
+     * Change the current room to the room the player moves to.
      *
-     * @param currentRoom the current room
+     * @param currentRoom The room the player wants to move to.
      */
     public void setCurrentRoom(Room currentRoom)
     {

@@ -24,6 +24,8 @@ public class LanguageHandler {
     /**
      * Created a language handler and gives translations its values depending on the given language.
      *
+     * @see Language
+     * @see #getLanguage(Language)
      * @param language the selected language by the player.
      */
     public LanguageHandler(Language language) {
