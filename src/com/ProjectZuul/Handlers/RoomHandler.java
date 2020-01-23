@@ -104,7 +104,7 @@ public class RoomHandler {
         Room square, hallway, hallway2, hallway3, library, classRoom666, canteen, teachersRoom, principalsOffice, toilets, vaultRoom;
 
         // create the rooms
-        square = new Room(this.languageHandler.get("GAME_ROOMS_SQUARE"), this.languageHandler.get("GAME_ROOMS_SQUARE"), this.player);
+        square = new Room(this.languageHandler.get("GAME_ROOMS_SQUARE"), this.languageHandler.get("GAME_ROOMS_SQUARE_DESC"), this.player);
         hallway = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_1"), this.player);
         hallway2 = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_2"), this.player);
         hallway3 = new Room(this.languageHandler.get("GAME_ROOMS_HALLWAY"), this.languageHandler.get("GAME_ROOMS_HALLWAY_DESC_3"), this.player);

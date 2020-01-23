@@ -35,7 +35,7 @@ GAME_ROOMS_LIBRARY_DESC:Je bent in de bibliotheek, er zijn natuurlijk allemaal b
 GAME_ROOMS_CLASS_ROOM_666:Lokaal666
 GAME_ROOMS_CLASS_ROOM_666_DESC:Je bent in lokaal666, het lijkt erop dat het hier spookt, wat is dat geluid?
 GAME_ROOMS_CANTEEN:Kantine
-GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geeng eten dus zijn hier waarschijnlijk ook niet. Of wel?
+GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geen eten dus zijn hier waarschijnlijk ook niet. Of wel?
 GAME_ROOMS_TEACHERS_ROOM:Leraren kamer
 GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een sppok. Dan is die waarschijnlijk hier.
 GAME_ROOMS_PRINCIPALS_OFFICE:Directeur kantoor
