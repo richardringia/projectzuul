@@ -3,15 +3,13 @@ package com.ProjectZuul.Handlers;
 import com.ProjectZuul.GUI.GameUI;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import javax.media.*;
 import javax.media.format.AudioFormat;
 
 /**
  * Handler to process .mp3 files. Used to create sound effects and scary background music.
  *
- * @author Anne Pier Merkus
+ * @author Anne Pier Merkus and Richard Ringia
  */
 public class SoundHandler {
     /**
@@ -89,6 +87,10 @@ public class SoundHandler {
                 Player player = Manager.createPlayer(new MediaLocator(new File("Sound/goat.mp3").toURI().toURL()));
                 player.start();
                 this.screamingGoatIsPlaying = true;
+                gameUI.addOnQuitListener(() -> {
+                    player.stop();
+                    player.close();
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();

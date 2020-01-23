@@ -3,13 +3,14 @@ package com.ProjectZuul.GUI;
 import com.ProjectZuul.Enums.GameMode;
 import com.ProjectZuul.Enums.Language;
 import com.ProjectZuul.GUI.Components.*;
+import com.ProjectZuul.GUI.GameUI;
 import com.ProjectZuul.GUI.Listeners.SetInactiveListener;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * The entry point after Main, creates the window, Main Menu and the GameUI when called.
+ * The entry point after Main, creates the window, Main Menu and the com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI when called.
  *
  * @see com.ProjectZuul.Main#main(String[])
  * @author Anne Pier Merkus
@@ -83,7 +84,7 @@ public class GUI
     }
 
     /**
-     * Creates a new GameUI and sets gameUIListener so we can call it later if needed.
+     * Creates a new com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI and sets gameUIListener so we can call it later if needed.
      */
     void createGame()
     {
@@ -91,7 +92,7 @@ public class GUI
     }
 
     /**
-     * Sets GameUI visibility.
+     * Sets com.ProjectZuul.com.ProjectZuul.GUI.GUI.GameUI visibility.
      *
      * @param visibility Whether the menu should be set visible or invisible.
      */

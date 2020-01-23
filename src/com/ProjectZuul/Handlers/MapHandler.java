@@ -128,7 +128,6 @@ public class MapHandler implements SetInactiveListener
                 a--;
         }
 
-        System.out.println(currentRoom);
         return currentRoom;
     }
 

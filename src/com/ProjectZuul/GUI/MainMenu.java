@@ -20,7 +20,7 @@ import java.awt.*;
 public class MainMenu implements SetInactiveListener
 {
     /**
-     * Instance of the GUI.
+     * Instance of the com.ProjectZuul.GUI.GUI.
      */
     private GUI gui;
 
@@ -136,7 +136,7 @@ public class MainMenu implements SetInactiveListener
     /**
      * Sets gui variable and the language before calling a function to create the Main Menu.
      *
-     * @param gui      Instance of the GUI.
+     * @param gui      Instance of the com.ProjectZuul.GUI.GUI.
      * @param language The default language.
      */
     public MainMenu(GUI gui, Language language)
