@@ -23,21 +23,21 @@ GAME_ROOM_DOOR_LOCK_1:You are trying to access the
 GAME_ROOM_DOOR_LOCK_2:, but the door seems to be locked!
 GAME_ROOM_DOOR_LOCK_3:Find a key to get inside this room.
 GAME_ROOM_DOOR_LOCK:The door in that direction appears to be locked.
-GAME_ROOM_DARK:It's too dark to see anything!\nFind a flashlight to help you. \n\nFlashlight is the only visible item in investigate until you have obtained one.\
+GAME_ROOM_DARK:It's too dark to see anything!Find a flashlight to help you.Flashlight is the only visible item in investigate until you have obtained one.
 GAME_ROOM_LONG_DESC:What would you like to do?
 GAME_ROOM_EXIT:To which direction would you like to move?
 GAME_ROOMS_SQUARE:Square
 GAME_ROOMS_SQUARE_DESC:You are outside of an abandoned school building, inside are some documents which are very important. Retrieve the documents and get a big reward. Don't get killed on the way, good luck!
 GAME_ROOMS_HALLWAY:Hallway
 GAME_ROOMS_HALLWAY_DESC_1:You are in the hallway, from here you can move in different directions to try and find rooms which are important to your success.
-GAME_ROOMS_HALLWAY_DESC_2:You find yourself in another hallway.
-GAME_ROOMS_HALLWAY_DESC_3:You find yourself in the third hallway, seems like there are some important rooms nearby.
+GAME_ROOMS_HALLWAY_DESC_2:You move further down the hallway.
+GAME_ROOMS_HALLWAY_DESC_3:You find yourself at the end of the hallway.
 GAME_ROOMS_LIBRARY:Library
 GAME_ROOMS_LIBRARY_DESC:You are in the library, of course this means there are books around, maybe there is something important in there?
 GAME_ROOMS_CLASS_ROOM_666:ClassRoom666
 GAME_ROOMS_CLASS_ROOM_666_DESC:You find yourself in the classroom 666, sounds like a classroom which could be haunted, what is that sound?
 GAME_ROOMS_CANTEEN:Canteen
-GAME_ROOMS_CANTEEN_DESC:You are in a canteen, ghosts don't need food so they probably aren'there, or are they?
+GAME_ROOMS_CANTEEN_DESC:You are in a canteen, ghosts don't need food so they probably aren't here, or are they?
 GAME_ROOMS_TEACHERS_ROOM:TeachersRoom
 GAME_ROOMS_TEACHERS_ROOM_DESC:Welcome to the teachers room, if any teachers died and came back as ghosts, they'll probably be here.
 GAME_ROOMS_PRINCIPALS_OFFICE:Principal's Office

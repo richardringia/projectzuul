@@ -16,12 +16,12 @@ GAME_NAVIGATION_BACK:Terug
 GAME_TIMER_TIME_LEFT:Tijd over
 GAME_WIN:game gewonnen
 GAME_LOST:game verloren
-GAME_NO_ROOM:Er is geen deur die kant op.
+GAME_NO_ROOM:Er is geen deur aan die kant.
 GAME_ROOM_DOOR_LOCK_1:Je probeert de
 GAME_ROOM_DOOR_LOCK_2:binnen te komen, maar het lijkt erop dat deze op slot zit!
 GAME_ROOM_DOOR_LOCK_3:Vind de sleutel en ga de kamer naar binnen
-GAME_ROOM_DOOR_LOCK:deze deur kijkt op slot te zitten
-GAME_ROOM_DARK:Het is te donker om iets te zien!\nVind de zaplamp. \n\nDe zaklamp is het enige voorwerp wat zichtbaar om op te pakken. Alleen als de zaklamp niet is opgeraapd\n
+GAME_ROOM_DOOR_LOCK:deze deur lijkt op slot te zitten
+GAME_ROOM_DARK:Het is te donker om iets te zien! Vind de zaklamp. De zaklamp is het enige voorwerp die zichtbaar om op te pakken totdat je deze hebt.
 GAME_ROOM_LONG_DESC:Wat wil je gaan doen?
 GAME_ROOM_EXIT:Welke kant wil je op?
 GAME_ROOMS_SQUARE:Schoolplein
@@ -37,13 +37,13 @@ GAME_ROOMS_CLASS_ROOM_666_DESC:Je bent in lokaal666, het lijkt erop dat het hier
 GAME_ROOMS_CANTEEN:Kantine
 GAME_ROOMS_CANTEEN_DESC:Je bent in de kantine, spoken hoeven geen eten dus zijn hier waarschijnlijk ook niet. Of wel?
 GAME_ROOMS_TEACHERS_ROOM:Leraren kamer
-GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een sppok. Dan is die waarschijnlijk hier.
+GAME_ROOMS_TEACHERS_ROOM_DESC:Welkom in de leraren kamer, als een leraar dood is gegaan en is terug gekomen als een spook, dan is die waarschijnlijk hier.
 GAME_ROOMS_PRINCIPALS_OFFICE:Directeur kantoor
-GAME_ROOMS_PRINCIPALS_OFFICE_DESC:Het directeur kantoor is altijd belangrijk, misschien is hier iets?
-GAME_ROOMS_TOILETS:Wc's
-GAME_ROOMS_TOILETS_DESC:Je bent bij de wc's, hier zijn meestal spoken, omdat mensen hier altijd alleen zijn. Maar het gebouwd is ook vertalen...
+GAME_ROOMS_PRINCIPALS_OFFICE_DESC:Het kantoor van de directeur is altijd belangrijk, misschien is hier iets?
+GAME_ROOMS_TOILETS:Toiletten
+GAME_ROOMS_TOILETS_DESC:Je bent bij de toiletten, hier zijn meestal spoken, omdat mensen hier altijd alleen zijn. Maar het gebouw is ook verlaten...
 GAME_ROOMS_VAULT_ROOM:Kluis kamer
-GAME_ROOMS_VAULT_ROOM_DESC:De kluis kamer, moet je hier zijn, misschien even de kamer onderzoeken?
+GAME_ROOMS_VAULT_ROOM_DESC:De kluis kamer, hier moet je zijn, misschien even de kamer onderzoeken?
 GAME_INVESTIGATE_NO_ITEMS:Geen voorwerpen gevonden
 GAME_ITEMS_VAULT:Kluis
 GAME_ITEMS_VAULT_DOCUMENT:Document
