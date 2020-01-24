@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Main
-comment0.text=\n\ Class\ used\ to\ start\ the\ applications.\n\ @author\ Anne\ Pier\ Merkus\ and\ Richard\ Ringia\n
+comment0.text=\r\n\ Class\ used\ to\ start\ the\ applications.\r\n\ @author\ Anne\ Pier\ Merkus\ and\ Richard\ Ringia\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-comment1.text=\n\ Starting\ point\ of\ the\ application.\n\n\ @see\ GUI\n\ @param\ args\ the\ input\ arguments\n
+comment1.text=\r\n\ Starting\ point\ of\ the\ application.\r\n\r\n\ @see\ GUI\r\n\ @param\ args\ the\ input\ arguments\r\n
 numComments=2

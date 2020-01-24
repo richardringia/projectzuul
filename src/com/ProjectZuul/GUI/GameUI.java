@@ -356,7 +356,7 @@ public class GameUI implements SetInactiveListener {
             case EASY:
                 inventoryHandler.createFlashLight();
                 inventoryHandler.createMap();
-                duration = 300000;
+                duration = 5000;
                 break;
             case MEDIUM:
                 inventoryHandler.createFlashLight();
@@ -448,10 +448,12 @@ public class GameUI implements SetInactiveListener {
             if (clockTime >= duration - 30000) {
                 timeLeftText.setForeground(Color.RED);
                 timeLabel.setForeground(Color.RED);
-                soundHandler.playScreamingGoatSound();
+                if ( clockTime <= duration -29000) {
+                    soundHandler.playScreamingGoatSound();
+                }
             }
 
-            if (clockTime >= duration - 60000  && gameMode == GameMode.EASY) {
+            if (clockTime >= duration - 60000  && gameMode == GameMode.EASY && clockTime <= duration -59000) {
                 soundHandler.playLastMinuteSound();
             }
 

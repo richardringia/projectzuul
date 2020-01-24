@@ -129,7 +129,7 @@ public class GUI
     {
         window.removeAll();
         window.dispose();
-        //System.exit(0);
+        System.exit(0);
     }
 
     /**
